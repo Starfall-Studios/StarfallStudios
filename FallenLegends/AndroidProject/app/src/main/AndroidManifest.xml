@@ -21,6 +21,8 @@
             </intent-filter>
         </activity>
         <activity android:name="es.starfallstudios.fallenlegends.HomeScreen"/>
+        <activity android:name="es.starfallstudios.fallenlegends.AboutScreen"/>
+        <activity android:name="es.starfallstudios.fallenlegends.TermsConditionsScreen"/>
     </application>
 
 </manifest>

@@ -30,4 +30,9 @@ public class HomeScreen extends AppCompatActivity {
         Intent intent = new Intent(this, AboutScreen.class);
         startActivity(intent);
     }
+
+    public void onTermsClick(View view) {
+        Intent intent = new Intent(this, TermsConditionsScreen.class);
+        startActivity(intent);
+    }
 }
