@@ -5,3 +5,6 @@ We have chosen Android 8.0 as the minimum version for our game. This is because 
 
 ## Java Version
 We have chosen Java 8 to work in Android Studio.
+
+## Model design
+![Imgur](https://i.imgur.com/07aqc9Y.jpg)
