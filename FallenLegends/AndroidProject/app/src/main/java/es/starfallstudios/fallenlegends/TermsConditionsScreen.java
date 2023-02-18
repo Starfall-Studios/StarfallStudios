@@ -11,7 +11,7 @@ public class TermsConditionsScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //set window title to "Terms and Conditions"
-        setTitle("Terms and Conditions");
+        setTitle(R.string.TermsCond);
         //set back button on title bar
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 

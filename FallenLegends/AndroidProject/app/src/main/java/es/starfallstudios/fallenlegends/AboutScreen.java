@@ -11,7 +11,7 @@ public class AboutScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         //set window title to "About"
-        setTitle("About");
+        setTitle(R.string.about);
         //set back button on title bar to go back to home screen
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
