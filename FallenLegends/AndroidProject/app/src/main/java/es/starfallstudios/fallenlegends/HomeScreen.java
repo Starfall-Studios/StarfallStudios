@@ -1,13 +1,8 @@
 package es.starfallstudios.fallenlegends;
 
-import static com.google.android.gms.common.GooglePlayServicesUtil.isGooglePlayServicesAvailable;
-
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -22,9 +17,16 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
 
+import org.osmdroid.config.Configuration;
+import org.osmdroid.util.GeoPoint;
+import org.osmdroid.views.MapController;
+import org.osmdroid.views.MapView;
+
 public class HomeScreen extends AppCompatActivity {
 
     private FusedLocationProviderClient fusedLocationClient;
+    private MapView mapView;
+    private MapController mapController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,8 +44,17 @@ public class HomeScreen extends AppCompatActivity {
         } catch (NullPointerException ignored) {
         }
 
-
         setContentView(R.layout.activity_home_screen);
+
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
+
+        GeoPoint startPoint = new GeoPoint(41.387015, 2.169919);
+
+        mapView = findViewById(R.id.map);
+        mapController = (MapController) mapView.getController();
+        mapController.setCenter(startPoint);
+        mapController.setZoom(9);
+        mapView.setMultiTouchControls(true);
     }
 
     private void getLocation() {
@@ -69,6 +80,8 @@ public class HomeScreen extends AppCompatActivity {
                             System.out.println("Longitude: " + longitude + " Latitude: " + latitude);
                             TextView textView = findViewById(R.id.textView_HomeScreen);
                             textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
+                            mapController.setCenter(new GeoPoint(latitude, longitude));
+                            mapController.setZoom(18);
                         }
                     }
                 });
