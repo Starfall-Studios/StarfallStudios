@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Fallen Legends</string>
+    <string name="textView">Pantalla Inicial</string>
+    <string name="TermsCond">Términos y Condiciones</string>
+    <string name="about">Acerca de nosotros</string>
+</resources>
