@@ -39,6 +39,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
         /* DATABASE CHECK
         FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -88,8 +89,7 @@ public class HomeScreen extends AppCompatActivity {
                             System.out.println("Longitude: " + longitude + " Latitude: " + latitude);
                             TextView textView = findViewById(R.id.textView_HomeScreen);
                             textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
-                            mapController.setCenter(new GeoPoint(latitude, longitude));
-                            mapController.setZoom(18);
+                            moveToLocation(latitude, longitude);
                         }
                     }
                 });
@@ -110,6 +110,11 @@ public class HomeScreen extends AppCompatActivity {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+    }
+
+    private void moveToLocation(double latitude, double longitude) {
+        GeoPoint point = new GeoPoint(latitude, longitude);
+        mapController.animateTo(point, (double) 21, (long) 1000);
     }
 
     public void onTermsClick(View view) {
@@ -137,8 +142,7 @@ public class HomeScreen extends AppCompatActivity {
                             System.out.println("Longitude: " + longitude + " Latitude: " + latitude);
                             TextView textView = findViewById(R.id.textView_HomeScreen);
                             textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
-                            mapController.setCenter(new GeoPoint(latitude, longitude));
-                            mapController.setZoom(18);
+                            moveToLocation(latitude, longitude);
                         }
                     }
                 });
