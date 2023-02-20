@@ -3,4 +3,5 @@
     <string name="textView">Pantalla d\'inici</string>
     <string name="TermsCond">Termes i Condicions</string>
     <string name="about">Acerca de nosotros</string>
+    <string name="profile">Perfil</string>
 </resources>

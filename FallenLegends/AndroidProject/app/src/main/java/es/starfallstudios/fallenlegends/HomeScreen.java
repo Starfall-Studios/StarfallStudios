@@ -2,12 +2,12 @@ package es.starfallstudios.fallenlegends;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Canvas;
 import android.location.Location;
 import android.location.LocationRequest;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -18,17 +18,16 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
-import com.google.android.gms.common.GoogleApiAvailability;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 import org.osmdroid.config.Configuration;
+import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Overlay;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -64,6 +63,8 @@ public class HomeScreen extends AppCompatActivity {
         mapController.setCenter(startPoint);
         mapController.setZoom(9);
         mapView.setMultiTouchControls(true);
+        //show streets and buildings but not labels
+        mapView.setTileSource(TileSourceFactory.MAPNIK);
     }
 
     private void getLocation() {
@@ -97,9 +98,11 @@ public class HomeScreen extends AppCompatActivity {
 
     public void onAboutClick(View view) {
         // inflate the layout of the popup window
-        LayoutInflater inflater = (LayoutInflater)
-                getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.main_navigator, null);
+        Intent intent = new Intent(this, AboutScreen.class);
+        startActivity(intent);
+        /*
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.profile_info, null);
 
         // create the popup window
         int width = RelativeLayout.LayoutParams.WRAP_CONTENT;
@@ -109,7 +112,7 @@ public class HomeScreen extends AppCompatActivity {
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);*/
     }
 
     private void moveToLocation(double latitude, double longitude) {
@@ -146,5 +149,23 @@ public class HomeScreen extends AppCompatActivity {
                         }
                     }
                 });
+
     }
+    public void onProfileClick(View view) {
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.profile_info, null);
+
+        // create the popup window
+        int width = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        int height = RelativeLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = false; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window
+        popupWindow.showAtLocation(view, Gravity.LEFT, 0, 0);
+
+        //dismiss the popup window when touched
+    }
+
 }
