@@ -3,6 +3,7 @@ package es.starfallstudios.fallenlegends;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Canvas;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationRequest;
 import android.os.Bundle;
@@ -28,6 +29,9 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Overlay;
+import org.osmdroid.views.overlay.Polygon;
+
+import java.util.ArrayList;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -35,16 +39,14 @@ public class HomeScreen extends AppCompatActivity {
     private MapView mapView;
     private MapController mapController;
     private PopupWindow profilePopupWindow;
+    private GameManager gameManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
-        /* DATABASE CHECK
-
-        DatabaseReference myRef = database.getReference("message");
-        myRef.setValue("Hello, World!");*/
+        gameManager = GameManager.getInstance();
 
         getLocation();
 
@@ -156,6 +158,21 @@ public class HomeScreen extends AppCompatActivity {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window
         profilePopupWindow.showAtLocation(view, Gravity.LEFT, 0, -100);
+    }
+
+    private void drawZone() {
+        ArrayList<Zone> zones = gameManager.getZonesList();
+
+        for (Zone zone : zones) {
+            ArrayList<GeoPoint> points = zone.getPoints();
+            points.add(points.get(0));
+            Polygon polygon = new Polygon();
+            polygon.setPoints(points);
+            polygon.setFillColor(Color.argb(50, 255, 0, 0));
+            polygon.setStrokeColor(Color.RED);
+            polygon.setStrokeWidth(5);
+            mapView.getOverlays().add(polygon);
+        }
     }
 
 }

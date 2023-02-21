@@ -10,11 +10,18 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    private GameManager gameManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        gameManager = GameManager.getInstance();
+        gameManager.getZones();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -29,8 +36,6 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // Thread will sleep for 5 seconds
                 Thread.sleep(5*1000);
-
-                System.out.println("Thread is running");
 
                 // After 5 seconds redirect to another intent
                 Intent i = new Intent(MainActivity.this,HomeScreen.class);

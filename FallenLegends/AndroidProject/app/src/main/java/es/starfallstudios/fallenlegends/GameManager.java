@@ -39,7 +39,7 @@ public class GameManager {
         }
     }
 
-    private void getZones() {
+    public void getZones() {
         DatabaseReference myRef = database.getReference("zones");
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -48,6 +48,7 @@ public class GameManager {
                     Zone zone = zoneSnapshot.getValue(Zone.class);
                     zones.add(zone);
                 }
+                Log.d("FIREBASE", "Zones updated!");
             }
 
             @Override
@@ -56,6 +57,10 @@ public class GameManager {
                 Log.w("FIREBASE", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public ArrayList<Zone> getZonesList() {
+        return zones;
     }
 
 }
