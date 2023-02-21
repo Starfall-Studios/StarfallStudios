@@ -4,6 +4,7 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class Zone {
     private int owner;
@@ -74,10 +75,10 @@ public class Zone {
         String name = json.substring(json.indexOf("\"name\":\"") + 8, json.indexOf("\",\"points\":"));
         ArrayList<GeoPoint> points = new ArrayList<>();
         String pointsString = json.substring(json.indexOf("\"points\":[") + 10, json.indexOf("]}"));
-        String[] pointsArray = pointsString.split("},");
+        String[] pointsArray = pointsString.split(Pattern.quote("},"));
         for (String point : pointsArray) {
             double latitude = Double.parseDouble(point.substring(point.indexOf("\"latitude\":") + 11, point.indexOf(",\"longitude\":")));
-            double longitude = Double.parseDouble(point.substring(point.indexOf("\"longitude\":") + 12, point.length()));
+            double longitude = Double.parseDouble(point.substring(point.indexOf("\"longitude\":") + 12, point.length()-1));
             points.add(new GeoPoint(latitude, longitude));
         }
         return new Zone(owner, id, name, points);

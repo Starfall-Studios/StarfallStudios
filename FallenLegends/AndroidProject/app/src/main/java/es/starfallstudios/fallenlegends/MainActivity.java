@@ -21,10 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         gameManager = GameManager.getInstance();
-        //gameManager.getZones();
-        ArrayList<Zone> zones = new ArrayList<Zone>();
-        zones.add(new Zone(-1, 0, "Test Zone"));
-        gameManager.setZones(zones);
+        gameManager.getZones();
+        //testLocalDB();
+
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -52,6 +51,12 @@ public class MainActivity extends AppCompatActivity {
         });
         // start thread
         background.start();
+    }
+
+    private void testLocalDB() {
+        ArrayList<Zone> zones = new ArrayList<Zone>();
+        zones.add(new Zone(-1, 0, "Test Zone"));
+        gameManager.setZones(zones);
     }
 
     public void scaleView(View v, float startScale, float endScale) {

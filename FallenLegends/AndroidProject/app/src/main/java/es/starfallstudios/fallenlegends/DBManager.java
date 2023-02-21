@@ -38,7 +38,9 @@ public class DBManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                    Zone zone = Zone.fromJSON(zoneSnapshot.getValue(String.class));
+                    String data = zoneSnapshot.getValue(String.class);
+                    System.out.println(data);
+                    Zone zone = Zone.fromJSON(data);
                     zones.add(zone);
                 }
                 Log.d("FIREBASE", "Zones updated!");
