@@ -34,6 +34,7 @@ public class HomeScreen extends AppCompatActivity {
     private FusedLocationProviderClient fusedLocationClient;
     private MapView mapView;
     private MapController mapController;
+    private PopupWindow profilePopupWindow;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +42,7 @@ public class HomeScreen extends AppCompatActivity {
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
         /* DATABASE CHECK
-        FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
+
         DatabaseReference myRef = database.getReference("message");
         myRef.setValue("Hello, World!");*/
 
@@ -100,19 +101,6 @@ public class HomeScreen extends AppCompatActivity {
         // inflate the layout of the popup window
         Intent intent = new Intent(this, AboutScreen.class);
         startActivity(intent);
-        /*
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.profile_info, null);
-
-        // create the popup window
-        int width = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        int height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
-
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window
-        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);*/
     }
 
     private void moveToLocation(double latitude, double longitude) {
@@ -123,6 +111,10 @@ public class HomeScreen extends AppCompatActivity {
     public void onTermsClick(View view) {
         Intent intent = new Intent(this, TermsConditionsScreen.class);
         startActivity(intent);
+    }
+
+    public void onCloseProfileClick(View view) {
+        profilePopupWindow.dismiss();
     }
 
     public void onUpdateLocationClick(View view) {
@@ -159,13 +151,11 @@ public class HomeScreen extends AppCompatActivity {
         int width = RelativeLayout.LayoutParams.WRAP_CONTENT;
         int height = RelativeLayout.LayoutParams.WRAP_CONTENT;
         boolean focusable = false; // lets taps outside the popup also dismiss it
-        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+        profilePopupWindow = new PopupWindow(popupView, width, height, focusable);
 
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window
-        popupWindow.showAtLocation(view, Gravity.LEFT, 0, 0);
-
-        //dismiss the popup window when touched
+        profilePopupWindow.showAtLocation(view, Gravity.LEFT, 0, -100);
     }
 
 }

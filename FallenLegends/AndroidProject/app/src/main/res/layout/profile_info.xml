@@ -9,26 +9,65 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#FFFFFF"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-        <Button
-            android:id="@+id/aboutusBtn"
-            android:layout_width="154dp"
-            android:layout_height="34dp"
-            android:background="#0F9D58"
-            android:onClick="onAboutClick"
-            android:text="About us"
-            android:textColor="#ffffff" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/termscndBtn"
-            android:layout_width="237dp"
-            android:layout_height="35dp"
-            android:background="#0F9D58"
-            android:onClick="onTermsClick"
-            android:text="Terms and Conditions"
-            android:textColor="#ffffff" />
+            <Button
+                android:id="@+id/termscndBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:background="#0F9D58"
+                android:onClick="onTermsClick"
+                android:text="@string/TermsCond"
+                android:textColor="#ffffff" />
+
+            <Space
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/aboutusBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:background="#0F9D58"
+                android:onClick="onAboutClick"
+                android:text="@string/about"
+                android:textColor="#ffffff" />
+
+        </LinearLayout>
+
+        <Space
+            android:layout_width="255dp"
+            android:layout_height="40dp"
+            android:layout_weight="1" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="10"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:onClick="onCloseProfileClick"
+                android:text="@string/closeButton" />
+        </LinearLayout>
+
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
