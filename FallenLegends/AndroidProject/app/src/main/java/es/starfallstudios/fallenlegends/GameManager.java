@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class GameManager {
 
     private static GameManager instance = null;
+    private static DBManager dbManager = DBManager.getInstance();
     private FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
 
     private ArrayList<Zone> zones;
@@ -32,31 +33,11 @@ public class GameManager {
 
     public void setZones(ArrayList<Zone> zones) {
         this.zones = zones;
-        DatabaseReference myRef = database.getReference();
-
-        for (Zone zone : zones) {
-            myRef.child("zones").child(Integer.toString(zone.getId())).setValue(zone);
-        }
+        //dbManager.storeZones(zones);
     }
 
     public void getZones() {
-        DatabaseReference myRef = database.getReference("zones");
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                    Zone zone = zoneSnapshot.getValue(Zone.class);
-                    zones.add(zone);
-                }
-                Log.d("FIREBASE", "Zones updated!");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Log.w("FIREBASE", "Failed to read value.", error.toException());
-            }
-        });
+        zones = dbManager.retrieveZones();
     }
 
     public ArrayList<Zone> getZonesList() {

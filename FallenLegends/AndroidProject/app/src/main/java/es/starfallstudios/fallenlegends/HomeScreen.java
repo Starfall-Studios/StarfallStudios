@@ -68,6 +68,8 @@ public class HomeScreen extends AppCompatActivity {
         mapView.setMultiTouchControls(true);
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
+
+        drawZone();
     }
 
     private void getLocation() {
