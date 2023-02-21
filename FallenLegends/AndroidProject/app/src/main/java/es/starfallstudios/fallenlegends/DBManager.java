@@ -10,6 +10,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.osmdroid.util.GeoPoint;
+
 import java.util.ArrayList;
 
 public class DBManager {
@@ -24,13 +26,6 @@ public class DBManager {
         return instance;
     }
 
-    public void storeZones(ArrayList<Zone> zones) {
-        DatabaseReference myRef = database.getReference();
-        for (Zone zone : zones) {
-            myRef.child("zones").child(Integer.toString(zone.getId())).setValue(zone.toJSON());
-        }
-    }
-
     public ArrayList<Zone> retrieveZones() {
         ArrayList<Zone> zones = new ArrayList<Zone>();
         DatabaseReference myRef = database.getReference("zones");
@@ -38,10 +33,20 @@ public class DBManager {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
-                    String data = zoneSnapshot.getValue(String.class);
-                    System.out.println(data);
-                    Zone zone = Zone.fromJSON(data);
-                    zones.add(zone);
+                    int id = zoneSnapshot.child("id").getValue(Integer.class);
+                    String name = zoneSnapshot.child("name").getValue(String.class);
+                    int owner = zoneSnapshot.child("owner").getValue(Integer.class);
+
+                    ArrayList<GeoPoint> points = new ArrayList<GeoPoint>();
+
+                    for (DataSnapshot pointSnapshot : zoneSnapshot.child("points").getChildren()) {
+                        double latitude = pointSnapshot.child("0").getValue(Double.class);
+                        double longitude = pointSnapshot.child("1").getValue(Double.class);
+                        points.add(new GeoPoint(latitude, longitude));
+                    }
+
+                    zones.add(new Zone(id, owner, name, points));
+
                 }
                 Log.d("FIREBASE", "Zones updated!");
             }

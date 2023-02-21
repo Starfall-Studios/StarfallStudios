@@ -41,6 +41,10 @@ public class Zone {
         this.owner = owner;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public ArrayList<GeoPoint> getPoints() {
         return points;
     }
@@ -53,35 +57,16 @@ public class Zone {
         return id;
     }
 
-    //Serialize to JSON
-    public String toJSON() {
-        String json = "{";
-        json += "\"owner\":" + owner + ",";
-        json += "\"id\":" + id + ",";
-        json += "\"name\":\"" + name + "\",";
-        json += "\"points\":[";
-        for (GeoPoint point : points) {
-            json += "{\"latitude\":" + point.getLatitude() + ",\"longitude\":" + point.getLongitude() + "},";
+    public boolean isCoordinatesInsideZone(GeoPoint coordinates) {
+        int i;
+        int j;
+        boolean result = false;
+        for (i = 0, j = points.size() - 1; i < points.size(); j = i++) {
+            if ((points.get(i).getLatitude() > coordinates.getLatitude()) != (points.get(j).getLatitude() > coordinates.getLatitude()) &&
+                    (coordinates.getLongitude() < (points.get(j).getLongitude() - points.get(i).getLongitude()) * (coordinates.getLatitude() - points.get(i).getLatitude()) / (points.get(j).getLatitude() - points.get(i).getLatitude()) + points.get(i).getLongitude())) {
+                result = !result;
+            }
         }
-        json = json.substring(0, json.length() - 1);
-        json += "]}";
-        return json;
+        return result;
     }
-
-    //Deserialize from JSON
-    public static Zone fromJSON(String json) {
-        int owner = Integer.parseInt(json.substring(json.indexOf("\"owner\":") + 8, json.indexOf(",\"id\":")));
-        int id = Integer.parseInt(json.substring(json.indexOf("\"id\":") + 5, json.indexOf(",\"name\":")));
-        String name = json.substring(json.indexOf("\"name\":\"") + 8, json.indexOf("\",\"points\":"));
-        ArrayList<GeoPoint> points = new ArrayList<>();
-        String pointsString = json.substring(json.indexOf("\"points\":[") + 10, json.indexOf("]}"));
-        String[] pointsArray = pointsString.split(Pattern.quote("},"));
-        for (String point : pointsArray) {
-            double latitude = Double.parseDouble(point.substring(point.indexOf("\"latitude\":") + 11, point.indexOf(",\"longitude\":")));
-            double longitude = Double.parseDouble(point.substring(point.indexOf("\"longitude\":") + 12, point.length()-1));
-            points.add(new GeoPoint(latitude, longitude));
-        }
-        return new Zone(owner, id, name, points);
-    }
-
 }

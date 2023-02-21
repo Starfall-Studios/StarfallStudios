@@ -28,6 +28,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
+import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.Polygon;
 
@@ -40,6 +41,7 @@ public class HomeScreen extends AppCompatActivity {
     private MapController mapController;
     private PopupWindow profilePopupWindow;
     private GameManager gameManager;
+    private Marker userMarker;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,16 +62,23 @@ public class HomeScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_home_screen);
 
-        GeoPoint startPoint = new GeoPoint(40.416775, -3.703790);
+        GeoPoint startPoint = new GeoPoint(41.58025556428497, 1.6077941269397034);
         mapView = findViewById(R.id.map);
         mapController = (MapController) mapView.getController();
         mapController.setCenter(startPoint);
-        mapController.setZoom(9);
-        mapView.setMultiTouchControls(true);
+        mapController.setZoom(20);
+        userMarker = new Marker(mapView);
+
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
 
         drawZone();
+    }
+
+    public void onGetZoneClick(View view) {
+        Zone zone = gameManager.getZone(gameManager.getUserLocation());
+        System.out.println(zone.getName() + ", player at coords: " + gameManager.getUserLocation().getLatitude() + ", " + gameManager.getUserLocation().getLongitude());
+
     }
 
     private void getLocation() {
@@ -92,7 +101,6 @@ public class HomeScreen extends AppCompatActivity {
                             // Logic to handle location object
                             double longitude = location.getLongitude();
                             double latitude = location.getLatitude();
-                            System.out.println("Longitude: " + longitude + " Latitude: " + latitude);
                             TextView textView = findViewById(R.id.textView_HomeScreen);
                             textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
                             moveToLocation(latitude, longitude);
@@ -109,6 +117,10 @@ public class HomeScreen extends AppCompatActivity {
 
     private void moveToLocation(double latitude, double longitude) {
         GeoPoint point = new GeoPoint(latitude, longitude);
+        gameManager.setUserLocation(point);
+        userMarker.setPosition(point);
+        userMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        mapView.getOverlays().add(userMarker);
         mapController.animateTo(point, (double) 21, (long) 1000);
     }
 
@@ -138,7 +150,6 @@ public class HomeScreen extends AppCompatActivity {
                             // Logic to handle location object
                             double longitude = location.getLongitude();
                             double latitude = location.getLatitude();
-                            System.out.println("Longitude: " + longitude + " Latitude: " + latitude);
                             TextView textView = findViewById(R.id.textView_HomeScreen);
                             textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
                             moveToLocation(latitude, longitude);
@@ -170,10 +181,11 @@ public class HomeScreen extends AppCompatActivity {
             points.add(points.get(0));
             Polygon polygon = new Polygon();
             polygon.setPoints(points);
+            polygon.setTitle(zone.getName());
             polygon.setFillColor(Color.argb(50, 255, 0, 0));
             polygon.setStrokeColor(Color.RED);
             polygon.setStrokeWidth(5);
-            mapView.getOverlays().add(polygon);
+            mapView.getOverlayManager().add(polygon);
         }
     }
 

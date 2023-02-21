@@ -2,6 +2,7 @@ package es.starfallstudios.fallenlegends;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -10,6 +11,11 @@ import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
 
+import com.google.firebase.storage.internal.Util;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
@@ -22,8 +28,6 @@ public class MainActivity extends AppCompatActivity {
 
         gameManager = GameManager.getInstance();
         gameManager.getZones();
-        //testLocalDB();
-
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -53,12 +57,6 @@ public class MainActivity extends AppCompatActivity {
         background.start();
     }
 
-    private void testLocalDB() {
-        ArrayList<Zone> zones = new ArrayList<Zone>();
-        zones.add(new Zone(-1, 0, "Test Zone"));
-        gameManager.setZones(zones);
-    }
-
     public void scaleView(View v, float startScale, float endScale) {
         System.out.println("Scaling view");
         Animation anim = new ScaleAnimation(
@@ -70,4 +68,5 @@ public class MainActivity extends AppCompatActivity {
         anim.setDuration(5000);
         v.startAnimation(anim);
     }
+
 }
