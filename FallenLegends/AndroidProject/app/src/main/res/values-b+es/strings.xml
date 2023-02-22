@@ -3,4 +3,6 @@
     <string name="textView">Pantalla Inicial</string>
     <string name="TermsCond">Términos y Condiciones</string>
     <string name="about">Acerca de nosotros</string>
+    <string name="profile">Perfil</string>
+    <string name="closeButton">Cerrar</string>
 </resources>

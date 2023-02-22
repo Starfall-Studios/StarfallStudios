@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "440323238175",
+    "project_id": "fallen-legends-30515",
+    "storage_bucket": "fallen-legends-30515.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440323238175:android:4b0c485801b72cb1baa82a",
+        "android_client_info": {
+          "package_name": "es.starfallstudios.fallenlegends"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "440323238175-3m52jrs8m2sbgrdh4ihtr15btjk7qefl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCM5GKBfTwFWUmDvP0yQFnexz3b-q2Ngss"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "440323238175-3m52jrs8m2sbgrdh4ihtr15btjk7qefl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

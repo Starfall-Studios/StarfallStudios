@@ -3,4 +3,6 @@
     <string name="textView">Home Screen</string>
     <string name="TermsCond">Terms And Conditions</string>
     <string name="about">About</string>
+    <string name="profile">Profile</string>
+    <string name="closeButton">Close</string>
 </resources>
