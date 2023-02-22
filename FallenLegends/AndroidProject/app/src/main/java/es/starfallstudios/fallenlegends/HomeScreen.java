@@ -46,6 +46,7 @@ public class HomeScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
         gameManager = GameManager.getInstance();
@@ -123,7 +124,7 @@ public class HomeScreen extends AppCompatActivity {
         mapView.getOverlays().add(userMarker);
         mapController.animateTo(point, (double) 21, (long) 1000);
     }
-
+    
     public void onTermsClick(View view) {
         Intent intent = new Intent(this, TermsConditionsScreen.class);
         startActivity(intent);
