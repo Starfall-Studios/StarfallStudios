@@ -2,7 +2,6 @@ package es.starfallstudios.fallenlegends;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.graphics.Canvas;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationRequest;
@@ -14,7 +13,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
+
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -29,7 +28,6 @@ import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
-import org.osmdroid.views.overlay.Overlay;
 import org.osmdroid.views.overlay.Polygon;
 
 import java.util.ArrayList;
@@ -69,10 +67,8 @@ public class HomeScreen extends AppCompatActivity {
         mapController.setCenter(startPoint);
         mapController.setZoom(20);
         userMarker = new Marker(mapView);
-
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-
         drawZone();
     }
 
@@ -151,8 +147,6 @@ public class HomeScreen extends AppCompatActivity {
                             // Logic to handle location object
                             double longitude = location.getLongitude();
                             double latitude = location.getLatitude();
-                            //TextView textView = findViewById(R.id.textView_HomeScreen);
-                            //textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
                             moveToLocation(latitude, longitude);
                         }
                     }
@@ -183,8 +177,8 @@ public class HomeScreen extends AppCompatActivity {
             Polygon polygon = new Polygon();
             polygon.setPoints(points);
             polygon.setTitle(zone.getName());
-            polygon.setFillColor(Color.argb(50, 255, 0, 0));
-            polygon.setStrokeColor(Color.RED);
+            polygon.setFillColor(Color.argb(35, 0, 0, 255));
+            polygon.setStrokeColor(Color.BLUE);
             polygon.setStrokeWidth(5);
             mapView.getOverlayManager().add(polygon);
         }
