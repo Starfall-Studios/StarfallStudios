@@ -102,8 +102,8 @@ public class HomeScreen extends AppCompatActivity {
                             // Logic to handle location object
                             double longitude = location.getLongitude();
                             double latitude = location.getLatitude();
-                            TextView textView = findViewById(R.id.textView_HomeScreen);
-                            textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
+                            //TextView textView = findViewById(R.id.textView_HomeScreen);
+                            //textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
                             moveToLocation(latitude, longitude);
                         }
                     }
@@ -151,8 +151,8 @@ public class HomeScreen extends AppCompatActivity {
                             // Logic to handle location object
                             double longitude = location.getLongitude();
                             double latitude = location.getLatitude();
-                            TextView textView = findViewById(R.id.textView_HomeScreen);
-                            textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
+                            //TextView textView = findViewById(R.id.textView_HomeScreen);
+                            //textView.setText("Longitude: " + longitude + " Latitude: " + latitude);
                             moveToLocation(latitude, longitude);
                         }
                     }
