@@ -174,7 +174,7 @@ public class HomeScreen extends AppCompatActivity {
                 Intent intent = new Intent(this, AboutScreen.class);
                 startActivity(intent);
                 return true;
-            case R.id.TermsAndConditions:
+            case R.id.TermsConditions:
                 Intent intent2 = new Intent(this, TermsConditionsScreen.class);
                 startActivity(intent2);
                 return true;
