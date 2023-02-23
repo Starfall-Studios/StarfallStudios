@@ -1,5 +1,7 @@
 package es.starfallstudios.fallenlegends;
 
+import static android.app.PendingIntent.getActivity;
+
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -8,6 +10,7 @@ import android.location.LocationRequest;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -158,20 +161,26 @@ public class HomeScreen extends AppCompatActivity {
 
     }
     public void onProfileClick(View view) { //Fix this method
-        /*
-        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-        View popupView = inflater.inflate(R.layout.profile_info, null);
+        PopupMenu popup = new PopupMenu(this, view);
+        MenuInflater inflater = popup.getMenuInflater();
+        inflater.inflate(R.menu.menu_profile, popup.getMenu());
+        popup.show();
+    }
 
-        // create the popup window
-        int width = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        int height = RelativeLayout.LayoutParams.WRAP_CONTENT;
-        boolean focusable = false; // lets taps outside the popup also dismiss it
-        profilePopupWindow = new PopupWindow(popupView, width, height, focusable);
+    public boolean onProfileMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.aboutUs:
+                Intent intent = new Intent(this, AboutScreen.class);
+                startActivity(intent);
+                return true;
+            case R.id.TermsAndConditions:
+                Intent intent2 = new Intent(this, TermsConditionsScreen.class);
+                startActivity(intent2);
+                return true;
+            default:
+                return false;
+        }
 
-        // show the popup window
-        // which view you pass in doesn't matter, it is only used for the window
-        profilePopupWindow.showAtLocation(view, Gravity.LEFT, 0, -100);
-        */
     }
 
     private void drawZone() {

@@ -6,9 +6,11 @@
 
     <item
         android:id="@+id/aboutUs"
-        android:title="About Us"/>
+        android:title="About Us"
+        android:onClick="onProfileMenuItemClick"/>
 
     <item
         android:id="@+id/TermsAndConditions"
-        android:title="Terms and Conditions"/>
+        android:title="Terms and Conditions"
+        android:onClick="onProfileMenuItemClick"/>
 </menu>
