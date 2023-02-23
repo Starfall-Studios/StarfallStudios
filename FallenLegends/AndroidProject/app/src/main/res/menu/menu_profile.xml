@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/configuration"
+        android:title="Configuration"/>
+
+    <item
+        android:id="@+id/aboutUs"
+        android:title="About Us"/>
+
+    <item
+        android:id="@+id/TermsAndConditions"
+        android:title="Terms and Conditions"/>
+</menu>

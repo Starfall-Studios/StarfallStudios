@@ -8,11 +8,15 @@ import android.location.LocationRequest;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -153,7 +157,8 @@ public class HomeScreen extends AppCompatActivity {
                 });
 
     }
-    public void onProfileClick(View view) {
+    public void onProfileClick(View view) { //Fix this method
+        /*
         LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
         View popupView = inflater.inflate(R.layout.profile_info, null);
 
@@ -166,6 +171,7 @@ public class HomeScreen extends AppCompatActivity {
         // show the popup window
         // which view you pass in doesn't matter, it is only used for the window
         profilePopupWindow.showAtLocation(view, Gravity.LEFT, 0, -100);
+        */
     }
 
     private void drawZone() {
