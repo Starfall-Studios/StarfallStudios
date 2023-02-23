@@ -1,9 +1,6 @@
 package es.starfallstudios.fallenlegends;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Context;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,13 +8,6 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-
-import com.google.firebase.storage.internal.Util;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 

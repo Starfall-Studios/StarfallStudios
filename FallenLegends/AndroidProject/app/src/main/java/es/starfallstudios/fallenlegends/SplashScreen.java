@@ -1,10 +1,6 @@
 package es.starfallstudios.fallenlegends;
 
 import android.os.Bundle;
-import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
-
 import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {

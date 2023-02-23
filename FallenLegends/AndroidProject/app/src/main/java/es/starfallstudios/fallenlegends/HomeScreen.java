@@ -1,6 +1,5 @@
 package es.starfallstudios.fallenlegends;
 
-import static android.app.PendingIntent.getActivity;
 
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -8,18 +7,13 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationRequest;
 import android.os.Bundle;
-import android.view.Gravity;
-import android.view.LayoutInflater;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,7 +22,6 @@ import androidx.core.app.ActivityCompat;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.material.navigation.NavigationView;
 
 import org.osmdroid.config.Configuration;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
@@ -114,12 +107,6 @@ public class HomeScreen extends AppCompatActivity {
                 });
     }
 
-    public void onAboutClick(View view) {
-        // inflate the layout of the popup window
-        Intent intent = new Intent(this, AboutScreen.class);
-        startActivity(intent);
-    }
-
     private void moveToLocation(double latitude, double longitude) {
         GeoPoint point = new GeoPoint(latitude, longitude);
         gameManager.setUserLocation(point);
@@ -128,16 +115,20 @@ public class HomeScreen extends AppCompatActivity {
         mapView.getOverlays().add(userMarker);
         mapController.animateTo(point, (double) 21, (long) 1000);
     }
-    
+    /*
     public void onTermsClick(View view) {
         Intent intent = new Intent(this, TermsConditionsScreen.class);
         startActivity(intent);
     }
-
+    public void onAboutClick(View view) {
+        // inflate the layout of the popup window
+        Intent intent = new Intent(this, AboutScreen.class);
+        startActivity(intent);
+    }
     public void onCloseProfileClick(View view) {
         profilePopupWindow.dismiss();
     }
-
+    */
     public void onUpdateLocationClick(View view) {
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 

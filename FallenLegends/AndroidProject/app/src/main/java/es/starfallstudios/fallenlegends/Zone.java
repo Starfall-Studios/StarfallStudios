@@ -3,8 +3,6 @@ package es.starfallstudios.fallenlegends;
 import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class Zone {
     private int owner;
