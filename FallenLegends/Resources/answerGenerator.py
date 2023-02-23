@@ -1,5 +1,8 @@
 import random
 import datetime
+from datetime import timedelta
+from random import randrange
+from faker import Faker
 
 print("Welcome to the Fallen Legends Answer Generator!")
 
@@ -7,8 +10,12 @@ def generateAnswer():
     print("Generating answer...")
     answer = ""
 
+    fake = Faker()
+
     answer += "\""
-    dateTime = datetime.datetime.now()
+    startDate = datetime.datetime(2023, 1, 30, 0, 0, 0)
+    dateTime = fake.date_time_between(start_date=startDate, end_date='now', tzinfo=None)
+
     answer += str(dateTime.year)
     answer += "/"
     answer += str(dateTime.month)
@@ -20,19 +27,32 @@ def generateAnswer():
     answer += str(dateTime.minute)
     answer += ":"
     answer += str(dateTime.second)
-    answer += " p. m. CET\",\""
-
-    answer += str(random.randint(14, 39))
-    answer += "\",\""
-
-    if random.randint(0, 1) == 0:
-        answer += "Sí"
-    else:
-        answer += "No"
-
     answer += "\",\""
 
     choice = random.randint(0, 3)
+    if choice == 0:
+        answer += "Menos de 18"
+    elif choice == 1:
+        answer += "Entre 18 y 25"
+    elif choice == 2:
+        answer += "Entre 26 y 35"
+    elif choice == 3:
+        answer += "Mas de 35"
+    answer += "\",\""
+
+    isPlayer = random.randint(0, 7)
+    if isPlayer == 0:
+        answer += "No"
+    else:
+        answer += "Si"
+
+    answer += "\",\""
+
+    if isPlayer == 0:
+        choice = 0
+    else:
+        choice = random.randint(1, 3)
+
     if choice == 0:
         answer += "Nunca"
     elif choice == 1:
@@ -91,9 +111,9 @@ def generateAnswer():
     elif choice == 1:
         answer += "Batallas entre criaturas"
     elif choice == 2:
-        answer += "Colección de criaturas"
+        answer += "Coleccion de criaturas"
     elif choice == 3:
-        answer += "Intercambio y relación con otros jugadores"
+        answer += "Intercambio y relacion con otros jugadores"
     elif choice == 4:
         answer += "No he jugado"
 
@@ -102,7 +122,5 @@ def generateAnswer():
     return answer
 
 with open("formAnswers.csv", "a") as file:
-    file.write("Fecha,Edad,¿Juegas a videojuegos?,¿Con qué frecuencia?,¿Qué tipo de videojuegos te gustan?,¿Te gustaría que tuvieramos un videojuego?,¿Te gustaría que tuvieras un videojuego propio?,¿Has jugado a Pokemon Go?,¿Qué te gustaba más de Pokemon Go?")
-
     for i in range(0, 70):
         file.write(generateAnswer() + "\n")
