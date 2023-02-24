@@ -5,19 +5,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#030825"
-    tools:context=".LoginScreen">
+    tools:context=".SignUpScreen">
+
+    <ImageView
+        android:id="@+id/imageView4"
+        android:layout_width="364dp"
+        android:layout_height="295dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="8dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/logo_fallen" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="359dp"
-        android:layout_height="wrap_content"
+        android:layout_width="364dp"
+        android:layout_height="265dp"
         android:layout_marginStart="16dp"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="16dp"
         android:padding="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2">
+        app:layout_constraintTop_toBottomOf="@+id/imageView4"
+        app:layout_constraintVertical_bias="0.060000002">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -34,43 +48,34 @@
                 android:inputType="textEmailAddress" />
 
             <EditText
-                android:id="@+id/input_password"
+                android:id="@+id/input_username"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="username"
+                android:inputType="textEmailAddress" />
+
+            <EditText
+                android:id="@+id/input_createpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="Password"
-                android:inputType="textPassword" />
+                android:inputType="textEmailAddress" />
 
-            <Button
-                android:id="@+id/btn_login"
+            <EditText
+                android:id="@+id/input_createrepeatpassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/loginButton" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Don't you have an account yet?" />
+                android:ems="10"
+                android:hint="Password"
+                android:inputType="textEmailAddress" />
 
             <Button
-                android:id="@+id/btn_opensignup"
+                android:id="@+id/signupButton"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/signupButton" />
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="364dp"
-        android:layout_height="295dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/logo_fallen" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

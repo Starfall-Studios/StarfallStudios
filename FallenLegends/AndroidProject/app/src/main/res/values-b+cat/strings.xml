@@ -6,4 +6,5 @@
     <string name="profile">Perfil</string>
     <string name="closeButton">Tancar</string>
     <string name="loginButton">Iniciar Sessió</string>
+    <string name="signupButton">Registrar-se</string>
 </resources>

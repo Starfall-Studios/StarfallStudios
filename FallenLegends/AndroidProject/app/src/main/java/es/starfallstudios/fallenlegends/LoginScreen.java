@@ -1,18 +1,16 @@
 package es.starfallstudios.fallenlegends;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -22,9 +20,19 @@ public class LoginScreen extends AppCompatActivity {
     EditText email;
     EditText password;
     Button loginButton;
+    Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        requestWindowFeature(View.SYSTEM_UI_FLAG_FULLSCREEN);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        try {
+            this.getSupportActionBar().hide();
+        } catch (NullPointerException ignored) {
+        }
+
         super.onCreate(savedInstanceState);
 
         mAuth = FirebaseAuth.getInstance();
@@ -34,8 +42,10 @@ public class LoginScreen extends AppCompatActivity {
         email = findViewById(R.id.input_email);
         password = findViewById(R.id.input_password);
         loginButton = findViewById(R.id.btn_login);
+        signupButton = findViewById(R.id.btn_opensignup);
 
         loginButton.setOnClickListener(v -> login());
+        signupButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, SignUpScreen.class)));
     }
 
     private void login() {
