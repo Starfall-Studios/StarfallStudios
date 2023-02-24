@@ -9,6 +9,7 @@ import android.location.Location;
 import android.location.LocationRequest;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Looper;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -16,13 +17,18 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.PopupMenu;
 import android.widget.PopupWindow;
+import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationCallback;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
+import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
@@ -53,6 +59,9 @@ public class HomeScreen extends AppCompatActivity {
     private Marker userMarker;
     private FirebaseAuth mAuth;
 
+    private LocationCallback locationCallback;
+    private com.google.android.gms.location.LocationRequest locationRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,10 +83,6 @@ public class HomeScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_home_screen);
 
-        final String mapId = "mapbox://styles/mapbox/dark-v11";
-        final String accessToken_old = "sk.eyJ1IjoiZGF2aWlkc29sdiIsImEiOiJjbGVocnNocHowaWJkM29td3ZmbHU5dGFhIn0.iPJa7aoMQnUvVy-dplksgw";
-        final String accessToken = "pk.eyJ1IjoiZGF2aWlkc29sdiIsImEiOiJjbDIyMWd0bWcwNWQ2M29vMjM4cnVsZ3Z1In0.YypzAdyIaR0WKLISgA4j7A";
-
         GeoPoint startPoint = new GeoPoint(41.58025556428497, 1.6077941269397034);
         mapView = findViewById(R.id.map);
         mapController = (MapController) mapView.getController();
@@ -85,10 +90,23 @@ public class HomeScreen extends AppCompatActivity {
         mapController.setZoom(20);
         userMarker = new Marker(mapView);
         //show streets and buildings but not labels
-        //mapView.setTileSource(new MapBoxTileSource(mapId, accessToken));
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         //mapView.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
         drawZone();
+
+        locationCallback = new LocationCallback() {
+            @Override
+            public void onLocationResult(@NonNull LocationResult locationResult) {
+                super.onLocationResult(locationResult);
+                for (Location location : locationResult.getLocations()) {
+                    double longitude = location.getLongitude();
+                    double latitude = location.getLatitude();
+                    moveToLocation(latitude, longitude);
+                }
+            }
+        };
+
+        startLocationUpdates();
     }
 
     private void getLocation() {
@@ -115,6 +133,16 @@ public class HomeScreen extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    private void startLocationUpdates() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            Toast.makeText(this, "You don't have location permissions!", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        fusedLocationClient.requestLocationUpdates(locationRequest,
+                locationCallback,
+                Looper.getMainLooper());
     }
 
     private void moveToLocation(double latitude, double longitude) {
