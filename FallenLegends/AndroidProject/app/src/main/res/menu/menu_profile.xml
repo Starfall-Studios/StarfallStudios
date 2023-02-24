@@ -9,4 +9,8 @@
         android:id="@+id/TermsConditions"
         android:title="Terms and Conditions"
         android:onClick="onProfileMenuItemClick"/>
+    <item
+        android:id="@+id/Logout"
+        android:title="Logout"
+        android:onClick="onProfileMenuItemClick"/>
 </menu>

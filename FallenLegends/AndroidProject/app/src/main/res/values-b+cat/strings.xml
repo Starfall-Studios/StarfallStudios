@@ -5,4 +5,5 @@
     <string name="about">Acerca de nosotros</string>
     <string name="profile">Perfil</string>
     <string name="closeButton">Tancar</string>
+    <string name="loginButton">Iniciar Sessió</string>
 </resources>

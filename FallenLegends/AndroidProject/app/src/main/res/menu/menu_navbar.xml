@@ -3,25 +3,30 @@
     <item
         android:id="@+id/nav_teams"
         android:icon="@drawable/baseline_supervisor_account_24"
-        android:title="Teams"/>
+        android:onClick="onNavMenuItemClick"
+        android:title="Teams" />
 
     <item
         android:id="@+id/nav_shop"
         android:icon="@drawable/baseline_shopping_cart_24"
-        android:title="Shop"/>
+        android:onClick="onNavMenuItemClick"
+        android:title="Shop" />
 
     <item
         android:id="@+id/nav_locationZone"
         android:title="Zone Info"
         android:enabled="true"
+        android:onClick="onNavMenuItemClick"
         />
     <item
         android:id="@+id/nav_myZones"
         android:icon="@drawable/baseline_map_24"
-        android:title="My Zones"/>
+        android:onClick="onNavMenuItemClick"
+        android:title="My Zones" />
 
     <item
         android:id="@+id/nav_deck"
         android:icon="@drawable/baseline_local_library_24"
-        android:title="Deck"/>
+        android:onClick="onNavMenuItemClick"
+        android:title="Deck" />
 </menu>

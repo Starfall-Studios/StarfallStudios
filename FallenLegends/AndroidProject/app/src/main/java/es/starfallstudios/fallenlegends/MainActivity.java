@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
                 Thread.sleep(5*1000);
 
                 // After 5 seconds redirect to another intent
-                Intent i = new Intent(MainActivity.this,HomeScreen.class);
+                Intent i = new Intent(MainActivity.this,LoginScreen.class);
                 startActivity(i);
 
                 //Remove activity

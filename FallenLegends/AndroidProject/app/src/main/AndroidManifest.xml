@@ -16,6 +16,10 @@
         android:theme="@style/Theme.FallenLegends"
         tools:targetApi="31">
         <activity
+            android:name=".LoginScreen"
+            android:exported="false"
+            android:screenOrientation="portrait"/>
+        <activity
             android:name=".MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
@@ -25,9 +29,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="es.starfallstudios.fallenlegends.HomeScreen" android:screenOrientation="portrait"/>
-        <activity android:name="es.starfallstudios.fallenlegends.AboutScreen" android:screenOrientation="portrait"/>
-        <activity android:name="es.starfallstudios.fallenlegends.TermsConditionsScreen" android:screenOrientation="portrait"/>
+        <activity
+            android:name=".HomeScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".AboutScreen"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".TermsConditionsScreen"
+            android:screenOrientation="portrait" />
     </application>
 
 </manifest>
