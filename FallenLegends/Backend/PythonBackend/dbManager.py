@@ -18,3 +18,7 @@ class DBManager:
     
     def getCreatures(self):
         return self.db.child("creatures").get().val()
+    
+    def setCreatures(self, creatures):
+        for creature in creatures:
+            self.db.child("creatures").child(creature["id"]).set(creature)

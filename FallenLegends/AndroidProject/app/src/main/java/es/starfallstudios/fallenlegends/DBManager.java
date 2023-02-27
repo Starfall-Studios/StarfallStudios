@@ -60,4 +60,32 @@ public class DBManager {
 
         return zones;
     }
+
+    public ArrayList<Creature> retrieveCreatures() {
+        ArrayList<Creature> creatures = new ArrayList<Creature>();
+        DatabaseReference myRef = database.getReference("creatures");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot creatureSnapshot : dataSnapshot.getChildren()) {
+                    int id = creatureSnapshot.child("id").getValue(Integer.class);
+                    String name = creatureSnapshot.child("name").getValue(String.class);
+                    int zone = creatureSnapshot.child("zone").getValue(Integer.class);
+                    double latitude = creatureSnapshot.child("latitude").getValue(Double.class);
+                    double longitude = creatureSnapshot.child("longitude").getValue(Double.class);
+
+                    creatures.add(new Creature(name, id, zone, latitude, longitude));
+                }
+                Log.d("FIREBASE", "Creatures updated!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+
+        return creatures;
+    }
 }

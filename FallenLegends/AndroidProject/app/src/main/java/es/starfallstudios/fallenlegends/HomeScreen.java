@@ -92,7 +92,9 @@ public class HomeScreen extends AppCompatActivity {
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
         //mapView.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
+
         drawZone();
+        drawCreatures();
 
         locationCallback = new LocationCallback() {
             @Override
@@ -227,6 +229,19 @@ public class HomeScreen extends AppCompatActivity {
             polygon.setStrokeColor(Color.BLUE);
             polygon.setStrokeWidth(5);
             mapView.getOverlayManager().add(polygon);
+        }
+    }
+
+    private void drawCreatures() {
+        ArrayList<Creature> creatures = gameManager.getCreaturesList();
+
+        for (Creature creature : creatures) {
+            Marker marker = new Marker(mapView);
+            marker.setPosition(creature.getLocation());
+            marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+            //marker.setIcon(getResources().getDrawable(R.drawable.ic_creature));
+            marker.setTitle(creature.getName());
+            mapView.getOverlayManager().add(marker);
         }
     }
 

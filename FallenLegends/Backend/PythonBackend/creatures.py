@@ -34,11 +34,17 @@ class CreatureManager:
 
         self.loadCreatures()
 
+    def uploadCreatures(self):
+        db = dbManager.DBManager()
+        db.setCreatures(self.creatures)
+        print("Uploaded creatures!")
+
     def createRandomCreature(self):
         latitude, longitude = utils.createRandomPosition()
         zone = self.zm.getZone(latitude, longitude)
         creature = {
-            "name": "Test Creature 2",
+            "id": self.creatures[-1]["id"] + 1,
+            "name": "Test Creature " + str(self.creatures[-1]["id"] + 2),
             "zone": zone["id"],
             "latitude": latitude,
             "longitude": longitude

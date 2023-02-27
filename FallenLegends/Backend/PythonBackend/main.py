@@ -9,11 +9,10 @@ def main():
     zoneManager.loadZones()
 
     creatureManager = CreatureManager()
-    c1 = creatureManager.createRandomCreature()
-
     creatures = creatureManager.getCreatures()
-    creatures.append(c1)
-    creatureManager.setCreatures(creatures)
+    
+    creatureManager.uploadCreatures()
+
     creatureManager.saveCreatures()
     zoneManager.saveZones()
     

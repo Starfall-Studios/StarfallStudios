@@ -19,6 +19,7 @@ public class MainActivity extends AppCompatActivity {
 
         gameManager = GameManager.getInstance();
         gameManager.getZones();
+        gameManager.getCreatures();
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
