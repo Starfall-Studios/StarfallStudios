@@ -3,7 +3,7 @@ from zones import ZoneManager
 from creatures import CreatureManager
 
 def main():
-    print("Hey")
+    print("Fallen Legends Backend v0.1 starting...")
     zoneManager = ZoneManager()
     zoneManager.checkForUpdate()
     zoneManager.loadZones()
@@ -17,5 +17,4 @@ def main():
     creatureManager.saveCreatures()
     
 if __name__ == '__main__':
-    print("Hey")
     main()

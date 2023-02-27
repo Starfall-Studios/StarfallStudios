@@ -48,7 +48,6 @@ class ZoneManager:
         latInside = latitude > zone["points"][3][0] and latitude < zone["points"][1][0]
         longInside = longitude > zone["points"][3][1] and longitude < zone["points"][1][1]
         if (latInside and longInside):
-            print("Inside zone")
             return True
         else:
             return False

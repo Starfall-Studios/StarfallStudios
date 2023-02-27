@@ -2,7 +2,7 @@ import random
 from zones import ZoneManager
 from math import sin, cos, sqrt, atan2, radians
 
-# function to create random position inside 4 coordinates
+# CREATES RANDOM POSITION INSIDE ZONES
 def createRandomPosition():
     latitude, longitude = 0, 0
 
@@ -20,6 +20,7 @@ def createRandomPosition():
 
     return latitude, longitude
 
+# GET DISTANTCE BETWEEN TWO POINTS IN KM
 def getDistance(lat1, lon1, lat2, lon2):
     R = 6373.0
 
