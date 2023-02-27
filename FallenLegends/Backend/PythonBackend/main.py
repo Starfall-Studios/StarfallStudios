@@ -1,20 +1,13 @@
 import pyrebase
-import threading
 import json
 import random
-
-config = {
-  "apiKey": " AIzaSyCM5GKBfTwFWUmDvP0yQFnexz3b-q2Ngss ",
-  "authDomain": "fallen-legends-30515.firebaseapp.com",
-  "databaseURL": "https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/",
-  "storageBucket": "fallen-legends-30515.appspot.com"
-}
+import config
 
 zones = {}
 version = "0.0.1"
 
 def downloadZones():
-    firebase = pyrebase.initialize_app(config)
+    firebase = pyrebase.initialize_app(config.config)
     db = firebase.database()
     res = db.child("zones").get()
     print("Downloaded zones! Saving to zones.json")
@@ -28,13 +21,13 @@ def loadZones():
         return data
 
 def setVersion():
-    firebase = pyrebase.initialize_app(config)
+    firebase = pyrebase.initialize_app(config.config)
     db = firebase.database()
     db.child("version").set(version)
     print("Version set to " + version)
 
 def checkForUpdate():
-    firebase = pyrebase.initialize_app(config)
+    firebase = pyrebase.initialize_app(config.config)
     db = firebase.database()
     _version = db.child("version").get()
 
@@ -60,14 +53,26 @@ def createRandomPosition():
     return latitude, longitude
 
 def createRandomCreature():
-    pass
+    latitude, longitude = createRandomPosition()
+    zone = getZone(latitude, longitude)
+    creature = {
+        "name": "Test",
+        "zone": zone["id"],
+        "latitude": latitude,
+        "longitude": longitude
+    }
+    return creature
 
 def isInsideZone(zone, latitude, longitude):
     # check if point is inside zone
-    if (latitude > zone["points"][0][0] and latitude < zone["points"][3][0]) and (longitude > zone["points"][0][1] and longitude < zone["points"][3][1]):
+    latInside = latitude > zone["points"][3][0] and latitude < zone["points"][1][0]
+    longInside = longitude > zone["points"][3][1] and longitude < zone["points"][1][1]
+    if (latInside and longInside):
+        print("Inside zone")
         return True
     else:
         return False
+    
     
 def getZone(latitude, longitude):
     for zone in zones:
