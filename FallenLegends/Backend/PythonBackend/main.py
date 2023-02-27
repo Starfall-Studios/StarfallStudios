@@ -1,6 +1,7 @@
-import random
+import threading
 from zones import ZoneManager
 from creatures import CreatureManager
+import api
 
 def main():
     print("Fallen Legends Backend v0.1 starting...")
@@ -9,7 +10,9 @@ def main():
     zoneManager.loadZones()
 
     creatureManager = CreatureManager()
-    creatures = creatureManager.getCreatures()
+
+    thread = threading.Thread(target=api.startAPI)
+    thread.start()
     
     creatureManager.uploadCreatures()
 
