@@ -22,7 +22,7 @@ class CreatureManager:
 
     def saveCreatures(self):
         with open("creatures.json", "w") as f:
-            json.dump(self.creatures, f)
+            json.dump(self.creatures, f, indent=4)
 
     def downloadCreatures(self):
         db = dbManager.DBManager()

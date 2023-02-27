@@ -17,7 +17,7 @@ class ZoneManager:
 
     def saveZones(self):
         with open("zones.json", "w") as f:
-            json.dump(self.zones, f)
+            json.dump(self.zones, f, indent=4)
 
     def setVersion(self):
         db = DBManager()
@@ -39,7 +39,7 @@ class ZoneManager:
         print("Downloaded zones! Saving to zones.json")
 
         with open('zones.json', 'w') as outfile:
-            json.dump(res, outfile)
+            json.dump(res, outfile, indent=4)
 
         self.loadZones()
 

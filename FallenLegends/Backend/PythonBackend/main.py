@@ -15,6 +15,7 @@ def main():
     creatures.append(c1)
     creatureManager.setCreatures(creatures)
     creatureManager.saveCreatures()
+    zoneManager.saveZones()
     
 if __name__ == '__main__':
     main()

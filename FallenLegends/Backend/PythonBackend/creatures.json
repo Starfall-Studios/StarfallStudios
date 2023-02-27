@@ -1,1 +1,26 @@
-[{"name": "Test Creature", "zone": 4406, "latitude": 41.680538464054464, "longitude": 1.5173707876051157}, {"name": "Test Creature 2", "zone": 1301, "latitude": 41.542777826951834, "longitude": 1.5864131867526807}, {"name": "Test Creature 2", "zone": 1331, "latitude": 41.54389995324094, "longitude": 1.7251783340032927}]
+[
+    {
+        "name": "Test Creature",
+        "zone": 4406,
+        "latitude": 41.680538464054464,
+        "longitude": 1.5173707876051157
+    },
+    {
+        "name": "Test Creature 2",
+        "zone": 1301,
+        "latitude": 41.542777826951834,
+        "longitude": 1.5864131867526807
+    },
+    {
+        "name": "Test Creature 2",
+        "zone": 1331,
+        "latitude": 41.54389995324094,
+        "longitude": 1.7251783340032927
+    },
+    {
+        "name": "Test Creature 2",
+        "zone": 3245,
+        "latitude": 41.628028412540075,
+        "longitude": 1.7003212192008812
+    }
+]
