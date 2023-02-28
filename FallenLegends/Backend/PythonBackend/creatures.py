@@ -2,6 +2,7 @@ import dbManager
 import json
 from zones import ZoneManager
 import utils
+import random
 
 class CreatureManager:
 
@@ -10,6 +11,9 @@ class CreatureManager:
         self.zm = ZoneManager()
         self.loadCreatures()
 
+    def getCreatureCount(self):
+        return len(self.creatures)
+
     def getCreatures(self):
         return self.creatures
     
@@ -17,6 +21,8 @@ class CreatureManager:
         self.creatures = creatures
     
     def loadCreatures(self):
+        with open("baseCreatures.json") as f:
+            self.baseCreatures = json.load(f)
         with open("creatures.json") as f:
             self.creatures = json.load(f)
 
@@ -42,12 +48,21 @@ class CreatureManager:
     def createRandomCreature(self):
         latitude, longitude = utils.createRandomPosition()
         zone = self.zm.getZone(latitude, longitude)
+        base = self.baseCreatures[random.randint(0, len(self.baseCreatures) - 1)]
+        tier = random.randint(1, 5)
+        multiplier = [1, 1.1, 1.25, 1.5, 2]
         creature = {
-            "id": self.creatures[-1]["id"] + 1,
-            "name": "Test Creature " + str(self.creatures[-1]["id"] + 2),
+            "id": len(self.creatures) + 1,
+            "name": base["name"],
+            "type": base["type"],
+            "tier": tier,
+            "hp": base["hp"] * multiplier[tier-1],
+            "attack": base["attack"] * multiplier[tier-1],
+            "defense": base["defense"] * multiplier[tier-1],
             "zone": zone["id"],
             "latitude": latitude,
             "longitude": longitude
         }
         print("Created creature at " + str(latitude) + ", " + str(longitude) + " in zone " + str(zone["id"]))
+        self.creatures.append(creature)
         return creature

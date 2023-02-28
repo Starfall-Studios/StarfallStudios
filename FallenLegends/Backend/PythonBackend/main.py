@@ -19,9 +19,8 @@ def main():
       #thread = threading.Thread(target=api.startAPI)
       #thread.start()
 
-    creatures = utils.generateBaseCreatures()
-    with open("baseCreatures.json", "w") as f:
-        json.dump(creatures, f, indent=4)
+    creatureManager.createRandomCreature()
+    creatureManager.createRandomCreature()
     
     creatureManager.uploadCreatures()
 

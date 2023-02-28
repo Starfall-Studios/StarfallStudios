@@ -13,7 +13,11 @@ public class GameManager {
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
 
     private ArrayList<Zone> zones;
-    private ArrayList<Creature> creatures;
+
+    // Creatures that are in the map
+    private ArrayList<Creature> mapCreatures;
+    // Creatures that are in the player's inventory
+    private ArrayList<Creature> playerCreatures;
 
     public static GameManager getInstance() {
         if (instance == null) {
@@ -24,7 +28,8 @@ public class GameManager {
 
     private GameManager() {
         zones = new ArrayList<Zone>();
-        creatures = new ArrayList<Creature>();
+        mapCreatures = new ArrayList<Creature>();
+        playerCreatures = new ArrayList<Creature>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
     }
 
@@ -45,11 +50,11 @@ public class GameManager {
     }
 
     public void getCreatures() {
-        creatures = dbManager.retrieveCreatures();
+        mapCreatures = dbManager.retrieveCreatures();
     }
 
     public ArrayList<Creature> getCreaturesList() {
-        return creatures;
+        return mapCreatures;
     }
 
     public Zone getZone(GeoPoint point) {
