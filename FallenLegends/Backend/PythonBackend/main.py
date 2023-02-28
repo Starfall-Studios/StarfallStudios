@@ -1,7 +1,9 @@
-import threading
+# import threading
 from zones import ZoneManager
 from creatures import CreatureManager
-import api
+# import api
+import utils
+import json
 
 useApi = False
 
@@ -13,9 +15,13 @@ def main():
 
     creatureManager = CreatureManager()
 
-    if useApi:
-      thread = threading.Thread(target=api.startAPI)
-      thread.start()
+    #if useApi:
+      #thread = threading.Thread(target=api.startAPI)
+      #thread.start()
+
+    creatures = utils.generateBaseCreatures()
+    with open("baseCreatures.json", "w") as f:
+        json.dump(creatures, f, indent=4)
     
     creatureManager.uploadCreatures()
 

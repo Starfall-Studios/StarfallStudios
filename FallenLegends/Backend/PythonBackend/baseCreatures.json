@@ -1,0 +1,82 @@
+[
+    {
+        "id": 0,
+        "name": "Gryphix",
+        "type": "Fire",
+        "hp": 80,
+        "attack": 42,
+        "defense": 50
+    },
+    {
+        "id": 1,
+        "name": "Nightmire",
+        "type": "Rock",
+        "hp": 85,
+        "attack": 46,
+        "defense": 56
+    },
+    {
+        "id": 2,
+        "name": "Lumino",
+        "type": "Water",
+        "hp": 185,
+        "attack": 74,
+        "defense": 100
+    },
+    {
+        "id": 3,
+        "name": "Frostbite",
+        "type": "Rock",
+        "hp": 89,
+        "attack": 69,
+        "defense": 46
+    },
+    {
+        "id": 4,
+        "name": "Sunspark",
+        "type": "Rock",
+        "hp": 56,
+        "attack": 71,
+        "defense": 64
+    },
+    {
+        "id": 5,
+        "name": "Thunderwing",
+        "type": "Water",
+        "hp": 65,
+        "attack": 89,
+        "defense": 94
+    },
+    {
+        "id": 6,
+        "name": "Stormbringer",
+        "type": "Electric",
+        "hp": 69,
+        "attack": 14,
+        "defense": 35
+    },
+    {
+        "id": 7,
+        "name": "Shadowfury",
+        "type": "Rock",
+        "hp": 160,
+        "attack": 68,
+        "defense": 42
+    },
+    {
+        "id": 8,
+        "name": "Celestia",
+        "type": "Fairy",
+        "hp": 58,
+        "attack": 68,
+        "defense": 54
+    },
+    {
+        "id": 9,
+        "name": "Inferno",
+        "type": "Water",
+        "hp": 132,
+        "attack": 24,
+        "defense": 92
+    }
+]

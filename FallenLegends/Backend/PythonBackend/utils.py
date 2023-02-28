@@ -2,6 +2,9 @@ import random
 from zones import ZoneManager
 from math import sin, cos, sqrt, atan2, radians
 
+creatureNames = ["Gryphix", "Nightmire","Lumino","Frostbite","Sunspark","Thunderwing","Stormbringer","Shadowfury","Celestia","Inferno","Moonbeam","Starlight","Mysticor","Dreamweaver","Faeleth","Phoenixfire","Krakensong","Aquarion","Darksoul","Silverglow","Skydancer","Elderscale","Woodlandia","Wildfire","Icefall","Nightshade","Shadowclaw","Thunderbolt","Magicorn","Spellweaver","Crystalwing","Sunburst","Emberheart","Moonstone","Starborn","Enchantress","Earthsprite","Faerieflame","Sunray","Mysticmeadow"]
+creatureTypes = ["Water", "Fire", "Electric", "Rock", "Fairy"]
+
 # CREATES RANDOM POSITION INSIDE ZONES
 def createRandomPosition():
     latitude, longitude = 0, 0
@@ -38,3 +41,17 @@ def getDistance(lat1, lon1, lat2, lon2):
     distance = R * c
 
     return distance
+
+def generateBaseCreatures():
+    creatures = []
+    for i in range(0, 10):
+        creatures.append({
+            "id": i,
+            "name": creatureNames[i],
+            "type": creatureTypes[random.randint(0, len(creatureTypes) - 1)],
+            "hp": random.randint(50, 200),
+            "attack": random.randint(10, 100),
+            "defense": random.randint(10, 100)
+        })
+
+    return creatures
