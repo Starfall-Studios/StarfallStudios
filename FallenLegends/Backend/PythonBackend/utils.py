@@ -44,7 +44,7 @@ def getDistance(lat1, lon1, lat2, lon2):
 
 def generateBaseCreatures():
     creatures = []
-    for i in range(0, 10):
+    for i in range(0, 40):
         creatures.append({
             "id": i,
             "name": creatureNames[i],
