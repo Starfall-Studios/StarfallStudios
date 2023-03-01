@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Screens;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -8,6 +8,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+
+import es.starfallstudios.fallenlegends.GameManager;
+import es.starfallstudios.fallenlegends.R;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
                 Thread.sleep(5*1000);
 
                 // After 5 seconds redirect to another intent
-                Intent i = new Intent(MainActivity.this,LoginScreen.class);
+                Intent i = new Intent(MainActivity.this, LoginScreen.class);
                 startActivity(i);
 
                 //Remove activity

@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Screens;
 
 
 import android.Manifest;
@@ -7,7 +7,6 @@ import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationRequest;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.view.MenuInflater;
@@ -28,26 +27,26 @@ import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.Priority;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 
 import org.osmdroid.config.Configuration;
-import org.osmdroid.tileprovider.constants.OpenStreetMapTileProviderConstants;
-import org.osmdroid.tileprovider.tilesource.ITileSource;
-import org.osmdroid.tileprovider.tilesource.MapBoxTileSource;
-import org.osmdroid.tileprovider.tilesource.MapQuestTileSource;
-import org.osmdroid.tileprovider.tilesource.OnlineTileSourceBase;
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory;
 import org.osmdroid.util.GeoPoint;
-import org.osmdroid.util.MapTileIndex;
+import org.osmdroid.views.CustomZoomButtonsController;
 import org.osmdroid.views.MapController;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.Marker;
 import org.osmdroid.views.overlay.Polygon;
-import org.osmdroid.views.overlay.TilesOverlay;
 
 import java.util.ArrayList;
+
+import es.starfallstudios.fallenlegends.BuildConfig;
+import es.starfallstudios.fallenlegends.Creature;
+import es.starfallstudios.fallenlegends.CreatureInfoWindow;
+import es.starfallstudios.fallenlegends.GameManager;
+import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.Zone;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -88,6 +87,9 @@ public class HomeScreen extends AppCompatActivity {
         mapController = (MapController) mapView.getController();
         mapController.setCenter(startPoint);
         mapController.setZoom(20);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mapView.setMaxZoomLevel(21.0);
+        mapView.setMinZoomLevel(21.0);
         userMarker = new Marker(mapView);
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
@@ -241,6 +243,7 @@ public class HomeScreen extends AppCompatActivity {
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             //marker.setIcon(getResources().getDrawable(R.drawable.ic_creature));
             marker.setTitle(creature.getName());
+            marker.setInfoWindow(new CreatureInfoWindow(mapView, creature));
             mapView.getOverlayManager().add(marker);
         }
     }

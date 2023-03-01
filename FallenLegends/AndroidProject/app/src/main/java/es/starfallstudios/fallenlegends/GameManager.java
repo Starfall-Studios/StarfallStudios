@@ -57,6 +57,11 @@ public class GameManager {
         return mapCreatures;
     }
 
+    /**
+     * Returns the zone where a geopoint is located
+     * @param point Geopoint to check
+     * @return Zone where the geopoint is located
+     */
     public Zone getZone(GeoPoint point) {
         for (Zone zone : zones) {
             if (zone.isCoordinatesInsideZone(point)) {

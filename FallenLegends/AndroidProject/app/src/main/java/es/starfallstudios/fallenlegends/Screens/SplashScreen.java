@@ -1,7 +1,9 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Screens;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+
+import es.starfallstudios.fallenlegends.R;
 
 public class SplashScreen extends AppCompatActivity {
 

@@ -16,14 +16,14 @@
         android:theme="@style/Theme.FallenLegends"
         tools:targetApi="31">
         <activity
-            android:name=".SignUpScreen"
+            android:name=".Screens.SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".LoginScreen"
+            android:name=".Screens.LoginScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".MainActivity"
+            android:name=".Screens.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -33,13 +33,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HomeScreen"
+            android:name=".Screens.HomeScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".AboutScreen"
+            android:name=".Screens.AboutScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".TermsConditionsScreen"
+            android:name=".Screens.TermsConditionsScreen"
             android:screenOrientation="portrait" />
     </application>
 
