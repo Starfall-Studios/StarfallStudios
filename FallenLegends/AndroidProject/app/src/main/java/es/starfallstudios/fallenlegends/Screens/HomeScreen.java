@@ -91,9 +91,9 @@ public class HomeScreen extends AppCompatActivity {
         mapView.setMaxZoomLevel(21.0);
         mapView.setMinZoomLevel(21.0);
         userMarker = new Marker(mapView);
+
         //show streets and buildings but not labels
         mapView.setTileSource(TileSourceFactory.MAPNIK);
-        //mapView.getOverlayManager().getTilesOverlay().setColorFilter(TilesOverlay.INVERT_COLORS);
 
         drawZone();
         drawCreatures();

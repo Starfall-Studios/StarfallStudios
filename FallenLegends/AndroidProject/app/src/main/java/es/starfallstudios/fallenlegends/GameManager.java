@@ -53,6 +53,10 @@ public class GameManager {
         mapCreatures = dbManager.retrieveCreatures();
     }
 
+    /**
+     * Returns the list of creatures that are in the map
+     * @return List of creatures that are in the map
+     */
     public ArrayList<Creature> getCreaturesList() {
         return mapCreatures;
     }
