@@ -8,6 +8,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
+import android.widget.Toast;
 
 import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
@@ -15,6 +16,8 @@ import es.starfallstudios.fallenlegends.R;
 public class MainActivity extends AppCompatActivity {
 
     private GameManager gameManager;
+    public static boolean zonesLoaded = false;
+    public static boolean creaturesLoaded = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +40,9 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // Thread will sleep for 5 seconds
                 Thread.sleep(5*1000);
+                while (!creaturesLoaded || !zonesLoaded) {
+                    Thread.sleep(1000*1);
+                }
 
                 // After 5 seconds redirect to another intent
                 Intent i = new Intent(MainActivity.this, LoginScreen.class);

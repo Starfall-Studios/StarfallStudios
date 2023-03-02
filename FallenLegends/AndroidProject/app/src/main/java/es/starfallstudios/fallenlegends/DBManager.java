@@ -14,6 +14,8 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 
+import es.starfallstudios.fallenlegends.Screens.MainActivity;
+
 public class DBManager {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -49,6 +51,7 @@ public class DBManager {
 
                 }
                 Log.d("FIREBASE", "Zones updated!");
+                MainActivity.zonesLoaded = true;
             }
 
             @Override
@@ -77,6 +80,7 @@ public class DBManager {
                     creatures.add(new Creature(name, id, zone, latitude, longitude));
                 }
                 Log.d("FIREBASE", "Creatures updated!");
+                MainActivity.creaturesLoaded = true;
             }
 
             @Override

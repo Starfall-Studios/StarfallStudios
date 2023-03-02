@@ -87,9 +87,9 @@ public class HomeScreen extends AppCompatActivity {
         mapController = (MapController) mapView.getController();
         mapController.setCenter(startPoint);
         mapController.setZoom(20);
-        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        //mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
         mapView.setMaxZoomLevel(21.0);
-        mapView.setMinZoomLevel(21.0);
+        mapView.setMinZoomLevel(14.0);
         userMarker = new Marker(mapView);
 
         //show streets and buildings but not labels
