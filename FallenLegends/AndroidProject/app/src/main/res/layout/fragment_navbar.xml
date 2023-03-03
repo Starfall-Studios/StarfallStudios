@@ -3,12 +3,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".navbar">
+>
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:src="@drawable/test_shape"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingVertical="4dp"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageButton
+            android:id="@+id/btn_profile"
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="16dp"
+            android:onClick="onProfileClick"
+            android:text="PROFILE"
+            android:src="@drawable/logo_fallen"
+            android:padding="5dp"
+            android:scaleType="fitCenter"
+            android:elevation="20dp"
+            android:layout_marginEnd="6dp"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:layout_marginEnd="6dp"
+            android:text="test"/>
+
+        <ImageButton
+            android:layout_width="80dp"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:layout_marginEnd="6dp"
+            android:text="test"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:layout_marginEnd="6dp"
+            android:text="test"/>
+
+        <ImageButton
+            android:layout_width="60dp"
+            android:layout_height="match_parent"
+            android:elevation="10dp"
+            android:layout_marginEnd="16dp"
+            android:text="test"/>
+
+    </LinearLayout>
+
+
 
 </FrameLayout>

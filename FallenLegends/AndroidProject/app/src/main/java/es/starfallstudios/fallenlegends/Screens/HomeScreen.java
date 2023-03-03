@@ -47,6 +47,7 @@ import es.starfallstudios.fallenlegends.CreatureInfoWindow;
 import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.Zone;
+import es.starfallstudios.fallenlegends.Fragments.navbar;
 
 public class HomeScreen extends AppCompatActivity {
 
@@ -82,14 +83,18 @@ public class HomeScreen extends AppCompatActivity {
 
         setContentView(R.layout.activity_home_screen);
 
+        //Load navbar fragment intro navbar container
+        getSupportFragmentManager().beginTransaction().replace(R.id.navbar_container, new navbar()).commit();
+
         GeoPoint startPoint = new GeoPoint(41.58025556428497, 1.6077941269397034);
         mapView = findViewById(R.id.map);
         mapController = (MapController) mapView.getController();
         mapController.setCenter(startPoint);
         mapController.setZoom(20);
-        //mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mapView.getZoomController().setVisibility(CustomZoomButtonsController.Visibility.NEVER);
+        mapView.setMultiTouchControls(true);
         mapView.setMaxZoomLevel(21.0);
-        mapView.setMinZoomLevel(14.0);
+        mapView.setMinZoomLevel(18.0);
         userMarker = new Marker(mapView);
 
         //show streets and buildings but not labels

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -13,7 +12,7 @@
         android:layout_marginBottom="8dp"
         android:onClick="onUpdateLocationClick"
         android:text="Loc"
-        app:layout_constraintBottom_toTopOf="@+id/navBar"
+        app:layout_constraintBottom_toTopOf="@+id/navbar_container"
         app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
@@ -39,17 +38,13 @@
 
     </org.osmdroid.views.MapView>
 
-    <ImageView
-        android:id="@+id/navBar"
-        android:layout_width="0dp"
+    <FrameLayout
+        android:id="@+id/navbar_container"
+        android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_marginBottom="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginStart="16dp"
-        android:background="@drawable/test_shape"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/map"
-        app:layout_constraintStart_toStartOf="@+id/map"
-        android:elevation="20dp"/>
+        android:layout_marginBottom="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
