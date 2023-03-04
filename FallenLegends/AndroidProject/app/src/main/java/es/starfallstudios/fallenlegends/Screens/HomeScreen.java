@@ -44,6 +44,7 @@ import java.util.ArrayList;
 import es.starfallstudios.fallenlegends.BuildConfig;
 import es.starfallstudios.fallenlegends.Creature;
 import es.starfallstudios.fallenlegends.CreatureInfoWindow;
+import es.starfallstudios.fallenlegends.Fragments.UpdateLocation_button;
 import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.Zone;
@@ -85,6 +86,8 @@ public class HomeScreen extends AppCompatActivity {
 
         //Load navbar fragment intro navbar container
         getSupportFragmentManager().beginTransaction().replace(R.id.navbar_container, new navbar()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.updateLocation_container, new UpdateLocation_button()).commit();
+
 
         GeoPoint startPoint = new GeoPoint(41.58025556428497, 1.6077941269397034);
         mapView = findViewById(R.id.map);
