@@ -7,23 +7,11 @@
         <deviceKey>
           <Key>
             <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\lopez\.android\avd\Pixel_4_API_29.avd" />
+            <value value="C:\Users\Crafo\.android\avd\Pixel_4a_API_30.avd" />
           </Key>
         </deviceKey>
       </Target>
     </targetSelectedWithDropDown>
-    <timeTargetWasSelectedWithDropDown value="2023-03-04T11:24:43.065522400Z" />
-    <multipleDevicesSelectedInDropDown value="true" />
-    <targetsSelectedWithDialog>
-      <Target>
-        <type value="QUICK_BOOT_TARGET" />
-        <deviceKey>
-          <Key>
-            <type value="VIRTUAL_DEVICE_PATH" />
-            <value value="C:\Users\lopez\.android\avd\Pixel_4_API_29.avd" />
-          </Key>
-        </deviceKey>
-      </Target>
-    </targetsSelectedWithDialog>
+    <timeTargetWasSelectedWithDropDown value="2023-03-04T11:34:32.181791100Z" />
   </component>
 </project>
