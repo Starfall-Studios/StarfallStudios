@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".HeaderBar">
+
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="start|center"
+        android:layout_marginHorizontal="8dp">
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@drawable/roundbutton"
+            android:layout_gravity="start|center"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:src="@drawable/test_shape"
+            android:layout_gravity="start|center"
+            android:layout_marginStart="20dp"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:layout_marginStart="20dp"
+            android:text="profile_name"/>
+    </FrameLayout>
+
+    <FrameLayout
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:layout_gravity="end|center">
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/test_shape"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="gems_qty"/>
+    </FrameLayout>
+
+
+
+</FrameLayout>
