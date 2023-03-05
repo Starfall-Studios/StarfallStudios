@@ -28,6 +28,27 @@ public class DBManager {
         return instance;
     }
 
+    public boolean checkForUpdate() {
+        DatabaseReference myRef = database.getReference("version");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int version = dataSnapshot.getValue(Integer.class);
+                if (version > GameManager.getInstance().getZoneVersion()) {
+                    StorageManager.getInstance().saveZoneVersion(version);
+                    MainActivity.zonesLoaded = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+        return false;
+    }
+
     public ArrayList<Zone> retrieveZones() {
         ArrayList<Zone> zones = new ArrayList<Zone>();
         DatabaseReference myRef = database.getReference("zones");
