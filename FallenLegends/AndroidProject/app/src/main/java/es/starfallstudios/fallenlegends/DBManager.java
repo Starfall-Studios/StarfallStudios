@@ -14,6 +14,8 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 
+import es.starfallstudios.fallenlegends.Screens.MainActivity;
+
 public class DBManager {
 
     FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
@@ -24,6 +26,27 @@ public class DBManager {
             instance = new DBManager();
         }
         return instance;
+    }
+
+    public boolean checkForUpdate() {
+        DatabaseReference myRef = database.getReference("version");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int version = dataSnapshot.getValue(Integer.class);
+                if (version > GameManager.getInstance().getZoneVersion()) {
+                    StorageManager.getInstance().saveZoneVersion(version);
+                    MainActivity.zonesLoaded = false;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+        return false;
     }
 
     public ArrayList<Zone> retrieveZones() {
@@ -49,6 +72,7 @@ public class DBManager {
 
                 }
                 Log.d("FIREBASE", "Zones updated!");
+                MainActivity.zonesLoaded = true;
             }
 
             @Override
@@ -59,5 +83,34 @@ public class DBManager {
         });
 
         return zones;
+    }
+
+    public ArrayList<Creature> retrieveCreatures() {
+        ArrayList<Creature> creatures = new ArrayList<Creature>();
+        DatabaseReference myRef = database.getReference("creatures");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot creatureSnapshot : dataSnapshot.getChildren()) {
+                    int id = creatureSnapshot.child("id").getValue(Integer.class);
+                    String name = creatureSnapshot.child("name").getValue(String.class);
+                    int zone = creatureSnapshot.child("zone").getValue(Integer.class);
+                    double latitude = creatureSnapshot.child("latitude").getValue(Double.class);
+                    double longitude = creatureSnapshot.child("longitude").getValue(Double.class);
+
+                    creatures.add(new Creature(name, id, zone, latitude, longitude));
+                }
+                Log.d("FIREBASE", "Creatures updated!");
+                MainActivity.creaturesLoaded = true;
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+
+        return creatures;
     }
 }

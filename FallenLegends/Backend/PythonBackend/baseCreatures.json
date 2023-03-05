@@ -1,0 +1,322 @@
+[
+    {
+        "id": 0,
+        "name": "Gryphix",
+        "type": "Rock",
+        "hp": 118,
+        "attack": 30,
+        "defense": 60
+    },
+    {
+        "id": 1,
+        "name": "Nightmire",
+        "type": "Electric",
+        "hp": 156,
+        "attack": 79,
+        "defense": 36
+    },
+    {
+        "id": 2,
+        "name": "Lumino",
+        "type": "Water",
+        "hp": 139,
+        "attack": 100,
+        "defense": 18
+    },
+    {
+        "id": 3,
+        "name": "Frostbite",
+        "type": "Electric",
+        "hp": 89,
+        "attack": 50,
+        "defense": 80
+    },
+    {
+        "id": 4,
+        "name": "Sunspark",
+        "type": "Water",
+        "hp": 83,
+        "attack": 36,
+        "defense": 53
+    },
+    {
+        "id": 5,
+        "name": "Thunderwing",
+        "type": "Fire",
+        "hp": 122,
+        "attack": 94,
+        "defense": 44
+    },
+    {
+        "id": 6,
+        "name": "Stormbringer",
+        "type": "Electric",
+        "hp": 52,
+        "attack": 70,
+        "defense": 34
+    },
+    {
+        "id": 7,
+        "name": "Shadowfury",
+        "type": "Water",
+        "hp": 166,
+        "attack": 26,
+        "defense": 10
+    },
+    {
+        "id": 8,
+        "name": "Celestia",
+        "type": "Rock",
+        "hp": 103,
+        "attack": 37,
+        "defense": 62
+    },
+    {
+        "id": 9,
+        "name": "Inferno",
+        "type": "Fire",
+        "hp": 93,
+        "attack": 69,
+        "defense": 14
+    },
+    {
+        "id": 10,
+        "name": "Moonbeam",
+        "type": "Electric",
+        "hp": 182,
+        "attack": 52,
+        "defense": 40
+    },
+    {
+        "id": 11,
+        "name": "Starlight",
+        "type": "Rock",
+        "hp": 123,
+        "attack": 46,
+        "defense": 59
+    },
+    {
+        "id": 12,
+        "name": "Mysticor",
+        "type": "Fairy",
+        "hp": 80,
+        "attack": 83,
+        "defense": 51
+    },
+    {
+        "id": 13,
+        "name": "Dreamweaver",
+        "type": "Rock",
+        "hp": 76,
+        "attack": 76,
+        "defense": 90
+    },
+    {
+        "id": 14,
+        "name": "Faeleth",
+        "type": "Fairy",
+        "hp": 165,
+        "attack": 32,
+        "defense": 83
+    },
+    {
+        "id": 15,
+        "name": "Phoenixfire",
+        "type": "Fire",
+        "hp": 54,
+        "attack": 41,
+        "defense": 26
+    },
+    {
+        "id": 16,
+        "name": "Krakensong",
+        "type": "Electric",
+        "hp": 159,
+        "attack": 62,
+        "defense": 65
+    },
+    {
+        "id": 17,
+        "name": "Aquarion",
+        "type": "Rock",
+        "hp": 68,
+        "attack": 97,
+        "defense": 31
+    },
+    {
+        "id": 18,
+        "name": "Darksoul",
+        "type": "Rock",
+        "hp": 154,
+        "attack": 82,
+        "defense": 85
+    },
+    {
+        "id": 19,
+        "name": "Silverglow",
+        "type": "Fire",
+        "hp": 116,
+        "attack": 11,
+        "defense": 98
+    },
+    {
+        "id": 20,
+        "name": "Skydancer",
+        "type": "Electric",
+        "hp": 87,
+        "attack": 57,
+        "defense": 14
+    },
+    {
+        "id": 21,
+        "name": "Elderscale",
+        "type": "Electric",
+        "hp": 121,
+        "attack": 61,
+        "defense": 57
+    },
+    {
+        "id": 22,
+        "name": "Woodlandia",
+        "type": "Fairy",
+        "hp": 169,
+        "attack": 88,
+        "defense": 18
+    },
+    {
+        "id": 23,
+        "name": "Wildfire",
+        "type": "Electric",
+        "hp": 144,
+        "attack": 59,
+        "defense": 81
+    },
+    {
+        "id": 24,
+        "name": "Icefall",
+        "type": "Fairy",
+        "hp": 159,
+        "attack": 10,
+        "defense": 90
+    },
+    {
+        "id": 25,
+        "name": "Nightshade",
+        "type": "Fire",
+        "hp": 106,
+        "attack": 82,
+        "defense": 92
+    },
+    {
+        "id": 26,
+        "name": "Shadowclaw",
+        "type": "Fairy",
+        "hp": 151,
+        "attack": 88,
+        "defense": 64
+    },
+    {
+        "id": 27,
+        "name": "Thunderbolt",
+        "type": "Rock",
+        "hp": 57,
+        "attack": 54,
+        "defense": 38
+    },
+    {
+        "id": 28,
+        "name": "Magicorn",
+        "type": "Rock",
+        "hp": 136,
+        "attack": 65,
+        "defense": 20
+    },
+    {
+        "id": 29,
+        "name": "Spellweaver",
+        "type": "Water",
+        "hp": 61,
+        "attack": 100,
+        "defense": 65
+    },
+    {
+        "id": 30,
+        "name": "Crystalwing",
+        "type": "Fairy",
+        "hp": 93,
+        "attack": 14,
+        "defense": 72
+    },
+    {
+        "id": 31,
+        "name": "Sunburst",
+        "type": "Water",
+        "hp": 62,
+        "attack": 65,
+        "defense": 78
+    },
+    {
+        "id": 32,
+        "name": "Emberheart",
+        "type": "Fire",
+        "hp": 141,
+        "attack": 51,
+        "defense": 19
+    },
+    {
+        "id": 33,
+        "name": "Moonstone",
+        "type": "Water",
+        "hp": 181,
+        "attack": 42,
+        "defense": 17
+    },
+    {
+        "id": 34,
+        "name": "Starborn",
+        "type": "Rock",
+        "hp": 152,
+        "attack": 28,
+        "defense": 63
+    },
+    {
+        "id": 35,
+        "name": "Enchantress",
+        "type": "Electric",
+        "hp": 67,
+        "attack": 20,
+        "defense": 68
+    },
+    {
+        "id": 36,
+        "name": "Earthsprite",
+        "type": "Rock",
+        "hp": 104,
+        "attack": 67,
+        "defense": 18
+    },
+    {
+        "id": 37,
+        "name": "Faerieflame",
+        "type": "Fire",
+        "hp": 91,
+        "attack": 42,
+        "defense": 32
+    },
+    {
+        "id": 38,
+        "name": "Sunray",
+        "type": "Fairy",
+        "hp": 153,
+        "attack": 97,
+        "defense": 60
+    },
+    {
+        "id": 39,
+        "name": "Mysticmeadow",
+        "type": "Water",
+        "hp": 145,
+        "attack": 11,
+        "defense": 82
+    }
+]

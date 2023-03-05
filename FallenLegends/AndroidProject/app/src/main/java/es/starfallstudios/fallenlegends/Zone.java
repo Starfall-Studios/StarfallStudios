@@ -3,8 +3,6 @@ package es.starfallstudios.fallenlegends;
 import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.regex.Pattern;
 
 public class Zone {
     private int owner;
@@ -13,19 +11,13 @@ public class Zone {
 
     private ArrayList<GeoPoint> points;
 
-    public Zone(int owner, int id, String name) {
-        this.owner = owner;
-        this.id = id;
-        this.name = name;
-        points = new ArrayList<>();
-
-        //create default points
-        points.add(new GeoPoint(41.57660025593672, 1.6017485255249397));
-        points.add(new GeoPoint(41.57321351450865, 1.6013365167652305));
-        points.add(new GeoPoint(41.57445008068013, 1.6055154627566814));
-        points.add(new GeoPoint(41.577139622357116, 1.6053977459682045));
-
-    }
+    /**
+     * Create a new zone
+     * @param owner player id
+     * @param id zone id
+     * @param name zone name
+     * @param points ArrayList of GeoPoints clockwise starting from the top left corner
+     */
     public Zone(int owner, int id, String name, ArrayList<GeoPoint> points) {
         this.owner = owner;
         this.id = id;
@@ -33,30 +25,60 @@ public class Zone {
         this.points = points;
     }
 
+    /**
+     * Get the zone owner id
+     *
+     * @return player id
+     */
     public int getOwner() {
         return owner;
     }
 
+    /**
+     * Set the zone owner id
+     * @param owner player id
+     */
     public void setOwner(int owner) {
         this.owner = owner;
     }
 
+    /**
+     * Get the zone name
+     * @return zone name
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Get the zone's delimiter points
+     * @return ArrayList of GeoPoints clockwise starting from the top left corner
+     */
     public ArrayList<GeoPoint> getPoints() {
         return points;
     }
 
+    /**
+     * Set the zone's delimiter points
+     * @param points ArrayList of GeoPoints clockwise starting from the top left corner
+     */
     public void setPoints(ArrayList<GeoPoint> points) {
         this.points = points;
     }
 
+    /**
+     * Get the zone id
+     * @return zone id
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Check if a point is inside the zone
+     * @param coordinates GeoPoint to check
+     * @return true if the point is inside the zone, false otherwise
+     */
     public boolean isCoordinatesInsideZone(GeoPoint coordinates) {
         int i;
         int j;

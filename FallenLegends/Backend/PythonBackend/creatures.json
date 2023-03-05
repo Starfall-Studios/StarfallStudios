@@ -1,0 +1,50 @@
+[
+    {
+        "id": 1,
+        "name": "Sunburst",
+        "type": "Water",
+        "tier": 1,
+        "hp": 62,
+        "attack": 65,
+        "defense": 78,
+        "zone": 4262,
+        "latitude": 41.67401522827785,
+        "longitude": 1.593960450396621
+    },
+    {
+        "id": 2,
+        "name": "Sunspark",
+        "type": "Water",
+        "tier": 4,
+        "hp": 124.5,
+        "attack": 54.0,
+        "defense": 79.5,
+        "zone": 2712,
+        "latitude": 41.602074855342,
+        "longitude": 1.8260231784096148
+    },
+    {
+        "id": 3,
+        "name": "Sunburst",
+        "type": "Water",
+        "tier": 5,
+        "hp": 124,
+        "attack": 130,
+        "defense": 156,
+        "zone": 2629,
+        "latitude": 41.59772958817504,
+        "longitude": 1.8114119949530503
+    },
+    {
+        "id": 4,
+        "name": "Silverglow",
+        "type": "Fire",
+        "tier": 4,
+        "hp": 174.0,
+        "attack": 16.5,
+        "defense": 147.0,
+        "zone": 199,
+        "latitude": 41.494290053469044,
+        "longitude": 1.6720423174442756
+    }
+]
