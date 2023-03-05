@@ -3,47 +3,91 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HeaderBar">
+    tools:context=".Fragments.HeaderBar">
 
     <FrameLayout
         android:layout_width="150dp"
         android:layout_height="40dp"
         android:layout_gravity="start|center"
         android:layout_marginHorizontal="8dp">
+
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:src="@drawable/roundbutton"
-            android:layout_gravity="start|center"/>
+            android:layout_gravity="start|center"
+            android:onClick="onProfileClick"
+            android:src="@drawable/roundbutton" />
+
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="30dp"
-            android:src="@drawable/test_shape"
             android:layout_gravity="start|center"
-            android:layout_marginStart="20dp"/>
+            android:layout_marginStart="20dp"
+            android:onClick="onProfileClick"
+            android:src="@drawable/test_shape" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:gravity="center"
             android:layout_marginStart="20dp"
-            android:text="profile_name"/>
+            android:gravity="center"
+            android:text="profile_name"
+            android:textColor="@color/white"/>
     </FrameLayout>
 
     <FrameLayout
-        android:layout_width="150dp"
+        android:layout_width="200dp"
         android:layout_height="40dp"
         android:layout_gravity="end|center">
-        <ImageView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:src="@drawable/test_shape"/>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="center"
-            android:text="gems_qty"/>
-    </FrameLayout>
 
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="51dp"
+            android:layout_height="30dp"
+            android:layout_gravity="left|center"
+            android:layout_marginStart="30dp"
+            android:src="@drawable/test_shape" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="left|center"
+            android:src="@drawable/pngwing_com" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="45dp"
+            android:gravity="left|center"
+            android:text="food"
+            android:textColor="@color/white"/>
+
+        <ImageView
+            android:id="@+id/imageView6"
+            android:layout_width="60dp"
+            android:layout_height="30dp"
+            android:layout_gravity="right|center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/test_shape" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_marginStart="15dp"
+            android:src="@drawable/emerald_image" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right|center"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="24dp"
+            android:text="gems"
+            android:textColor="@color/white"/>
+
+    </FrameLayout>
 
 
 </FrameLayout>

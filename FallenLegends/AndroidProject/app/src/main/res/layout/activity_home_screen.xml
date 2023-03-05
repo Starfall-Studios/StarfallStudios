@@ -5,6 +5,16 @@
     android:layout_height="match_parent">
 
     <FrameLayout
+        android:id="@+id/headerbar_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <FrameLayout
         android:id="@+id/updateLocation_container"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -14,15 +24,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/btn_profile"
-        android:layout_width="104dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="13dp"
-        android:onClick="onProfileClick"
-        android:text="PROFILE"
-        app:layout_constraintStart_toStartOf="@+id/map"
-        app:layout_constraintTop_toTopOf="@+id/map" />
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"
