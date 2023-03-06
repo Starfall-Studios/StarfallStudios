@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
         gameManager = GameManager.getInstance();
         gameManager.getZones();
         gameManager.getCreatures();
-        gameManager.setSharedPreferences(getSharedPreferences("FallenLegends", MODE_PRIVATE));
+        //gameManager.setSharedPreferences(getSharedPreferences("FallenLegends", MODE_PRIVATE));
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);

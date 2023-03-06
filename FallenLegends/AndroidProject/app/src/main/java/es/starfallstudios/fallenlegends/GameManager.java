@@ -44,7 +44,7 @@ public class GameManager {
         mapCreatures = new ArrayList<Creature>();
         playerCreatures = new ArrayList<Creature>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
-        zoneVersion = storageManager.getZoneVersion();
+        //zoneVersion = storageManager.getZoneVersion();
     }
 
     /**
