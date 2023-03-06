@@ -13,10 +13,10 @@ import es.starfallstudios.fallenlegends.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link navbar#newInstance} factory method to
+ * Use the {@link CurrentZone#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class navbar extends Fragment {
+public class CurrentZone extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -27,7 +27,7 @@ public class navbar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public navbar() {
+    public CurrentZone() {
         // Required empty public constructor
     }
 
@@ -37,11 +37,11 @@ public class navbar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment navbar.
+     * @return A new instance of fragment CurrentZone.
      */
     // TODO: Rename and change types and number of parameters
-    public static navbar newInstance(String param1, String param2) {
-        navbar fragment = new navbar();
+    public static CurrentZone newInstance(String param1, String param2) {
+        CurrentZone fragment = new CurrentZone();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,16 +61,20 @@ public class navbar extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
 
-        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
+        View view = inflater.inflate(R.layout.fragment_current_zone, container, false);
+
+        view.findViewById(R.id.acceptButton).setOnClickListener(View -> {
+            Toast.makeText(view.getContext(), "Accept", Toast.LENGTH_SHORT).show();
         });
 
+        view.findViewById(R.id.closeButton).setOnClickListener(View -> {
+            Toast.makeText(view.getContext(), "Close", Toast.LENGTH_SHORT).show();
+            //close fragment
+            getParentFragmentManager().beginTransaction().remove(this).commit();
+        });
+
+        // Inflate the layout for this fragment
         return view;
     }
-
-
 }
