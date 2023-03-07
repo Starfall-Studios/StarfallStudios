@@ -66,8 +66,7 @@ public class navbar extends Fragment {
         View view = inflater.inflate(R.layout.fragment_navbar, container, false);
 
         view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, CurrentZone.newInstance(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).toByteArray())).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
         });
 
         return view;

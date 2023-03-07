@@ -1,5 +1,6 @@
 package es.starfallstudios.fallenlegends.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -12,6 +13,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.Serializable;
+
+import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.Zone;
 
@@ -22,17 +28,11 @@ import es.starfallstudios.fallenlegends.Zone;
  */
 public class CurrentZone extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "zoneByteArray";
-
     //Text Labels
     private TextView zoneName;
     private TextView zoneDescription;
     private TextView zoneOwner;
 
-    // TODO: Rename and change types of parameters
-    private byte[] zoneByteArray;
     private Zone zone;
 
     public CurrentZone() {
@@ -40,21 +40,13 @@ public class CurrentZone extends Fragment {
     }
 
     // TODO: Rename and change types and number of parameters
-    public static CurrentZone newInstance(byte[] zoneByteArray) {
-        CurrentZone fragment = new CurrentZone();
-        Bundle args = new Bundle();
-        args.putByteArray(ARG_PARAM1, zoneByteArray);
-        fragment.setArguments(args);
-        return fragment;
+    public static CurrentZone newInstance() {
+        return new CurrentZone();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            zoneByteArray = getArguments().getByteArray(ARG_PARAM1);
-            zone = Zone.fromBytes(zoneByteArray);
-        }
     }
 
     @Override
@@ -62,6 +54,8 @@ public class CurrentZone extends Fragment {
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_current_zone, container, false);
+
+        zone = GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation());
 
         view.findViewById(R.id.acceptButton).setOnClickListener(View -> {
             Toast.makeText(view.getContext(), "Accept", Toast.LENGTH_SHORT).show();

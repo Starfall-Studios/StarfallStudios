@@ -68,7 +68,7 @@ public class DBManager {
                         points.add(new GeoPoint(latitude, longitude));
                     }
 
-                    zones.add(new Zone(id, owner, name, points));
+                    zones.add(new Zone(owner, id, name, points));
 
                 }
                 Log.d("FIREBASE", "Zones updated!");
