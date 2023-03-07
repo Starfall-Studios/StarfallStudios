@@ -10,6 +10,7 @@
     <string name="zoneFragment_zoneName">Zone</string>
     <string name="zoneFragment_zoneOwner">Owner:</string>
     <string name="welcomeMsg">Welcome</string>
+    <string name="acceptButton">Accept</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

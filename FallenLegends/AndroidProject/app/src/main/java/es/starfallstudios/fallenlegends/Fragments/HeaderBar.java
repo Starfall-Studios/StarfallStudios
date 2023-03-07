@@ -71,11 +71,7 @@ public class HeaderBar extends Fragment implements Observer {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_header_bar, container, false);
-
-        //((TextView) v.findViewById(R.id.txt_playerName)).setText("testtt");
-
-        return v;
+        return inflater.inflate(R.layout.fragment_header_bar, container, false);
     }
 
     @Override
@@ -91,6 +87,6 @@ public class HeaderBar extends Fragment implements Observer {
 
     @Override
     public void update(Observable observable, Object o) {
-        txt_playerName.setText(GameManager.getInstance().getUsername());
+        txt_playerName.setText(GameManager.getInstance().getPlayer().getUsername());
     }
 }

@@ -10,4 +10,5 @@
     <string name="zoneFragment_zoneName">Zona</string>
     <string name="zoneFragment_zoneOwner">"Propietari: "</string>
     <string name="welcomeMsg">Benvingut</string>
+    <string name="acceptButton">Acceptar</string>
 </resources>

@@ -16,6 +16,9 @@
         android:theme="@style/Theme.FallenLegends"
         tools:targetApi="31">
         <activity
+            android:name=".Screens.GameActivity"
+            android:exported="false" />
+        <activity
             android:name=".Screens.SignUpScreen"
             android:exported="false" />
         <activity

@@ -62,7 +62,7 @@ public class LoginScreen extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
-                GameManager.getInstance().setUid(mAuth.getCurrentUser().getUid());
+                GameManager.getInstance().loadPlayer(mAuth.getCurrentUser().getUid());
                 finish();
                 startActivity(new Intent(LoginScreen.this, HomeScreen.class));
                 Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
@@ -80,7 +80,7 @@ public class LoginScreen extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            GameManager.getInstance().setUid(mAuth.getCurrentUser().getUid());
+            GameManager.getInstance().loadPlayer(currentUser.getUid());
             finish();
             startActivity(new Intent(LoginScreen.this, HomeScreen.class));
         }

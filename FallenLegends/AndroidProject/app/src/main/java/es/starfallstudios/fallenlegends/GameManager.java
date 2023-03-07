@@ -24,13 +24,9 @@ public class GameManager extends Observable {
 
     // Creatures that are in the map
     private ArrayList<Creature> mapCreatures;
-    // Creatures that are in the player's inventory
-    private ArrayList<Creature> playerCreatures;
 
     //User related variables
-    private String username;
-    private int userExperience;
-    private String uid;
+    private Player player;
 
     /**
      * Gets the game manager instance
@@ -49,7 +45,6 @@ public class GameManager extends Observable {
     private GameManager() {
         zones = new ArrayList<Zone>();
         mapCreatures = new ArrayList<Creature>();
-        playerCreatures = new ArrayList<Creature>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
         //zoneVersion = storageManager.getZoneVersion();
     }
@@ -147,34 +142,19 @@ public class GameManager extends Observable {
     }
 
     //User related methods
-    public synchronized String getUsername() {
-        return username;
+    public void loadPlayer(String uid) {
+        dbManager.retrievePlayer(uid);
     }
 
-    public void setUsername(String username) {
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
         synchronized (this) {
-            this.username = username;
+            this.player = player;
         }
         setChanged();
         notifyObservers();
-    }
-
-    public int getUserExperience() {
-        return userExperience;
-    }
-
-    public void setUserExperience(int userExperience) {
-        this.userExperience = userExperience;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid;
-        Log.d("GameManager", "UID: " + uid);
-        Log.d("GameManager", "Requesting username");
-        dbManager.retrieveUsername(uid);
     }
 }
