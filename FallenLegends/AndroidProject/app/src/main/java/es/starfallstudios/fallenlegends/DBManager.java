@@ -49,6 +49,28 @@ public class DBManager {
         return false;
     }
 
+    public String retrieveUsername(String uid) {
+        final String[] user = {""};
+        DatabaseReference myRef = database.getReference("users/" + uid + "/username");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                user[0] = dataSnapshot.getValue(String.class);
+                GameManager.getInstance().setUsername(user[0]);
+                Log.w("FIREBASE", "Username updated to " + user[0]);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.d("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+
+        return user[0];
+    }
+
     public ArrayList<Zone> retrieveZones() {
         ArrayList<Zone> zones = new ArrayList<Zone>();
         DatabaseReference myRef = database.getReference("zones");
@@ -112,5 +134,12 @@ public class DBManager {
         });
 
         return creatures;
+    }
+
+    public void signUpUser(String uid, String username, String email) {
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(uid).child("username").setValue(username);
+        myRef.child(uid).child("email").setValue(email);
+        myRef.child(uid).child("xp").setValue(0);
     }
 }

@@ -1,12 +1,14 @@
 package es.starfallstudios.fallenlegends;
 
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class GameManager {
+public class GameManager extends Observable {
 
     private static GameManager instance = null;
     private SharedPreferences sharedPreferences;
@@ -25,8 +27,13 @@ public class GameManager {
     // Creatures that are in the player's inventory
     private ArrayList<Creature> playerCreatures;
 
+    //User related variables
+    private String username;
+    private int userExperience;
+    private String uid;
+
     /**
-     * Gets the gamemanager instance
+     * Gets the game manager instance
      * @return GameManager instance
      */
     public static GameManager getInstance() {
@@ -137,5 +144,37 @@ public class GameManager {
      */
     public void setSharedPreferences(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+    }
+
+    //User related methods
+    public synchronized String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        synchronized (this) {
+            this.username = username;
+        }
+        setChanged();
+        notifyObservers();
+    }
+
+    public int getUserExperience() {
+        return userExperience;
+    }
+
+    public void setUserExperience(int userExperience) {
+        this.userExperience = userExperience;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+        Log.d("GameManager", "UID: " + uid);
+        Log.d("GameManager", "Requesting username");
+        dbManager.retrieveUsername(uid);
     }
 }

@@ -9,6 +9,7 @@
     <string name="signupButton">Sign Up</string>
     <string name="zoneFragment_zoneName">Zone</string>
     <string name="zoneFragment_zoneOwner">Owner:</string>
+    <string name="welcomeMsg">Welcome</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
 </resources>

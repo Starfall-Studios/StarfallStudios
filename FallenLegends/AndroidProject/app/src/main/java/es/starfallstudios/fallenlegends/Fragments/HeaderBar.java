@@ -7,8 +7,14 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import es.starfallstudios.fallenlegends.DBManager;
+import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 /**
@@ -16,7 +22,7 @@ import es.starfallstudios.fallenlegends.R;
  * Use the {@link HeaderBar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HeaderBar extends Fragment {
+public class HeaderBar extends Fragment implements Observer {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,6 +32,8 @@ public class HeaderBar extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    TextView txt_playerName;
 
     public HeaderBar() {
         // Required empty public constructor
@@ -56,16 +64,33 @@ public class HeaderBar extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        observe();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_header_bar, container, false);
+        View v = inflater.inflate(R.layout.fragment_header_bar, container, false);
+
+        //((TextView) v.findViewById(R.id.txt_playerName)).setText("testtt");
+
+        return v;
     }
 
-    public void onProfileClick(View view) {
-        Toast.makeText(view.getContext(), "Profile clicked!", Toast.LENGTH_SHORT).show();
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Get the widgets reference from XML layout
+        txt_playerName = view.findViewById(R.id.txt_playerName);
+    }
+
+    public void observe() {
+        GameManager.getInstance().addObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        txt_playerName.setText(GameManager.getInstance().getUsername());
     }
 }

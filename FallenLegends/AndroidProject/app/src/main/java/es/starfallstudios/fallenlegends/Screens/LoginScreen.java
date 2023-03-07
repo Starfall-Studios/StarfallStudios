@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 public class LoginScreen extends AppCompatActivity {
@@ -61,9 +62,10 @@ public class LoginScreen extends AppCompatActivity {
 
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                GameManager.getInstance().setUid(mAuth.getCurrentUser().getUid());
                 finish();
                 startActivity(new Intent(LoginScreen.this, HomeScreen.class));
-                Toast.makeText(LoginScreen.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(LoginScreen.this, "Error", Toast.LENGTH_SHORT).show();
             }
@@ -78,6 +80,7 @@ public class LoginScreen extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
+            GameManager.getInstance().setUid(mAuth.getCurrentUser().getUid());
             finish();
             startActivity(new Intent(LoginScreen.this, HomeScreen.class));
         }
