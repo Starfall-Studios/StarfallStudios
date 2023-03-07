@@ -7,4 +7,6 @@
     <string name="closeButton">Tancar</string>
     <string name="loginButton">Iniciar Sessió</string>
     <string name="signupButton">Registrar-se</string>
+    <string name="zoneFragment_zoneName">Zona</string>
+    <string name="zoneFragment_zoneOwner">"Dueño: "</string>
 </resources>

@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 /**
@@ -66,7 +67,7 @@ public class navbar extends Fragment {
 
         view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
             Toast.makeText(getContext(), "test", Toast.LENGTH_SHORT).show();
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, CurrentZone.newInstance(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).toByteArray())).commit();
         });
 
         return view;

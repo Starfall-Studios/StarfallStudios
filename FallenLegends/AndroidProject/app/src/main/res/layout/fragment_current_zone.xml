@@ -12,12 +12,22 @@
         android:layout_margin="16dp">
 
         <TextView
+            android:id="@+id/txt_zone_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="top|center"
-            android:text="Zone Name"
+            android:text="@string/zoneFragment_zoneName"
             android:textSize="48sp" />
+
+        <TextView
+            android:id="@+id/txt_zone_owner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:gravity="top|center"
+            android:text="@string/zoneFragment_zoneOwner"
+            android:textSize="24sp" />
 
         <TextView
             android:layout_width="match_parent"

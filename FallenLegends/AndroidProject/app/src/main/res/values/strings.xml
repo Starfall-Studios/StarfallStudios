@@ -7,7 +7,8 @@
     <string name="closeButton">Close</string>
     <string name="loginButton">Login</string>
     <string name="signupButton">Sign Up</string>
+    <string name="zoneFragment_zoneName">Zone</string>
+    <string name="zoneFragment_zoneOwner">Owner:</string>
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <!-- TODO: Remove or change this placeholder text -->
 </resources>
