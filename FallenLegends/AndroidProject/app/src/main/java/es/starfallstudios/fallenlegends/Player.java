@@ -9,6 +9,9 @@ public class Player {
     // Creatures that are in the player's inventory
     private ArrayList<Creature> playerCreatures;
 
+    // Creatures that are in the player's deck (max 4)
+    private ArrayList<Creature> playerDeck;
+
     //User related variables
     private String username;
     private int userExperience;
@@ -21,6 +24,7 @@ public class Player {
     public Player(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
         gm = GameManager.getInstance();
         playerCreatures = new ArrayList<Creature>();
+        playerDeck = new ArrayList<Creature>();
         this.uid = uid;
         this.username = username;
         this.userExperience = userExperience;

@@ -3,11 +3,21 @@ package es.starfallstudios.fallenlegends;
 import org.osmdroid.util.GeoPoint;
 
 public class Creature {
+    public static enum CreatureType {
+        FIRE,
+        ROCK,
+        ELECTRIC,
+        WATER,
+        FAIRY
+    }
+
     private String name;
     private int experience;
     private int health;
     private int attack;
     private int defense;
+    private int stamina;
+    private CreatureType type;
 
     private int id;
 
