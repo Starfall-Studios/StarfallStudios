@@ -55,7 +55,7 @@ public class Match {
                         Thread.sleep(1000);
                         gameTickUpdate();
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
+                        return;
                     }
                 }
             }
