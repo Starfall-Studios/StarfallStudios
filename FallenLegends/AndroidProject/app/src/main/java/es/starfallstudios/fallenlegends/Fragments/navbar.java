@@ -1,5 +1,6 @@
 package es.starfallstudios.fallenlegends.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,6 +12,7 @@ import android.widget.Toast;
 
 import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.Screens.GameActivity;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -67,6 +69,11 @@ public class navbar extends Fragment {
 
         view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
             getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
+        });
+
+        view.findViewById(R.id.btn_shop).setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), GameActivity.class));
+            Toast.makeText(getContext(), "Loading game!", Toast.LENGTH_SHORT).show();
         });
 
         return view;
