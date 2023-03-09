@@ -7,7 +7,22 @@
     tools:context=".Screens.GameActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:orientation="vertical" />
+
+    <FrameLayout
+        android:id="@+id/board_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="130dp"
+        android:layout_marginBottom="130dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_marginTop="130dp"
+        tools:layout_editor_absoluteX="16dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
