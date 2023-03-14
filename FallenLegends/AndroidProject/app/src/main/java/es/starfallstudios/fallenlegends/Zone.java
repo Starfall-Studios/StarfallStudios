@@ -2,11 +2,10 @@ package es.starfallstudios.fallenlegends;
 
 import org.osmdroid.util.GeoPoint;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Zone implements Serializable {
-    private int owner;
+public class Zone {
+    private String owner;
     private int id;
     private String name;
 
@@ -19,7 +18,7 @@ public class Zone implements Serializable {
      * @param name zone name
      * @param points ArrayList of GeoPoints clockwise starting from the top left corner
      */
-    public Zone(int owner, int id, String name, ArrayList<GeoPoint> points) {
+    public Zone(String owner, int id, String name, ArrayList<GeoPoint> points) {
         this.owner = owner;
         this.id = id;
         this.name = name;
@@ -31,7 +30,7 @@ public class Zone implements Serializable {
      *
      * @return player id
      */
-    public int getOwner() {
+    public String getOwner() {
         return owner;
     }
 
@@ -39,7 +38,7 @@ public class Zone implements Serializable {
      * Set the zone owner id
      * @param owner player id
      */
-    public void setOwner(int owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 
@@ -91,5 +90,9 @@ public class Zone implements Serializable {
             }
         }
         return result;
+    }
+
+    public boolean hasOwner() {
+        return !owner.equals("0");
     }
 }

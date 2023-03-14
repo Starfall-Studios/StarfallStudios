@@ -58,7 +58,7 @@ public class DBManager {
                 for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
                     int id = zoneSnapshot.child("id").getValue(Integer.class);
                     String name = zoneSnapshot.child("name").getValue(String.class);
-                    int owner = zoneSnapshot.child("owner").getValue(Integer.class);
+                    String owner = zoneSnapshot.child("owner").getValue(String.class);
 
                     ArrayList<GeoPoint> points = new ArrayList<GeoPoint>();
 
@@ -148,6 +148,33 @@ public class DBManager {
                 Log.w("FIREBASE", "Failed to read value.", error.toException());
             }
         });
+    }
+
+    public synchronized Player retrievePlayerById(String uid) {
+        GameManager.getInstance().setPlayer(new Player(uid));
+        DatabaseReference myRef = database.getReference("users/" + uid);
+        final Player[] temp = new Player[1];
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.child("username").getValue(String.class);
+                int xp = dataSnapshot.child("xp").getValue(Integer.class);
+                //int gems = dataSnapshot.child("gems").getValue(Integer.class);
+                //int food = dataSnapshot.child("food").getValue(Integer.class);
+                //int stone = dataSnapshot.child("stone").getValue(Integer.class);
+                //int wood = dataSnapshot.child("wood").getValue(Integer.class);
+                temp[0] = new Player(uid, username, xp, 0, 0, 0, 0);
+                Log.d("FIREBASE", "Player updated!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+
+        return temp[0];
     }
 
     public void updateZoneOwner(int zoneId, int ownerId) {

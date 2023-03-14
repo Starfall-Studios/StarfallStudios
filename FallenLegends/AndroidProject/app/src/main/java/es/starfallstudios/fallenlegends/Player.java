@@ -21,6 +21,10 @@ public class Player {
     private int wood;
     private int food;
 
+    public static Player createPlayer(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
+        return new Player(uid, username, userExperience, gems, stone, wood, food);
+    }
+
     public Player(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
         gm = GameManager.getInstance();
         playerCreatures = new ArrayList<Creature>();

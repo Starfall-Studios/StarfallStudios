@@ -150,6 +150,12 @@ public class GameManager extends Observable {
         return player;
     }
 
+    public Player getPlayerById(String uid) {
+        synchronized (this) {
+            return dbManager.retrievePlayerById(uid);
+        }
+    }
+
     public void setPlayer(Player player) {
         synchronized (this) {
             this.player = player;

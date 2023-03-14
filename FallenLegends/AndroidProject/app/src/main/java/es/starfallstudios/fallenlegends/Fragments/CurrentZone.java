@@ -34,6 +34,7 @@ public class CurrentZone extends Fragment {
     private TextView zoneOwner;
 
     private Zone zone;
+    private GameManager gameManager;
 
     public CurrentZone() {
         // Required empty public constructor
@@ -47,6 +48,7 @@ public class CurrentZone extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        gameManager = GameManager.getInstance();
     }
 
     @Override
@@ -55,7 +57,7 @@ public class CurrentZone extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_current_zone, container, false);
 
-        zone = GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation());
+        zone = gameManager.getZone(GameManager.getInstance().getUserLocation());
 
         view.findViewById(R.id.acceptButton).setOnClickListener(View -> {
             Toast.makeText(view.getContext(), "Accept", Toast.LENGTH_SHORT).show();
@@ -71,7 +73,8 @@ public class CurrentZone extends Fragment {
         zoneName.append(" " + zone.getName());
 
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
-        zoneOwner.append(String.valueOf(zone.getOwner()));
+        if (zone.hasOwner()) zoneOwner.append(gameManager.getPlayerById(zone.getOwner()).getUsername());
+        else zoneOwner.append("Nobody");
 
         // Inflate the layout for this fragment
         return view;
