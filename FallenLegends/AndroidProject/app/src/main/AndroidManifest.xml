@@ -16,17 +16,17 @@
         android:theme="@style/Theme.FallenLegends"
         tools:targetApi="31">
         <activity
-            android:name=".Screens.GameActivity"
+            android:name=".views.GameActivity"
             android:exported="false" />
         <activity
-            android:name=".Screens.SignUpScreen"
+            android:name=".views.SignUpScreen"
             android:exported="false" />
         <activity
-            android:name=".Screens.LoginScreen"
+            android:name=".views.LoginScreen"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.MainActivity"
+            android:name=".views.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait">
             <intent-filter>
@@ -36,13 +36,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Screens.HomeScreen"
+            android:name=".views.HomeScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.AboutScreen"
+            android:name=".views.AboutScreen"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".Screens.TermsConditionsScreen"
+            android:name=".views.TermsConditionsScreen"
             android:screenOrientation="portrait" />
     </application>
 

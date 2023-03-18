@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Views;
+package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import java.util.Observable;
 import java.util.Observer;
 
-import es.starfallstudios.fallenlegends.Models.GameManager;
+import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 /**

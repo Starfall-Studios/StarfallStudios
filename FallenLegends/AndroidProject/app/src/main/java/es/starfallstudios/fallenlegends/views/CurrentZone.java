@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Views;
+package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
@@ -10,9 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import es.starfallstudios.fallenlegends.Models.GameManager;
+import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.Models.Zone;
+import es.starfallstudios.fallenlegends.models.Zone;
 
 /**
  * A simple {@link Fragment} subclass.

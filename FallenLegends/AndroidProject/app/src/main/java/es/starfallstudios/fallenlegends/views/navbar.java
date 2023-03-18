@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Views;
+package es.starfallstudios.fallenlegends.views;
 
 import android.content.Intent;
 import android.os.Bundle;

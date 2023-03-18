@@ -1,7 +1,9 @@
-package es.starfallstudios.fallenlegends.Views;
+package es.starfallstudios.fallenlegends.views;
 
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -15,9 +17,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import es.starfallstudios.fallenlegends.R;
 
+import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
-import es.starfallstudios.fallenlegends.ViewModels.HomeViewModel;
+import es.starfallstudios.fallenlegends.viewmodels.HomeViewModel;
+import es.starfallstudios.fallenlegends.databinding.ActivityHomeScreenBinding;
 
 public class HomeScreen extends AppCompatActivity {
     @Override
@@ -32,8 +36,10 @@ public class HomeScreen extends AppCompatActivity {
         } catch (NullPointerException ignored) {
         }
 
+        checkForPermissions();
+
         ActivityHomeScreenBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen);
-        binding.setViewModel(new HomeViewModel(this, findViewById(R.id.map)));
+        binding.setViewModel(new HomeViewModel(getParent(), findViewById(R.id.map)));
         binding.executePendingBindings();
 
         //Load navbar fragment intro navbar container
@@ -42,6 +48,13 @@ public class HomeScreen extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.headerbar_container, new HeaderBar()).commit();
 
 
+    }
+
+    public void checkForPermissions() {
+        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            //request permission to user
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
+        }
     }
 
     public void onProfileClick(View view) { //Fix this method

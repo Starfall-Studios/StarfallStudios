@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#030825"
-    tools:context=".Screens.LoginScreen">
+    tools:context=".views.LoginScreen">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"

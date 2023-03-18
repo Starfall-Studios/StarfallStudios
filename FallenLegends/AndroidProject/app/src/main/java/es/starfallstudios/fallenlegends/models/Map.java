@@ -1,14 +1,10 @@
-package es.starfallstudios.fallenlegends.Models;
+package es.starfallstudios.fallenlegends.models;
 
-import android.Manifest;
 import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationRequest;
 import android.util.Log;
-
-import androidx.core.app.ActivityCompat;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
@@ -27,7 +23,6 @@ import java.util.ArrayList;
 
 import es.starfallstudios.fallenlegends.BuildConfig;
 import es.starfallstudios.fallenlegends.CreatureInfoWindow;
-import es.starfallstudios.fallenlegends.R;
 
 public class Map {
 
@@ -81,7 +76,7 @@ public class Map {
         mapController.animateTo(point, (double) 21, (long) 1000);
     }
 
-    private void getLocation() {
+    public void getLocation() {
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(mapView.getContext());
 
         try {

@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Models;
+package es.starfallstudios.fallenlegends.models;
 
 import android.util.Log;
 import android.widget.ProgressBar;

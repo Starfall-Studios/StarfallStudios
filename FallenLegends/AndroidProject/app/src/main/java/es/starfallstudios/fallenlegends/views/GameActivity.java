@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Views;
+package es.starfallstudios.fallenlegends.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -8,8 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ProgressBar;
 
-import es.starfallstudios.fallenlegends.Models.GameManager;
-import es.starfallstudios.fallenlegends.Models.Match;
+import es.starfallstudios.fallenlegends.models.GameManager;
+import es.starfallstudios.fallenlegends.models.Match;
 import es.starfallstudios.fallenlegends.R;
 
 public class GameActivity extends AppCompatActivity {
