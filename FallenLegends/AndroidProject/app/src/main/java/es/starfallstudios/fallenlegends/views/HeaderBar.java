@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Fragments;
+package es.starfallstudios.fallenlegends.Views;
 
 import android.os.Bundle;
 
@@ -7,15 +7,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import java.util.Observable;
+import java.util.Observer;
+
+import es.starfallstudios.fallenlegends.Models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UpdateLocation_button#newInstance} factory method to
+ * Use the {@link HeaderBar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UpdateLocation_button extends Fragment {
+public class HeaderBar extends Fragment implements Observer {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +31,9 @@ public class UpdateLocation_button extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UpdateLocation_button() {
+    TextView txt_playerName;
+
+    public HeaderBar() {
         // Required empty public constructor
     }
 
@@ -36,11 +43,11 @@ public class UpdateLocation_button extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdateLocation_button.
+     * @return A new instance of fragment HeaderBar.
      */
     // TODO: Rename and change types and number of parameters
-    public static UpdateLocation_button newInstance(String param1, String param2) {
-        UpdateLocation_button fragment = new UpdateLocation_button();
+    public static HeaderBar newInstance(String param1, String param2) {
+        HeaderBar fragment = new HeaderBar();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -55,12 +62,29 @@ public class UpdateLocation_button extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        observe();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_location_button, container, false);
+        return inflater.inflate(R.layout.fragment_header_bar, container, false);
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Get the widgets reference from XML layout
+        txt_playerName = view.findViewById(R.id.txt_playerName);
+    }
+
+    public void observe() {
+        GameManager.getInstance().addObserver(this);
+    }
+
+    @Override
+    public void update(Observable observable, Object o) {
+        txt_playerName.setText(GameManager.getInstance().getPlayer().getUsername());
     }
 }

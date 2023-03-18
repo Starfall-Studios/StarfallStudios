@@ -1,5 +1,6 @@
-package es.starfallstudios.fallenlegends.Fragments;
+package es.starfallstudios.fallenlegends.Views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,22 +8,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 import android.widget.Toast;
 
-import java.util.Observable;
-import java.util.Observer;
-
-import es.starfallstudios.fallenlegends.DBManager;
-import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HeaderBar#newInstance} factory method to
+ * Use the {@link navbar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HeaderBar extends Fragment implements Observer {
+public class navbar extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -33,9 +28,7 @@ public class HeaderBar extends Fragment implements Observer {
     private String mParam1;
     private String mParam2;
 
-    TextView txt_playerName;
-
-    public HeaderBar() {
+    public navbar() {
         // Required empty public constructor
     }
 
@@ -45,11 +38,11 @@ public class HeaderBar extends Fragment implements Observer {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HeaderBar.
+     * @return A new instance of fragment navbar.
      */
     // TODO: Rename and change types and number of parameters
-    public static HeaderBar newInstance(String param1, String param2) {
-        HeaderBar fragment = new HeaderBar();
+    public static navbar newInstance(String param1, String param2) {
+        navbar fragment = new navbar();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -64,29 +57,25 @@ public class HeaderBar extends Fragment implements Observer {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-        observe();
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_header_bar, container, false);
+        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
+
+        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
+        });
+
+        view.findViewById(R.id.btn_shop).setOnClickListener(v -> {
+            startActivity(new Intent(getActivity(), GameActivity.class));
+            Toast.makeText(getContext(), "Loading game!", Toast.LENGTH_SHORT).show();
+        });
+
+        return view;
     }
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
-        // Get the widgets reference from XML layout
-        txt_playerName = view.findViewById(R.id.txt_playerName);
-    }
 
-    public void observe() {
-        GameManager.getInstance().addObserver(this);
-    }
-
-    @Override
-    public void update(Observable observable, Object o) {
-        txt_playerName.setText(GameManager.getInstance().getPlayer().getUsername());
-    }
 }

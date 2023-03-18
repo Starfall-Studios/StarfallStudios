@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Screens;
+package es.starfallstudios.fallenlegends.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import es.starfallstudios.fallenlegends.DBManager;
+import es.starfallstudios.fallenlegends.Models.DBManager;
 import es.starfallstudios.fallenlegends.R;
 
 public class SignUpScreen extends AppCompatActivity {

@@ -1,6 +1,5 @@
-package es.starfallstudios.fallenlegends.Fragments;
+package es.starfallstudios.fallenlegends.Views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,18 +7,15 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
-import es.starfallstudios.fallenlegends.GameManager;
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.Screens.GameActivity;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link navbar#newInstance} factory method to
+ * Use the {@link gameboard#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class navbar extends Fragment {
+public class gameboard extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,7 +26,7 @@ public class navbar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public navbar() {
+    public gameboard() {
         // Required empty public constructor
     }
 
@@ -40,11 +36,11 @@ public class navbar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment navbar.
+     * @return A new instance of fragment gameboard.
      */
     // TODO: Rename and change types and number of parameters
-    public static navbar newInstance(String param1, String param2) {
-        navbar fragment = new navbar();
+    public static gameboard newInstance(String param1, String param2) {
+        gameboard fragment = new gameboard();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,19 +61,6 @@ public class navbar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
-
-        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
-        });
-
-        view.findViewById(R.id.btn_shop).setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), GameActivity.class));
-            Toast.makeText(getContext(), "Loading game!", Toast.LENGTH_SHORT).show();
-        });
-
-        return view;
+        return inflater.inflate(R.layout.fragment_gameboard, container, false);
     }
-
-
 }

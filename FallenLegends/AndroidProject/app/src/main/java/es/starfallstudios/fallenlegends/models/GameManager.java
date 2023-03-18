@@ -1,7 +1,6 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Models;
 
 import android.content.SharedPreferences;
-import android.util.Log;
 
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;

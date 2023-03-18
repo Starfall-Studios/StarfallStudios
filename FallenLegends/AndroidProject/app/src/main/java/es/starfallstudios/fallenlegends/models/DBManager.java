@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Models;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 
-import es.starfallstudios.fallenlegends.Screens.MainActivity;
+import es.starfallstudios.fallenlegends.Views.MainActivity;
 
 public class DBManager {
 

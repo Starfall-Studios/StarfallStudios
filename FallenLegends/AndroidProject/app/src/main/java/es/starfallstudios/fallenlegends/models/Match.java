@@ -1,8 +1,7 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Models;
 
 import android.util.Log;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 

@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.Models;
 
 import org.osmdroid.util.GeoPoint;
 

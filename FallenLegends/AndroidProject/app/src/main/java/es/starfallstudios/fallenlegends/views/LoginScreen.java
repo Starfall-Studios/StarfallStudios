@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Screens;
+package es.starfallstudios.fallenlegends.Views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
-import es.starfallstudios.fallenlegends.GameManager;
+import es.starfallstudios.fallenlegends.Models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 public class LoginScreen extends AppCompatActivity {

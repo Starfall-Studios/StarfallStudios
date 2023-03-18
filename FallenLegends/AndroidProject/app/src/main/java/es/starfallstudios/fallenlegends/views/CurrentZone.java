@@ -1,6 +1,5 @@
-package es.starfallstudios.fallenlegends.Fragments;
+package es.starfallstudios.fallenlegends.Views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,15 +10,9 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import org.w3c.dom.Text;
-
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.Serializable;
-
-import es.starfallstudios.fallenlegends.GameManager;
+import es.starfallstudios.fallenlegends.Models.GameManager;
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.Zone;
+import es.starfallstudios.fallenlegends.Models.Zone;
 
 /**
  * A simple {@link Fragment} subclass.
