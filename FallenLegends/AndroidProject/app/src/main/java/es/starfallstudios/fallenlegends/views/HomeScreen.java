@@ -1,9 +1,6 @@
 package es.starfallstudios.fallenlegends.views;
 
-
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -16,14 +13,14 @@ import android.widget.PopupMenu;
 import androidx.appcompat.app.AppCompatActivity;
 
 import es.starfallstudios.fallenlegends.R;
-
-import androidx.core.app.ActivityCompat;
-import androidx.databinding.DataBindingUtil;
+import androidx.lifecycle.ViewModelProvider;
 
 import es.starfallstudios.fallenlegends.viewmodels.HomeViewModel;
-import es.starfallstudios.fallenlegends.databinding.ActivityHomeScreenBinding;
 
 public class HomeScreen extends AppCompatActivity {
+
+    private HomeViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,25 +33,16 @@ public class HomeScreen extends AppCompatActivity {
         } catch (NullPointerException ignored) {
         }
 
-        checkForPermissions();
+        setContentView(R.layout.activity_home_screen);
 
-        ActivityHomeScreenBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_home_screen);
-        binding.setViewModel(new HomeViewModel(getParent(), findViewById(R.id.map)));
-        binding.executePendingBindings();
+        viewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        viewModel.setupMap(this);
 
         //Load navbar fragment intro navbar container
         getSupportFragmentManager().beginTransaction().replace(R.id.navbar_container, new navbar()).commit();
-        getSupportFragmentManager().beginTransaction().replace(R.id.updateLocation_container, new UpdateLocation_button()).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.headerbar_container, new HeaderBar()).commit();
 
 
-    }
-
-    public void checkForPermissions() {
-        if (ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            //request permission to user
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_FINE_LOCATION}, 1);
-        }
     }
 
     public void onProfileClick(View view) { //Fix this method

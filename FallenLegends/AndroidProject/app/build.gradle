@@ -4,10 +4,6 @@ plugins {
 }
 
 android {
-    dataBinding{
-        enabled=true
-    }
-
     namespace 'es.starfallstudios.fallenlegends'
     compileSdk 33
 

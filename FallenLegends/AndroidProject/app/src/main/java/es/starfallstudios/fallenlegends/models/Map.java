@@ -6,6 +6,8 @@ import android.location.Location;
 import android.location.LocationRequest;
 import android.util.Log;
 
+import androidx.core.location.LocationRequestCompat;
+
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -26,7 +28,6 @@ import es.starfallstudios.fallenlegends.CreatureInfoWindow;
 
 public class Map {
 
-    private static Map instance;
     private final MapView mapView;
     private MapController mapController;
 
@@ -35,11 +36,11 @@ public class Map {
     private final GameManager gameManager;
     private final Activity activity;
 
-    private Map(MapView mapView, Activity activity) {
+    public Map(MapView mapView) {
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
         this.mapView = mapView;
-        this.activity = activity;
+        this.activity = (Activity) mapView.getContext();
         gameManager = GameManager.getInstance();
         mapController = (MapController) mapView.getController();
 
@@ -58,13 +59,8 @@ public class Map {
 
         drawZone();
         drawCreatures();
-    }
 
-    public static Map getInstance(MapView mapView, Activity activity) {
-        if (instance == null) {
-            instance = new Map(mapView, activity);
-        }
-        return instance;
+        getLocation();
     }
 
     private void moveToLocation(double latitude, double longitude) {
@@ -80,16 +76,14 @@ public class Map {
         FusedLocationProviderClient fusedLocationClient = LocationServices.getFusedLocationProviderClient(mapView.getContext());
 
         try {
-            fusedLocationClient.getCurrentLocation(LocationRequest.QUALITY_HIGH_ACCURACY, null)
+            fusedLocationClient.getCurrentLocation(LocationRequestCompat.QUALITY_HIGH_ACCURACY, null)
                     .addOnSuccessListener(activity, new OnSuccessListener<Location>() {
                         @Override
                         public void onSuccess(Location location) {
                             // Got last known location. In some rare situations this can be null.
                             if (location != null) {
                                 // Logic to handle location object
-                                double longitude = location.getLongitude();
-                                double latitude = location.getLatitude();
-                                moveToLocation(latitude, longitude);
+                                moveToLocation(location.getLatitude(), location.getLongitude());
                             }
                         }
                     });
