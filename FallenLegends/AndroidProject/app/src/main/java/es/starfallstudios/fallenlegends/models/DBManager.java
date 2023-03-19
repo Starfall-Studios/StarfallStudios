@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.models;
 
 import android.util.Log;
 
@@ -14,7 +14,7 @@ import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 
-import es.starfallstudios.fallenlegends.Screens.MainActivity;
+import es.starfallstudios.fallenlegends.views.MainActivity;
 
 public class DBManager {
 
@@ -58,7 +58,7 @@ public class DBManager {
                 for (DataSnapshot zoneSnapshot : dataSnapshot.getChildren()) {
                     int id = zoneSnapshot.child("id").getValue(Integer.class);
                     String name = zoneSnapshot.child("name").getValue(String.class);
-                    int owner = zoneSnapshot.child("owner").getValue(Integer.class);
+                    String owner = zoneSnapshot.child("owner").getValue(String.class);
 
                     ArrayList<GeoPoint> points = new ArrayList<GeoPoint>();
 
@@ -68,7 +68,7 @@ public class DBManager {
                         points.add(new GeoPoint(latitude, longitude));
                     }
 
-                    zones.add(new Zone(id, owner, name, points));
+                    zones.add(new Zone(owner, id, name, points));
 
                 }
                 Log.d("FIREBASE", "Zones updated!");
@@ -112,5 +112,73 @@ public class DBManager {
         });
 
         return creatures;
+    }
+
+    public void signUpUser(String uid, String username, String email) {
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(uid).child("username").setValue(username);
+        myRef.child(uid).child("email").setValue(email);
+        myRef.child(uid).child("xp").setValue(0);
+        myRef.child(uid).child("gems").setValue(0);
+        myRef.child(uid).child("food").setValue(0);
+        myRef.child(uid).child("stone").setValue(0);
+        myRef.child(uid).child("wood").setValue(0);
+    }
+
+    public void retrievePlayer(String uid) {
+        GameManager.getInstance().setPlayer(new Player(uid));
+        DatabaseReference myRef = database.getReference("users/" + uid);
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.child("username").getValue(String.class);
+                int xp = dataSnapshot.child("xp").getValue(Integer.class);
+                //int gems = dataSnapshot.child("gems").getValue(Integer.class);
+                //int food = dataSnapshot.child("food").getValue(Integer.class);
+                //int stone = dataSnapshot.child("stone").getValue(Integer.class);
+                //int wood = dataSnapshot.child("wood").getValue(Integer.class);
+
+                GameManager.getInstance().setPlayer(new Player(uid, username, xp, 0, 0, 0, 0));
+                Log.d("FIREBASE", "Player updated!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    public synchronized Player retrievePlayerById(String uid) {
+        GameManager.getInstance().setPlayer(new Player(uid));
+        DatabaseReference myRef = database.getReference("users/" + uid);
+        final Player[] temp = new Player[1];
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String username = dataSnapshot.child("username").getValue(String.class);
+                int xp = dataSnapshot.child("xp").getValue(Integer.class);
+                //int gems = dataSnapshot.child("gems").getValue(Integer.class);
+                //int food = dataSnapshot.child("food").getValue(Integer.class);
+                //int stone = dataSnapshot.child("stone").getValue(Integer.class);
+                //int wood = dataSnapshot.child("wood").getValue(Integer.class);
+                temp[0] = new Player(uid, username, xp, 0, 0, 0, 0);
+                Log.d("FIREBASE", "Player updated!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+
+        return temp[0];
+    }
+
+    public void updateZoneOwner(int zoneId, int ownerId) {
+        DatabaseReference myRef = database.getReference("zones");
+        myRef.child(String.valueOf(zoneId)).child("owner").setValue(ownerId);
     }
 }

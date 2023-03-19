@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Screens;
+package es.starfallstudios.fallenlegends.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
@@ -8,9 +8,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
-import android.widget.Toast;
 
-import es.starfallstudios.fallenlegends.GameManager;
+import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 
 public class MainActivity extends AppCompatActivity {

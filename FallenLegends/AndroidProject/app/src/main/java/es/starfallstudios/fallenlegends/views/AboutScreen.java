@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Screens;
+package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 

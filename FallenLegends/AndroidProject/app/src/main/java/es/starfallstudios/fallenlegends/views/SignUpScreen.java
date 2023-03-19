@@ -1,4 +1,4 @@
-package es.starfallstudios.fallenlegends.Screens;
+package es.starfallstudios.fallenlegends.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 
+import es.starfallstudios.fallenlegends.models.DBManager;
 import es.starfallstudios.fallenlegends.R;
 
 public class SignUpScreen extends AppCompatActivity {
@@ -68,9 +69,10 @@ public class SignUpScreen extends AppCompatActivity {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                DBManager.getInstance().signUpUser(mAuth.getUid(), username, email);
                 finish();
                 startActivity(new Intent(SignUpScreen.this, HomeScreen.class));
-                Toast.makeText(SignUpScreen.this, "Bienvenido", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpScreen.this, getResources().getString(R.string.welcomeMsg) + " " + username + "!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(SignUpScreen.this, "Error", Toast.LENGTH_SHORT).show();
             }

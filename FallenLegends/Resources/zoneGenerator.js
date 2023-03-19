@@ -31,7 +31,7 @@ const makeAreas = (start, w, h, step) => {
         for (let j = 0; j < w; j++) {
             const area = {
                 id : i * w + j,
-                owner : -1,
+                owner : "0",
                 name : "Area " + (i * w + j),
                 points : [
                     grid[i + 1][j],

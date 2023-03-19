@@ -1,21 +1,27 @@
-package es.starfallstudios.fallenlegends.Fragments;
+package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
+
+import com.google.firebase.auth.FirebaseAuth;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.viewmodels.HeaderViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link UpdateLocation_button#newInstance} factory method to
+ * Use the {@link HeaderBar#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class UpdateLocation_button extends Fragment {
+public class HeaderBar extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -26,7 +32,9 @@ public class UpdateLocation_button extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public UpdateLocation_button() {
+    TextView txt_playerName;
+
+    public HeaderBar() {
         // Required empty public constructor
     }
 
@@ -36,11 +44,11 @@ public class UpdateLocation_button extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment UpdateLocation_button.
+     * @return A new instance of fragment HeaderBar.
      */
     // TODO: Rename and change types and number of parameters
-    public static UpdateLocation_button newInstance(String param1, String param2) {
-        UpdateLocation_button fragment = new UpdateLocation_button();
+    public static HeaderBar newInstance(String param1, String param2) {
+        HeaderBar fragment = new HeaderBar();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -61,6 +69,18 @@ public class UpdateLocation_button extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_update_location_button, container, false);
+        View v = inflater.inflate(R.layout.fragment_header_bar, container, false);
+
+        txt_playerName = v.findViewById(R.id.txt_playerName);
+
+        HeaderViewModel viewModel = new ViewModelProvider(requireActivity()).get(HeaderViewModel.class);
+        viewModel.getPlayer(FirebaseAuth.getInstance().getUid()).observe(getViewLifecycleOwner(), player -> {
+            txt_playerName.setText(player.getUsername());
+            Log.d("HeaderBar", "onCreateView setting player name to: " + player.getUsername());
+        });
+
+        Log.d("HeaderBar", "header view created!");
+
+        return v;
     }
 }

@@ -1,11 +1,11 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.models;
 
 import org.osmdroid.util.GeoPoint;
 
 import java.util.ArrayList;
 
 public class Zone {
-    private int owner;
+    private String owner;
     private int id;
     private String name;
 
@@ -18,7 +18,7 @@ public class Zone {
      * @param name zone name
      * @param points ArrayList of GeoPoints clockwise starting from the top left corner
      */
-    public Zone(int owner, int id, String name, ArrayList<GeoPoint> points) {
+    public Zone(String owner, int id, String name, ArrayList<GeoPoint> points) {
         this.owner = owner;
         this.id = id;
         this.name = name;
@@ -30,7 +30,7 @@ public class Zone {
      *
      * @return player id
      */
-    public int getOwner() {
+    public String getOwner() {
         return owner;
     }
 
@@ -38,7 +38,7 @@ public class Zone {
      * Set the zone owner id
      * @param owner player id
      */
-    public void setOwner(int owner) {
+    public void setOwner(String owner) {
         this.owner = owner;
     }
 
@@ -90,5 +90,9 @@ public class Zone {
             }
         }
         return result;
+    }
+
+    public boolean hasOwner() {
+        return !owner.equals("0");
     }
 }

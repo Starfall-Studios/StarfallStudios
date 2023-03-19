@@ -6,6 +6,10 @@ import android.widget.Toast;
 import org.osmdroid.views.MapView;
 import org.osmdroid.views.overlay.infowindow.MarkerInfoWindow;
 
+import es.starfallstudios.fallenlegends.models.Creature;
+import es.starfallstudios.fallenlegends.models.GameManager;
+import es.starfallstudios.fallenlegends.models.Utils;
+
 public class CreatureInfoWindow extends MarkerInfoWindow {
     /**
      * @param mapView view of the map

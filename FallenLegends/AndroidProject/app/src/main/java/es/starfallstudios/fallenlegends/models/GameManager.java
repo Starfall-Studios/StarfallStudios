@@ -1,12 +1,13 @@
-package es.starfallstudios.fallenlegends;
+package es.starfallstudios.fallenlegends.models;
 
 import android.content.SharedPreferences;
 
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;
 import java.util.ArrayList;
+import java.util.Observable;
 
-public class GameManager {
+public class GameManager extends Observable {
 
     private static GameManager instance = null;
     private SharedPreferences sharedPreferences;
@@ -22,11 +23,12 @@ public class GameManager {
 
     // Creatures that are in the map
     private ArrayList<Creature> mapCreatures;
-    // Creatures that are in the player's inventory
-    private ArrayList<Creature> playerCreatures;
+
+    //User related variables
+    private Player player;
 
     /**
-     * Gets the gamemanager instance
+     * Gets the game manager instance
      * @return GameManager instance
      */
     public static GameManager getInstance() {
@@ -42,7 +44,6 @@ public class GameManager {
     private GameManager() {
         zones = new ArrayList<Zone>();
         mapCreatures = new ArrayList<Creature>();
-        playerCreatures = new ArrayList<Creature>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
         //zoneVersion = storageManager.getZoneVersion();
     }
@@ -137,5 +138,28 @@ public class GameManager {
      */
     public void setSharedPreferences(SharedPreferences sharedPreferences) {
         this.sharedPreferences = sharedPreferences;
+    }
+
+    //User related methods
+    public void loadPlayer(String uid) {
+        dbManager.retrievePlayer(uid);
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Player getPlayerById(String uid) {
+        synchronized (this) {
+            return dbManager.retrievePlayerById(uid);
+        }
+    }
+
+    public void setPlayer(Player player) {
+        synchronized (this) {
+            this.player = player;
+        }
+        setChanged();
+        notifyObservers();
     }
 }
