@@ -34,7 +34,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:elevation="1dp"
-        android:onClick="@{(view) -> viewModel.updateLocation(view)}"
         app:layout_constraintBottom_toTopOf="@+id/navbar_container"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

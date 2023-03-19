@@ -69,11 +69,6 @@ public class navbar extends Fragment {
             getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
         });
 
-        view.findViewById(R.id.btn_shop).setOnClickListener(v -> {
-            startActivity(new Intent(getActivity(), GameActivity.class));
-            Toast.makeText(getContext(), "Loading game!", Toast.LENGTH_SHORT).show();
-        });
-
         return view;
     }
 

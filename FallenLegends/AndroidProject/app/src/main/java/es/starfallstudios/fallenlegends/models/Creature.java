@@ -42,6 +42,17 @@ public class Creature {
         this.longitude = longitude;
     }
 
+    public Creature(String name, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type) {
+        this.name = name;
+        this.id = id;
+        this.experience = experience;
+        this.health = health;
+        this.attack = attack;
+        this.defense = defense;
+        this.stamina = stamina;
+        this.type = type;
+    }
+
     /**
      * Gets the location of the creature
      * @return geopoint of creature
@@ -96,5 +107,13 @@ public class Creature {
      */
     public int getAttack() {
         return attack;
+    }
+
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
+    public String toString() {
+        return "Name: " + name + " | Health: " + health + " | Attack: " + attack + " | Defense: " + defense + " | Stamina: " + stamina + " | Type: " + type;
     }
 }

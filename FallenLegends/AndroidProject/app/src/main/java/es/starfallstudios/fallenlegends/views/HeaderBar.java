@@ -2,7 +2,6 @@ package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
-import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -14,12 +13,6 @@ import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
 
-import java.util.Objects;
-import java.util.Observable;
-import java.util.Observer;
-
-import es.starfallstudios.fallenlegends.databinding.FragmentHeaderBarBinding;
-import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.viewmodels.HeaderViewModel;
 

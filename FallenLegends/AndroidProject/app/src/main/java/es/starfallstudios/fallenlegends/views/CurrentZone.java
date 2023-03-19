@@ -1,8 +1,10 @@
 package es.starfallstudios.fallenlegends.views;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.models.Zone;
+import es.starfallstudios.fallenlegends.viewmodels.CurrentZoneViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,9 +29,6 @@ public class CurrentZone extends Fragment {
     private TextView zoneDescription;
     private TextView zoneOwner;
 
-    private Zone zone;
-    private GameManager gameManager;
-
     public CurrentZone() {
         // Required empty public constructor
     }
@@ -41,7 +41,6 @@ public class CurrentZone extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gameManager = GameManager.getInstance();
     }
 
     @Override
@@ -50,10 +49,11 @@ public class CurrentZone extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_current_zone, container, false);
 
-        zone = gameManager.getZone(GameManager.getInstance().getUserLocation());
+        CurrentZoneViewModel viewModel = new ViewModelProvider(this).get(CurrentZoneViewModel.class);
+
 
         view.findViewById(R.id.acceptButton).setOnClickListener(View -> {
-            Toast.makeText(view.getContext(), "Accept", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(getActivity(), GameActivity.class));
         });
 
         view.findViewById(R.id.closeButton).setOnClickListener(View -> {
@@ -62,12 +62,19 @@ public class CurrentZone extends Fragment {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
 
-        zoneName = view.findViewById(R.id.txt_zone_name);
-        zoneName.append(" " + zone.getName());
-
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
-        if (zone.hasOwner()) zoneOwner.append(gameManager.getPlayerById(zone.getOwner()).getUsername());
-        else zoneOwner.append("Nobody");
+        zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
+        zoneName = view.findViewById(R.id.txt_zone_name);
+        viewModel.getZone().observe(getViewLifecycleOwner(), zone -> {
+            zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zone.getName());
+        });
+        //zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getName());
+
+        viewModel.getOwner().observe(getViewLifecycleOwner(), player -> {
+            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + player.getUsername());
+        });
+
+
 
         // Inflate the layout for this fragment
         return view;

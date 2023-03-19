@@ -15,6 +15,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import es.starfallstudios.fallenlegends.R;
 import androidx.lifecycle.ViewModelProvider;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import es.starfallstudios.fallenlegends.viewmodels.HomeViewModel;
 
 public class HomeScreen extends AppCompatActivity {
@@ -42,7 +44,9 @@ public class HomeScreen extends AppCompatActivity {
         getSupportFragmentManager().beginTransaction().replace(R.id.navbar_container, new navbar()).commit();
         getSupportFragmentManager().beginTransaction().replace(R.id.headerbar_container, new HeaderBar()).commit();
 
-
+        findViewById(R.id.updateLocation_button).setOnClickListener(View -> {
+            viewModel.updateLocation();
+        });
     }
 
     public void onProfileClick(View view) { //Fix this method
@@ -61,7 +65,7 @@ public class HomeScreen extends AppCompatActivity {
                 startActivity(new Intent(this, TermsConditionsScreen.class));
                 return true;
             case R.id.Logout:
-                //mAuth.signOut();
+                FirebaseAuth.getInstance().signOut();
                 finish();
                 startActivity(new Intent(this, LoginScreen.class));
                 return true;
@@ -70,18 +74,5 @@ public class HomeScreen extends AppCompatActivity {
         }
 
     }
-
-    public boolean onNavMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.nav_locationZone:
-                //Zone zone = gameManager.getZone(gameManager.getUserLocation());
-                //System.out.println(zone.getName() + ", player at coords: " + gameManager.getUserLocation().getLatitude() + ", " + gameManager.getUserLocation().getLongitude());
-                return true;
-            default:
-                return false;
-        }
-    }
-
-
 
 }

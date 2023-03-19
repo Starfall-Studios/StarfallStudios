@@ -48,14 +48,14 @@
 
             <Button
                 android:id="@+id/acceptButton"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:elevation="20dp"
-                android:text="@string/acceptButton"/>
+                android:text="@string/conquestButton"/>
 
             <Button
                 android:id="@+id/closeButton"
-                android:layout_width="100dp"
+                android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:layout_marginStart="16dp"
                 android:elevation="20dp"

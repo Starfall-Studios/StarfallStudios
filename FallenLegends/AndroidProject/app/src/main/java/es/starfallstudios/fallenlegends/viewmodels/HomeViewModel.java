@@ -26,7 +26,7 @@ public class HomeViewModel extends ViewModel {
     }
 
 
-    public void updateLocation(View view) {
+    public void updateLocation() {
         map.getLocation();
     }
 
