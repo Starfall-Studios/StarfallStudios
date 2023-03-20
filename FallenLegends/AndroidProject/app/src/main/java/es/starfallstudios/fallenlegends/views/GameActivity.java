@@ -63,6 +63,13 @@ public class GameActivity extends AppCompatActivity {
         findViewById(R.id.player_card4).setOnClickListener(v -> {
             viewModel.playCard(3);
         });
+
+        viewModel.isMatchFinished().observe(this, isFinished -> {
+            if (isFinished) {
+                //show finished ui
+                finish();
+            }
+        });
     }
 
     //on activity destroy

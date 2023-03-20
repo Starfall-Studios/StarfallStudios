@@ -37,6 +37,8 @@ public class Match {
     MutableLiveData<Integer> playerManaLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyManaLD = new MutableLiveData<>();
 
+    MutableLiveData<Boolean> matchFinishedLD = new MutableLiveData<>();
+
     private void gameTickUpdate() {
         // Update mana
         if(playerMana < 100) playerMana += 10;
@@ -122,6 +124,7 @@ public class Match {
     }
 
     public boolean finishMatch() {
+        matchFinishedLD.postValue(true);
         if (gameTick != null) {
             if(gameTick.isAlive()) {
                 gameTick.interrupt();
@@ -130,6 +133,10 @@ public class Match {
         }
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
         return winner;
+    }
+
+    public MutableLiveData<Boolean> isMatchFinished() {
+        return matchFinishedLD;
     }
 
     public void playCreature(int index) {

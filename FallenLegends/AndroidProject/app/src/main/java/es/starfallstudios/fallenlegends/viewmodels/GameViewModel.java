@@ -38,4 +38,8 @@ public class GameViewModel extends ViewModel {
         return match.getOpponentHealth();
     }
 
+    public LiveData<Boolean> isMatchFinished() {
+        return match.isMatchFinished();
+    }
+
 }
