@@ -4,6 +4,7 @@
 *.ap_
 *.aab
 config.py
+google-services.json
 
 # Files for the ART/Dalvik VM
 *.dex
