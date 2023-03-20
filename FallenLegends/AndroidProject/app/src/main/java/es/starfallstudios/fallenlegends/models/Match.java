@@ -1,7 +1,6 @@
 package es.starfallstudios.fallenlegends.models;
 
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -123,7 +122,7 @@ public class Match {
         return enemyHealthLD;
     }
 
-    public boolean finishMatch() {
+    public void finishMatch() {
         matchFinishedLD.postValue(true);
         if (gameTick != null) {
             if(gameTick.isAlive()) {
@@ -132,6 +131,9 @@ public class Match {
             }
         }
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
+    }
+
+    public boolean isWinner() {
         return winner;
     }
 
@@ -152,6 +154,7 @@ public class Match {
         int damageTaken = (int) (damage * PLAYER_DAMAGE_MULTIPLIER);
         if (damageTaken >= playerHealth) {
             winner = false; // PLAYER LOSES
+            playerHealth = 0;
             finishMatch();
         }
         else playerHealth -= damageTaken;
@@ -161,6 +164,7 @@ public class Match {
         int damageTaken = (int) (damage * PLAYER_DAMAGE_MULTIPLIER);
         if (damageTaken >= opponentHealth) {
             winner = true; // PLAYER WINS
+            opponentHealth = 0;
             finishMatch();
         }
         else opponentHealth -= damageTaken;

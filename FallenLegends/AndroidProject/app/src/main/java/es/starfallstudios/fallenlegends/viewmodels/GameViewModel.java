@@ -22,6 +22,10 @@ public class GameViewModel extends ViewModel {
         match.finishMatch();
     }
 
+    public boolean isPlayerWinner() {
+        return match.isWinner();
+    }
+
     public void playCard(int index) {
         match.playCreature(index);
     }

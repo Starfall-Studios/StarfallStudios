@@ -67,7 +67,7 @@ public class GameActivity extends AppCompatActivity {
         viewModel.isMatchFinished().observe(this, isFinished -> {
             if (isFinished) {
                 //show finished ui
-                finish();
+                getSupportFragmentManager().beginTransaction().replace(R.id.board_container, FinishGameFragment.newInstance(viewModel.isPlayerWinner())).commit();
             }
         });
     }
