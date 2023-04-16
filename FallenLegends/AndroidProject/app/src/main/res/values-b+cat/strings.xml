@@ -12,4 +12,6 @@
     <string name="welcomeMsg">Benvingut</string>
     <string name="acceptButton">Acceptar</string>
     <string name="conquestButton">Conquerir</string>
+    <string name="hello_blank_fragment">Blank Fragment</string>
+    <string name="resetPasswordButton">Restableix Contrasenya</string>
 </resources>

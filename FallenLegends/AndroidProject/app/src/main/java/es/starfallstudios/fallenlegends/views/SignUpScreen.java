@@ -69,6 +69,7 @@ public class SignUpScreen extends AppCompatActivity {
 
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
+                mAuth.getCurrentUser().sendEmailVerification();
                 DBManager.getInstance().signUpUser(mAuth.getUid(), username, email);
                 finish();
                 startActivity(new Intent(SignUpScreen.this, HomeScreen.class));
