@@ -36,6 +36,7 @@ public class Match {
     MutableLiveData<Integer> playerManaLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyManaLD = new MutableLiveData<>();
 
+
     MutableLiveData<Boolean> matchFinishedLD = new MutableLiveData<>();
 
     private void gameTickUpdate() {
@@ -122,6 +123,7 @@ public class Match {
         return enemyHealthLD;
     }
 
+
     public void finishMatch() {
         matchFinishedLD.postValue(true);
         if (gameTick != null) {
@@ -155,6 +157,7 @@ public class Match {
         if (damageTaken >= playerHealth) {
             winner = false; // PLAYER LOSES
             playerHealth = 0;
+
             finishMatch();
         }
         else playerHealth -= damageTaken;
@@ -165,6 +168,7 @@ public class Match {
         if (damageTaken >= opponentHealth) {
             winner = true; // PLAYER WINS
             opponentHealth = 0;
+
             finishMatch();
         }
         else opponentHealth -= damageTaken;
