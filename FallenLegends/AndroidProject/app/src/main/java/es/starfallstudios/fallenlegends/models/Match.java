@@ -31,6 +31,9 @@ public class Match {
 
     private boolean winner;
 
+    MutableLiveData<Creature> playingCreaturePlayerLD = new MutableLiveData<>();
+    MutableLiveData<Creature> playingCreatureOpponentLD = new MutableLiveData<>();
+
     MutableLiveData<Integer> playerHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> playerManaLD = new MutableLiveData<>();
@@ -149,6 +152,7 @@ public class Match {
         playerManaLD.setValue(playerMana);
 
         playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
+        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
         Log.d("Match", "CREATURE PLAYED: " + playingCreaturePlayer.toString());
     }
 
@@ -172,5 +176,15 @@ public class Match {
             finishMatch();
         }
         else opponentHealth -= damageTaken;
+    }
+
+    public MutableLiveData<Creature> getPlayingCreaturePlayer() {
+        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
+        return playingCreaturePlayerLD;
+    }
+
+    public MutableLiveData<Creature> getPlayingCreatureOpponent() {
+        playingCreatureOpponentLD.setValue(playingCreatureOpponent);
+        return playingCreatureOpponentLD;
     }
 }

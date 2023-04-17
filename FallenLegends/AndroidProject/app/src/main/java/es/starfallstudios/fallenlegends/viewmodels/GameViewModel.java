@@ -7,6 +7,7 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import es.starfallstudios.fallenlegends.models.Creature;
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.models.Match;
 
@@ -44,6 +45,14 @@ public class GameViewModel extends ViewModel {
 
     public LiveData<Boolean> isMatchFinished() {
         return match.isMatchFinished();
+    }
+
+    public LiveData<Creature> getCurrentPlayerCreature() {
+        return match.getPlayingCreaturePlayer();
+    }
+
+    public LiveData<Creature> getCurrentOpponentCreature() {
+        return match.getPlayingCreatureOpponent();
     }
 
 }

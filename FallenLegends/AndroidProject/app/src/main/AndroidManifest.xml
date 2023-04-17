@@ -16,7 +16,7 @@
         android:theme="@style/Theme.FallenLegends"
         tools:targetApi="31">
         <activity
-            android:name=".RecoveryScreen"
+            android:name=".views.RecoveryScreen"
             android:exported="false" />
         <activity
             android:name=".views.GameActivity"

@@ -3,12 +3,15 @@ package es.starfallstudios.fallenlegends.views;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.viewmodels.GameViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +19,8 @@ import es.starfallstudios.fallenlegends.R;
  * create an instance of this fragment.
  */
 public class gameboard extends Fragment {
+
+    private GameViewModel viewModel;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,7 +65,18 @@ public class gameboard extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_gameboard, container, false);
+        View v = inflater.inflate(R.layout.fragment_gameboard, container, false);
+
+        viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+
+        viewModel.getCurrentPlayerCreature().observe(getViewLifecycleOwner(), creature -> {
+            if (creature != null) {
+                ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(creature.getResourceId());
+            } else {
+                ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(R.drawable.logo_fallen);
+            }
+        });
+
+        return v;
     }
 }

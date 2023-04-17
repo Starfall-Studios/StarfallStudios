@@ -2,6 +2,11 @@ package es.starfallstudios.fallenlegends.models;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.util.HashMap;
+
+import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.viewmodels.GameViewModel;
+
 public class Creature {
     public static enum CreatureType {
         FIRE,
@@ -9,6 +14,14 @@ public class Creature {
         ELECTRIC,
         WATER,
         FAIRY
+    }
+
+    public static enum BaseCreatures {
+        NIGHTMIRE,
+        FROSTBITE,
+        GRYPHIX,
+        LUMINO,
+        THUNDERWING
     }
 
     private String name;
@@ -20,6 +33,8 @@ public class Creature {
     private CreatureType type;
 
     private int id;
+
+    private int resourceId;
 
     // If the creature is in a zone, this is the zone id
     private int zoneId;
@@ -40,6 +55,7 @@ public class Creature {
         this.name = name;
         this.latitude = latitude;
         this.longitude = longitude;
+        resourceId = R.drawable.creature_nightmire;
     }
 
     public Creature(String name, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type) {
@@ -51,6 +67,19 @@ public class Creature {
         this.defense = defense;
         this.stamina = stamina;
         this.type = type;
+        resourceId = R.drawable.creature_nightmire;
+    }
+
+    public Creature(BaseCreatures baseCreature, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type) {
+        this.name = GameManager.getInstance().creatureNames.get(baseCreature);
+        this.id = id;
+        this.experience = experience;
+        this.health = health;
+        this.attack = attack;
+        this.defense = defense;
+        this.stamina = stamina;
+        this.type = type;
+        resourceId = GameManager.getInstance().creatureResources.get(baseCreature);
     }
 
     /**
@@ -115,5 +144,13 @@ public class Creature {
 
     public String toString() {
         return "Name: " + name + " | Health: " + health + " | Attack: " + attack + " | Defense: " + defense + " | Stamina: " + stamina + " | Type: " + type;
+    }
+
+    public int getResourceId() {
+        return resourceId;
+    }
+
+    public void setResourceId(int resourceId) {
+        this.resourceId = resourceId;
     }
 }
