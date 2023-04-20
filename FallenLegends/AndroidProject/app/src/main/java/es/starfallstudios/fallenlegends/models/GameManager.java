@@ -2,6 +2,9 @@ package es.starfallstudios.fallenlegends.models;
 
 import android.content.SharedPreferences;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;
 import java.util.ArrayList;
@@ -32,6 +35,9 @@ public class GameManager extends Observable {
 
     public HashMap<Creature.BaseCreatures, Integer> creatureResources;
     public HashMap<Creature.BaseCreatures, String> creatureNames;
+
+    //Repos
+    private final PlayerRepo playerRepo = new PlayerRepo();
 
     /**
      * Gets the game manager instance
@@ -148,42 +154,11 @@ public class GameManager extends Observable {
         return null;
     }
 
-    /**
-     * Gets the shared preferences
-     * @return shared preferences
-     */
-    public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
-    }
-
-    /**
-     * Sets the shared preferences
-     * @param sharedPreferences shared preferences
-     */
-    public void setSharedPreferences(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
-    }
-
-    //User related methods
-    public void loadPlayer(String uid) {
-        dbManager.retrievePlayer(uid);
-    }
-
     public Player getPlayer() {
         return player;
     }
 
-    public Player getPlayerById(String uid) {
-        synchronized (this) {
-            return dbManager.retrievePlayerById(uid);
-        }
-    }
-
     public void setPlayer(Player player) {
-        synchronized (this) {
-            this.player = player;
-        }
-        setChanged();
-        notifyObservers();
+        this.player = player;
     }
 }

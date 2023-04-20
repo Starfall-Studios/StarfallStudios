@@ -14,10 +14,6 @@ public class StorageManager {
         return instance;
     }
 
-    private StorageManager() {
-        sharedPreferences = GameManager.getInstance().getSharedPreferences();
-    }
-
     public void saveZoneVersion(int version) {
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("zoneVersion", String.valueOf(version));

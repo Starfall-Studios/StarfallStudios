@@ -28,7 +28,24 @@ public class PlayerRepo {
                 //int food = dataSnapshot.child("food").getValue(Integer.class);
                 //int stone = dataSnapshot.child("stone").getValue(Integer.class);
                 //int wood = dataSnapshot.child("wood").getValue(Integer.class);
-                player.setValue(new Player(uid, username, xp, 0, 0, 0, 0));
+                Player temp = new Player(uid, username, xp, 0, 0, 0, 0);
+                Deck tempDeck = new Deck();
+
+                for (DataSnapshot creature : dataSnapshot.child("creatures").getChildren()) {
+                    String name = creature.child("name").getValue(String.class);
+                    int base = creature.child("base").getValue(Integer.class);
+                    int exp = creature.child("experience").getValue(Integer.class);
+                    int hp = creature.child("hp").getValue(Integer.class);
+                    int attack = creature.child("attack").getValue(Integer.class);
+                    int defense = creature.child("defense").getValue(Integer.class);
+                    int stamina = creature.child("stamina").getValue(Integer.class);
+
+                    tempDeck.addCreature(new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC));
+                }
+
+                temp.setDeck(tempDeck);
+                player.setValue(temp);
+
                 Log.d(TAG, "Player updated!");
             }
 
@@ -40,4 +57,5 @@ public class PlayerRepo {
         });
         return player;
     }
+
 }

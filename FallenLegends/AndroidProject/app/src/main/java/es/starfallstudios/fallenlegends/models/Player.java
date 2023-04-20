@@ -10,7 +10,7 @@ public class Player {
     private ArrayList<Creature> playerCreatures;
 
     // Creatures that are in the player's deck (max 4)
-    private ArrayList<Creature> playerDeck;
+    private Deck playerDeck;
 
     //User related variables
     private String username;
@@ -28,7 +28,7 @@ public class Player {
     public Player(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
         gm = GameManager.getInstance();
         playerCreatures = new ArrayList<Creature>();
-        playerDeck = new ArrayList<Creature>();
+        playerDeck = new Deck();
         this.uid = uid;
         this.username = username;
         this.userExperience = userExperience;
@@ -48,6 +48,7 @@ public class Player {
         this.stone = 0;
         this.wood = 0;
         this.food = 0;
+        playerDeck = new Deck();
     }
 
     public String getUsername() {
@@ -104,5 +105,13 @@ public class Player {
 
     public void setFood(int food) {
         this.food = food;
+    }
+
+    public void setDeck(Deck deck) {
+        this.playerDeck = deck;
+    }
+
+    public Deck getDeck() {
+        return playerDeck;
     }
 }

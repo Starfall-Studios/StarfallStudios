@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseUser;
 
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.PlayerRepo;
 
 public class LoginScreen extends AppCompatActivity {
 
@@ -25,6 +26,8 @@ public class LoginScreen extends AppCompatActivity {
     Button loginButton;
     Button signupButton;
     Button recoveryButton;
+
+    private final PlayerRepo playerRepo = new PlayerRepo();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,10 +71,14 @@ public class LoginScreen extends AppCompatActivity {
                 Toast.makeText(LoginScreen.this, "Email not verified!", Toast.LENGTH_SHORT).show();
                 return;
             }
-            GameManager.getInstance().loadPlayer(mAuth.getCurrentUser().getUid());
-            finish();
-            startActivity(new Intent(LoginScreen.this, HomeScreen.class));
-            Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
+
+            playerRepo.requestPlayer(mAuth.getCurrentUser().getUid()).observe(this, player -> {
+                GameManager.getInstance().setPlayer(player);
+                finish();
+                startActivity(new Intent(LoginScreen.this, HomeScreen.class));
+                Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
+            });
+
         }).addOnFailureListener(e -> Toast.makeText(LoginScreen.this, "Error logging in!", Toast.LENGTH_SHORT).show());
 
     }
@@ -83,9 +90,12 @@ public class LoginScreen extends AppCompatActivity {
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         if (currentUser != null) {
-            GameManager.getInstance().loadPlayer(currentUser.getUid());
-            finish();
-            startActivity(new Intent(LoginScreen.this, HomeScreen.class));
+            playerRepo.requestPlayer(currentUser.getUid()).observe(this, player -> {
+                GameManager.getInstance().setPlayer(player);
+                finish();
+                startActivity(new Intent(LoginScreen.this, HomeScreen.class));
+                Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
+            });
         }
     }
 }

@@ -14,7 +14,7 @@ public class Match {
     private Zone zone;
 
     private Player player;
-    private Player opponent;
+    private OpponentAI opponent;
 
     private int playerMana;
     private int opponentMana;
@@ -68,6 +68,11 @@ public class Match {
             }
         }
 
+        if(playingCreaturePlayer == null && playingCreatureOpponent == null) {
+            damageOpponent(5);
+            damagePlayer(5);
+        }
+
         // Update health
         playerHealthLD.postValue(playerHealth);
         enemyHealthLD.postValue(opponentHealth);
@@ -84,11 +89,13 @@ public class Match {
         playerHealth = MAX_HEALTH;
         opponentHealth = MAX_HEALTH;
 
+        playingCreaturesPlayer = player.getDeck().getCreatures();
+
         playerMana = 30;
         opponentMana = 30;
 
         playingCreaturePlayer = null;
-        playingCreatureOpponent = new Creature("TestCreature", 9998, 20, 60, 50, 50, 50, Creature.CreatureType.ELECTRIC);
+        playingCreatureOpponent = new Creature(Creature.BaseCreatures.THUNDERWING, 9998, 20, 60, 50, 50, 50, Creature.CreatureType.ELECTRIC);
 
         gameTick = new Thread(new Runnable() {
             @Override
@@ -151,7 +158,9 @@ public class Match {
         if (playerMana >= 20) playerMana -= 20;
         playerManaLD.setValue(playerMana);
 
-        playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
+        playingCreaturePlayer = playingCreaturesPlayer.get(index);
+
+        //playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
         playingCreaturePlayerLD.setValue(playingCreaturePlayer);
         Log.d("Match", "CREATURE PLAYED: " + playingCreaturePlayer.toString());
     }
@@ -187,4 +196,9 @@ public class Match {
         playingCreatureOpponentLD.setValue(playingCreatureOpponent);
         return playingCreatureOpponentLD;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
 }

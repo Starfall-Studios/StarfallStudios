@@ -69,6 +69,14 @@ public class gameboard extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
+        viewModel.getCurrentOpponentCreature().observe(getViewLifecycleOwner(), creature -> {
+            if (creature != null) {
+                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(creature.getResourceId());
+            } else {
+                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(R.drawable.logo_fallen);
+            }
+        });
+
         viewModel.getCurrentPlayerCreature().observe(getViewLifecycleOwner(), creature -> {
             if (creature != null) {
                 ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(creature.getResourceId());
