@@ -49,6 +49,8 @@ public class Match {
 
         playerManaLD.postValue(playerMana);
 
+        opponent.updateMatchState();
+
         if(playingCreaturePlayer != null) {
             if (playingCreatureOpponent != null) {
                 playingCreatureOpponent.setHealth(playingCreatureOpponent.getHealth() - playingCreaturePlayer.getAttack());
@@ -156,12 +158,11 @@ public class Match {
     public void playCreature(int index) {
         Log.d("Match", "PLAYING CREATURE " + index);
         if (playerMana >= 20) playerMana -= 20;
+
         playerManaLD.setValue(playerMana);
 
-        playingCreaturePlayer = playingCreaturesPlayer.get(index);
+        setCreaturePlayer(playingCreaturesPlayer.get(index));
 
-        //playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
-        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
         Log.d("Match", "CREATURE PLAYED: " + playingCreaturePlayer.toString());
     }
 
@@ -199,6 +200,24 @@ public class Match {
 
     public Player getPlayer() {
         return player;
+    }
+
+    public Creature getCreaturePlayer() {
+        return playingCreaturePlayer;
+    }
+
+    public Creature getCreatureOpponent() {
+        return playingCreatureOpponent;
+    }
+
+    public void setCreaturePlayer(Creature creature) {
+        playingCreaturePlayer = creature;
+        playingCreaturePlayerLD.setValue(creature);
+    }
+
+    public void setCreatureOpponent(Creature creature) {
+        playingCreatureOpponent = creature;
+        playingCreatureOpponentLD.setValue(creature);
     }
 
 }

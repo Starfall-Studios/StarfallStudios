@@ -42,7 +42,7 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         manaBar = findViewById(R.id.mana_bar_progress);
-        cardImages = new ArrayList<ImageView>();
+        cardImages = new ArrayList<>();
 
         cardImages.add((ImageView) findViewById(R.id.player_card1));
         cardImages.add((ImageView) findViewById(R.id.player_card2));

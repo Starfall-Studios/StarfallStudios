@@ -153,4 +153,8 @@ public class Creature {
     public void setResourceId(int resourceId) {
         this.resourceId = resourceId;
     }
+
+    public CreatureType getType() {
+        return type;
+    }
 }
