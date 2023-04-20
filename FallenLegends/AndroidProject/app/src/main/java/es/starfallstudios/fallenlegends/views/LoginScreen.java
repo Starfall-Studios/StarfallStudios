@@ -24,6 +24,7 @@ public class LoginScreen extends AppCompatActivity {
     EditText password;
     Button loginButton;
     Button signupButton;
+    Button recoveryButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +47,11 @@ public class LoginScreen extends AppCompatActivity {
         password = findViewById(R.id.input_password);
         loginButton = findViewById(R.id.btn_login);
         signupButton = findViewById(R.id.btn_opensignup);
+        recoveryButton = findViewById(R.id.btn_openrecovery);
 
         loginButton.setOnClickListener(v -> login());
         signupButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, SignUpScreen.class)));
+        recoveryButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, RecoveryScreen.class)));
     }
 
     private void login() {
@@ -60,15 +63,15 @@ public class LoginScreen extends AppCompatActivity {
             return;
         }
 
-        mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
-            if (task.isSuccessful()) {
-                GameManager.getInstance().loadPlayer(mAuth.getCurrentUser().getUid());
-                finish();
-                startActivity(new Intent(LoginScreen.this, HomeScreen.class));
-                Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
-            } else {
-                Toast.makeText(LoginScreen.this, "Error", Toast.LENGTH_SHORT).show();
+        mAuth.signInWithEmailAndPassword(email, password).addOnSuccessListener(task -> {
+            if (!mAuth.getCurrentUser().isEmailVerified()) {
+                Toast.makeText(LoginScreen.this, "Email not verified!", Toast.LENGTH_SHORT).show();
+                return;
             }
+            GameManager.getInstance().loadPlayer(mAuth.getCurrentUser().getUid());
+            finish();
+            startActivity(new Intent(LoginScreen.this, HomeScreen.class));
+            Toast.makeText(LoginScreen.this, getResources().getString(R.string.welcomeMsg) + "!", Toast.LENGTH_SHORT).show();
         }).addOnFailureListener(e -> Toast.makeText(LoginScreen.this, "Error logging in!", Toast.LENGTH_SHORT).show());
 
     }

@@ -5,7 +5,10 @@ import android.content.SharedPreferences;
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Observable;
+
+import es.starfallstudios.fallenlegends.R;
 
 public class GameManager extends Observable {
 
@@ -27,6 +30,9 @@ public class GameManager extends Observable {
     //User related variables
     private Player player;
 
+    public HashMap<Creature.BaseCreatures, Integer> creatureResources;
+    public HashMap<Creature.BaseCreatures, String> creatureNames;
+
     /**
      * Gets the game manager instance
      * @return GameManager instance
@@ -45,7 +51,25 @@ public class GameManager extends Observable {
         zones = new ArrayList<Zone>();
         mapCreatures = new ArrayList<Creature>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
-        //zoneVersion = storageManager.getZoneVersion();
+
+        creatureResources = new HashMap<>();
+        creatureNames = new HashMap<>();
+
+        //Load creature resources
+        creatureResources.put(Creature.BaseCreatures.FROSTBITE, R.drawable.creature_frostbite);
+        creatureNames.put(Creature.BaseCreatures.FROSTBITE, "Frostbite");
+
+        creatureResources.put(Creature.BaseCreatures.GRYPHIX, R.drawable.creature_gryphix);
+        creatureNames.put(Creature.BaseCreatures.GRYPHIX, "Gryphix");
+
+        creatureResources.put(Creature.BaseCreatures.LUMINO, R.drawable.creature_lumino);
+        creatureNames.put(Creature.BaseCreatures.LUMINO, "Lumino");
+
+        creatureResources.put(Creature.BaseCreatures.NIGHTMIRE, R.drawable.creature_nightmire);
+        creatureNames.put(Creature.BaseCreatures.NIGHTMIRE, "Nightmire");
+
+        creatureResources.put(Creature.BaseCreatures.THUNDERWING, R.drawable.creature_thunderwing);
+        creatureNames.put(Creature.BaseCreatures.THUNDERWING, "Thunderwing");
     }
 
     /**

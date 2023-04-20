@@ -1,7 +1,6 @@
 package es.starfallstudios.fallenlegends.models;
 
 import android.util.Log;
-import android.widget.ProgressBar;
 
 import androidx.lifecycle.MutableLiveData;
 
@@ -32,10 +31,16 @@ public class Match {
 
     private boolean winner;
 
+    MutableLiveData<Creature> playingCreaturePlayerLD = new MutableLiveData<>();
+    MutableLiveData<Creature> playingCreatureOpponentLD = new MutableLiveData<>();
+
     MutableLiveData<Integer> playerHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> playerManaLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyManaLD = new MutableLiveData<>();
+
+
+    MutableLiveData<Boolean> matchFinishedLD = new MutableLiveData<>();
 
     private void gameTickUpdate() {
         // Update mana
@@ -121,7 +126,9 @@ public class Match {
         return enemyHealthLD;
     }
 
-    public boolean finishMatch() {
+
+    public void finishMatch() {
+        matchFinishedLD.postValue(true);
         if (gameTick != null) {
             if(gameTick.isAlive()) {
                 gameTick.interrupt();
@@ -129,7 +136,14 @@ public class Match {
             }
         }
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
+    }
+
+    public boolean isWinner() {
         return winner;
+    }
+
+    public MutableLiveData<Boolean> isMatchFinished() {
+        return matchFinishedLD;
     }
 
     public void playCreature(int index) {
@@ -138,6 +152,7 @@ public class Match {
         playerManaLD.setValue(playerMana);
 
         playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
+        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
         Log.d("Match", "CREATURE PLAYED: " + playingCreaturePlayer.toString());
     }
 
@@ -145,6 +160,8 @@ public class Match {
         int damageTaken = (int) (damage * PLAYER_DAMAGE_MULTIPLIER);
         if (damageTaken >= playerHealth) {
             winner = false; // PLAYER LOSES
+            playerHealth = 0;
+
             finishMatch();
         }
         else playerHealth -= damageTaken;
@@ -154,8 +171,20 @@ public class Match {
         int damageTaken = (int) (damage * PLAYER_DAMAGE_MULTIPLIER);
         if (damageTaken >= opponentHealth) {
             winner = true; // PLAYER WINS
+            opponentHealth = 0;
+
             finishMatch();
         }
         else opponentHealth -= damageTaken;
+    }
+
+    public MutableLiveData<Creature> getPlayingCreaturePlayer() {
+        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
+        return playingCreaturePlayerLD;
+    }
+
+    public MutableLiveData<Creature> getPlayingCreatureOpponent() {
+        playingCreatureOpponentLD.setValue(playingCreatureOpponent);
+        return playingCreatureOpponentLD;
     }
 }

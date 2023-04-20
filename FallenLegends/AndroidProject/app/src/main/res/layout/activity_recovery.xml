@@ -26,44 +26,19 @@
             android:padding="8dp">
 
             <EditText
-                android:id="@+id/input_email"
+                android:id="@+id/input_email_recovery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="E-Mail"
                 android:inputType="textEmailAddress" />
 
-            <EditText
-                android:id="@+id/input_password"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="Password"
-                android:inputType="textPassword" />
-
             <Button
-                android:id="@+id/btn_login"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/loginButton" />
-
-            <TextView
-                android:id="@+id/textView4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Don't you have an account yet?" />
-
-            <Button
-                android:id="@+id/btn_opensignup"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/signupButton" />
-
-            <Button
-                android:id="@+id/btn_openrecovery"
+                android:id="@+id/btn_recovery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/resetPasswordButton" />
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 

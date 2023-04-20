@@ -12,4 +12,6 @@
     <string name="welcomeMsg">Bienvenido</string>
     <string name="acceptButton">Aceptar</string>
     <string name="conquestButton">Conquistar</string>
+    <string name="hello_blank_fragment">Blank Fragment</string>
+    <string name="resetPasswordButton">Restablecer Contraseña</string>
 </resources>
