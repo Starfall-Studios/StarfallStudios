@@ -58,4 +58,11 @@ public class PlayerRepo {
         return player;
     }
 
+    public MutableLiveData<Deck> requestDeck(String uid, ValueEventListener listener) {
+        MutableLiveData<Deck> deck = new MutableLiveData<>();
+        DatabaseReference myRef = database.getReference("users/" + uid + "/creatures");
+        myRef.addValueEventListener(listener);
+        return deck;
+    }
+
 }

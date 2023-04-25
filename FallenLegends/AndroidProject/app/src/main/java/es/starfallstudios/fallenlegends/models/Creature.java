@@ -1,5 +1,7 @@
 package es.starfallstudios.fallenlegends.models;
 
+import androidx.lifecycle.MutableLiveData;
+
 import org.osmdroid.util.GeoPoint;
 
 import java.util.HashMap;
@@ -13,7 +15,8 @@ public class Creature {
         ROCK,
         ELECTRIC,
         WATER,
-        FAIRY
+        FAIRY,
+        NONE
     }
 
     public static enum BaseCreatures {
@@ -21,7 +24,8 @@ public class Creature {
         FROSTBITE,
         GRYPHIX,
         LUMINO,
-        THUNDERWING
+        THUNDERWING,
+        NONE
     }
 
     private String name;
@@ -30,7 +34,10 @@ public class Creature {
     private int attack;
     private int defense;
     private int stamina;
+    private int cost;
     private CreatureType type;
+
+    private MutableLiveData<Integer> healthLD;
 
     private int id;
 
@@ -42,6 +49,10 @@ public class Creature {
     // When creature spawns in the world, it will be in a specific location
     private double latitude;
     private double longitude;
+
+    public static Creature blankCreature() {
+        return new Creature(BaseCreatures.NONE, 0, 0, 0, 0, 0, 0, CreatureType.NONE);
+    }
 
     /**
      * Constructor for creatures that are in a zone
@@ -156,5 +167,22 @@ public class Creature {
 
     public CreatureType getType() {
         return type;
+    }
+
+    public int getCost() {
+        return stamina;
+    }
+
+    public boolean isAlive() {
+        return health > 0;
+    }
+
+    public boolean isBlank() {
+        return getType() == CreatureType.NONE;
+    }
+
+    public MutableLiveData<Integer> getHealthLD() {
+        healthLD.setValue(health);
+        return healthLD;
     }
 }

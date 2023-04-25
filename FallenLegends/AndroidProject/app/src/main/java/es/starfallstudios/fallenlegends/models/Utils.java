@@ -2,6 +2,8 @@ package es.starfallstudios.fallenlegends.models;
 
 import org.osmdroid.util.GeoPoint;
 
+import java.util.Random;
+
 public class Utils {
 
     private static double deg2rad(double deg) {
@@ -65,6 +67,16 @@ public class Utils {
      */
     public static boolean isCloseEnough(double lat1, double lon1, double lat2, double lon2, double interactionDistance) {
         return distance(lat1, lon1, lat2, lon2) <= interactionDistance;
+    }
+
+    public static int getRandomNumberInRange(int min, int max) {
+
+        if (min >= max) {
+            throw new IllegalArgumentException("max must be greater than min");
+        }
+
+        Random r = new Random();
+        return r.nextInt((max - min) + 1) + min;
     }
 
 }

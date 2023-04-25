@@ -53,7 +53,7 @@ public class GameActivity extends AppCompatActivity {
 
         Deck deck = GameManager.getInstance().getPlayer().getDeck();
         for(int i = 0; i < 4; i++) {
-            cardImages.get(i).setImageResource(deck.getCreatures().get(i).getResourceId());
+            cardImages.get(i).setBackgroundResource(deck.getCreatures().get(i).getResourceId());
         }
 
         viewModel.getMana().observe(this, mana -> {

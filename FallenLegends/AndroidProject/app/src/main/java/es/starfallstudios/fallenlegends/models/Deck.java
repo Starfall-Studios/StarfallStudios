@@ -18,6 +18,15 @@ public class Deck {
         return creatures;
     }
 
+    public Creature getCreature(int index) {
+        Creature c = creatures.get(index);
+        if (c.isAlive()) {
+            return c;
+        } else {
+            return null;
+        }
+    }
+
     public void setCreatures(ArrayList<Creature> creatures) {
         this.creatures = creatures;
     }

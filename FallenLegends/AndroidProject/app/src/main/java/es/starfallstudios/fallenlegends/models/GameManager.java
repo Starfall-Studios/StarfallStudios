@@ -76,6 +76,9 @@ public class GameManager extends Observable {
 
         creatureResources.put(Creature.BaseCreatures.THUNDERWING, R.drawable.creature_thunderwing);
         creatureNames.put(Creature.BaseCreatures.THUNDERWING, "Thunderwing");
+
+        creatureResources.put(Creature.BaseCreatures.NONE, R.drawable.logo_fallen);
+        creatureNames.put(Creature.BaseCreatures.NONE, "Blank");
     }
 
     /**
