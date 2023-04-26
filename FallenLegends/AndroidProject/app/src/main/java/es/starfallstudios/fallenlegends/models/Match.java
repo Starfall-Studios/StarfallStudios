@@ -37,6 +37,7 @@ public class Match {
     private Thread gameTick;
 
     private PlayerRepo playerRepo;
+    private ZoneRepo zoneRepo;
 
     private boolean winner;
 
@@ -100,6 +101,9 @@ public class Match {
         this.zone = zone;
         this.player = player;
 
+        zoneRepo = ZoneRepo.getInstance();
+        playerRepo = PlayerRepo.getInstance();
+
         //check if zone has owner
         if (!zone.hasOwner()) {
             //zone has no owner, so we are the first player
@@ -107,8 +111,6 @@ public class Match {
             winner = true;
             finishMatch();
         } else {
-            playerRepo = PlayerRepo.getInstance();
-
             winner = false;
 
             playerHealth = MAX_HEALTH;
@@ -204,6 +206,11 @@ public class Match {
             }
         }
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
+
+        if (isWinner()) {
+            zoneRepo.updateZoneOwner(zone.getId(), player.getUid());
+        }
+
     }
 
     public boolean isWinner() {

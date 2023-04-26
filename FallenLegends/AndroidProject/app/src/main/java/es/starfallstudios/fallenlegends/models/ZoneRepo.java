@@ -20,6 +20,15 @@ public class ZoneRepo {
     private final String TAG = getClass().getSimpleName();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
 
+    private static ZoneRepo instance;
+
+    public static ZoneRepo getInstance() {
+        if (instance == null) {
+            instance = new ZoneRepo();
+        }
+        return instance;
+    }
+
     public MutableLiveData<Zone> requestZone(int id) {
         MutableLiveData<Zone> zone = new MutableLiveData<>();
         DatabaseReference myRef = database.getReference("zones/" + id);
