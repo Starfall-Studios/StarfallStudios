@@ -11,6 +11,7 @@ import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.models.Player;
 import es.starfallstudios.fallenlegends.models.PlayerRepo;
 import es.starfallstudios.fallenlegends.models.Zone;
+import es.starfallstudios.fallenlegends.models.ZoneInfo;
 import es.starfallstudios.fallenlegends.models.ZoneRepo;
 
 public class CurrentZoneViewModel extends ViewModel {
@@ -45,6 +46,10 @@ public class CurrentZoneViewModel extends ViewModel {
             owner = playerRepo.requestPlayer((zoneRepo.requestZone(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getId()).getValue()).getOwner());
         }
         return owner;
+    }
+
+    public LiveData<ZoneInfo> getZoneInfo() {
+        return zoneRepo.requestZoneInfo(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getId());
     }
 
 }

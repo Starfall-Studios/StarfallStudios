@@ -65,13 +65,9 @@ public class CurrentZone extends Fragment {
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
         zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
         zoneName = view.findViewById(R.id.txt_zone_name);
-        viewModel.getZone().observe(getViewLifecycleOwner(), zone -> {
-            zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zone.getName());
-
-        });
-
-        viewModel.getOwner().observe(getViewLifecycleOwner(), player -> {
-            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + player.getUsername());
+        viewModel.getZoneInfo().observe(getViewLifecycleOwner(), zoneInfo -> {
+            zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zoneInfo.getZoneName());
+            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + zoneInfo.getOwnerName());
         });
 
         // Inflate the layout for this fragment
