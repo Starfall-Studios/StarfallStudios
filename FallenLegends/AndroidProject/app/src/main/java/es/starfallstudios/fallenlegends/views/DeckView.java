@@ -9,12 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import es.starfallstudios.fallenlegends.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link navbar#newInstance} factory method to
+ * Use the {@link DeckView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class navbar extends Fragment {
+public class DeckView extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +26,7 @@ public class navbar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public navbar() {
+    public DeckView() {
         // Required empty public constructor
     }
 
@@ -35,11 +36,11 @@ public class navbar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment navbar.
+     * @return A new instance of fragment deckView.
      */
     // TODO: Rename and change types and number of parameters
-    public static navbar newInstance(String param1, String param2) {
-        navbar fragment = new navbar();
+    public static DeckView newInstance(String param1, String param2) {
+        DeckView fragment = new DeckView();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,17 +61,11 @@ public class navbar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
+        View view = inflater.inflate(R.layout.fragment_deck, container, false);
 
-        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
-        });
-
-        view.findViewById(R.id.btn_deck).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new DeckView()).commit();
+        view.findViewById(R.id.closeButton).setOnClickListener(View -> {
+            getParentFragmentManager().beginTransaction().remove(this).commit();
         });
         return view;
     }
-
-
 }
