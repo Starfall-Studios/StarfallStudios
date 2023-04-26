@@ -39,10 +39,10 @@ public class OpponentAI {
         switch (enemyCreature.getType()) {
             case NONE:
                 Log.d("OpponentAI", "No enemy creature");
-                playCard(deck.getCreature(Utils.getRandomNumberInRange(0, 3)));
+                playCard(deck.getRandomCreatureAlive());
                 break;
             case ELECTRIC:
-                playCard(deck.getCreature(Utils.getRandomNumberInRange(0, 3)));
+                playCard(deck.getRandomCreatureAlive());
                 break;
             case FIRE:
                 break;

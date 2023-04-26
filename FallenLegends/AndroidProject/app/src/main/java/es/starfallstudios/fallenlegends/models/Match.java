@@ -36,7 +36,7 @@ public class Match {
 
     private Thread gameTick;
 
-    private PlayerRepo playerRepo = new PlayerRepo();
+    private PlayerRepo playerRepo;
 
     private boolean winner;
 
@@ -100,65 +100,75 @@ public class Match {
         this.zone = zone;
         this.player = player;
 
-        winner = false;
+        //check if zone has owner
+        if (!zone.hasOwner()) {
+            //zone has no owner, so we are the first player
+            zone.setOwner(player.getUsername());
+            winner = true;
+            finishMatch();
+        } else {
+            playerRepo = PlayerRepo.getInstance();
 
-        playerHealth = MAX_HEALTH;
-        opponentHealth = MAX_HEALTH;
+            winner = false;
 
-        playerMana = 30;
-        opponentMana = 30;
+            playerHealth = MAX_HEALTH;
+            opponentHealth = MAX_HEALTH;
 
-        playingCreaturePlayer = Creature.blankCreature();
-        playingCreatureOpponent = Creature.blankCreature();
+            playerMana = 30;
+            opponentMana = 30;
 
-        gameTick = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
-                    try {
-                        Thread.sleep(1000);
-                        gameTickUpdate();
-                    } catch (InterruptedException e) {
-                        return;
+            playingCreaturePlayer = Creature.blankCreature();
+            playingCreatureOpponent = Creature.blankCreature();
+
+            gameTick = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        try {
+                            Thread.sleep(1000);
+                            gameTickUpdate();
+                        } catch (InterruptedException e) {
+                            return;
+                        }
                     }
                 }
-            }
-        });
+            });
 
-        playingCreaturesPlayer = player.getDeck().getCreatures();
+            playingCreaturesPlayer = player.getDeck().getCreatures();
 
-        ValueEventListener listener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                Deck tempDeck = new Deck();
+            ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Deck tempDeck = new Deck();
 
-                for (DataSnapshot creature : dataSnapshot.getChildren()) {
-                    int base = creature.child("base").getValue(Integer.class);
-                    int exp = creature.child("experience").getValue(Integer.class);
-                    int hp = creature.child("hp").getValue(Integer.class);
-                    int attack = creature.child("attack").getValue(Integer.class);
-                    int defense = creature.child("defense").getValue(Integer.class);
-                    int stamina = creature.child("stamina").getValue(Integer.class);
+                    for (DataSnapshot creature : dataSnapshot.getChildren()) {
+                        int base = creature.child("base").getValue(Integer.class);
+                        int exp = creature.child("experience").getValue(Integer.class);
+                        int hp = creature.child("hp").getValue(Integer.class);
+                        int attack = creature.child("attack").getValue(Integer.class);
+                        int defense = creature.child("defense").getValue(Integer.class);
+                        int stamina = creature.child("stamina").getValue(Integer.class);
 
-                    Creature c = new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC);
-                    tempDeck.addCreature(c);
-                    Log.w("Match", "CREATURE ADDED TO AI DECK: " + c.toString());
+                        Creature c = new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC);
+                        tempDeck.addCreature(c);
+                        Log.w("Match", "CREATURE ADDED TO AI DECK: " + c.toString());
+                    }
+
+                    opponent = new OpponentAI(Match.this, tempDeck);
+                    gameTick.start();
+
+                    Log.d("GAMEEEE", "Deck updated! STARTING MATCH!");
                 }
 
-                opponent = new OpponentAI(Match.this, tempDeck);
-                gameTick.start();
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Failed to read value
+                    Log.w("", "Failed to read value.", error.toException());
+                }
+            };
 
-                Log.d("GAMEEEE", "Deck updated! STARTING MATCH!");
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                // Failed to read value
-                Log.w("", "Failed to read value.", error.toException());
-            }
-        };
-
-        playerRepo.requestDeck(zone.getOwner(), listener);
+            playerRepo.requestDeck(zone.getOwner(), listener);
+        }
     }
 
     public MutableLiveData<Integer> getPlayerMana() {

@@ -49,4 +49,9 @@ public class ZoneRepo {
         return zone;
     }
 
+    public void updateZoneOwner(int zoneId, String ownerId) {
+        DatabaseReference myRef = database.getReference("zones");
+        myRef.child(String.valueOf(zoneId)).child("owner").setValue(ownerId);
+    }
+
 }

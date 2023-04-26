@@ -67,11 +67,11 @@ public class CurrentZone extends Fragment {
         zoneName = view.findViewById(R.id.txt_zone_name);
         viewModel.getZone().observe(getViewLifecycleOwner(), zone -> {
             zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zone.getName());
-        });
-        //zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getName());
-
-        viewModel.getOwner().observe(getViewLifecycleOwner(), player -> {
-            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + player.getUsername());
+            if (zone.hasOwner()) {
+                viewModel.getOwner().observe(getViewLifecycleOwner(), player -> {
+                    zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + player.getUsername());
+                });
+            }
         });
 
 

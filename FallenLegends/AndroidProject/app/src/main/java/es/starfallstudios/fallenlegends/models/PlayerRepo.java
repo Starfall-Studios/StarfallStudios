@@ -16,6 +16,15 @@ public class PlayerRepo {
     private final String TAG = getClass().getSimpleName();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
 
+    public static PlayerRepo instance;
+
+    public static PlayerRepo getInstance() {
+        if (instance == null) {
+            instance = new PlayerRepo();
+        }
+        return instance;
+    }
+
     public MutableLiveData<Player> requestPlayer(String uid) {
         MutableLiveData<Player> player = new MutableLiveData<>();
         DatabaseReference myRef = database.getReference("users/" + uid);
@@ -63,6 +72,17 @@ public class PlayerRepo {
         DatabaseReference myRef = database.getReference("users/" + uid + "/creatures");
         myRef.addValueEventListener(listener);
         return deck;
+    }
+
+    public void signUpUser(String uid, String username, String email) {
+        DatabaseReference myRef = database.getReference("users");
+        myRef.child(uid).child("username").setValue(username);
+        myRef.child(uid).child("email").setValue(email);
+        myRef.child(uid).child("xp").setValue(0);
+        myRef.child(uid).child("gems").setValue(0);
+        myRef.child(uid).child("food").setValue(0);
+        myRef.child(uid).child("stone").setValue(0);
+        myRef.child(uid).child("wood").setValue(0);
     }
 
 }

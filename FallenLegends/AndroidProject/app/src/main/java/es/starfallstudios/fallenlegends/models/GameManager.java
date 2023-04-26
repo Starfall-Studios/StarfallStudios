@@ -16,15 +16,11 @@ import es.starfallstudios.fallenlegends.R;
 public class GameManager extends Observable {
 
     private static GameManager instance = null;
-    private SharedPreferences sharedPreferences;
 
     private int zoneVersion;
 
     private GeoPoint userLocation;
     private static final DBManager dbManager = DBManager.getInstance();
-    private static final StorageManager storageManager = StorageManager.getInstance();
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
-
     private ArrayList<Zone> zones;
 
     // Creatures that are in the map
@@ -35,9 +31,6 @@ public class GameManager extends Observable {
 
     public HashMap<Creature.BaseCreatures, Integer> creatureResources;
     public HashMap<Creature.BaseCreatures, String> creatureNames;
-
-    //Repos
-    private final PlayerRepo playerRepo = new PlayerRepo();
 
     /**
      * Gets the game manager instance

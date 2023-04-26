@@ -1,5 +1,7 @@
 package es.starfallstudios.fallenlegends.models;
 
+import com.google.firebase.storage.internal.Util;
+
 import java.util.ArrayList;
 
 public class Deck {
@@ -37,6 +39,16 @@ public class Deck {
 
     public void removeCreature(int index) {
         creatures.remove(index);
+    }
+
+    public Creature getRandomCreatureAlive() {
+        int index = Utils.getRandomNumberInRange(0, creatures.size() - 1);
+        Creature c = creatures.get(index);
+        if (c.isAlive()) {
+            return c;
+        } else {
+            return Creature.blankCreature();
+        }
     }
 
 }

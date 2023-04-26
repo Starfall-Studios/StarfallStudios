@@ -41,7 +41,7 @@ public class CurrentZoneViewModel extends ViewModel {
     }
 
     public LiveData<Player> getOwner() {
-        if (owner==null) {
+        if (owner==null && zone.hasOwner()) {
             owner = playerRepo.requestPlayer(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getOwner());
         }
         return owner;
