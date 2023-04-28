@@ -61,16 +61,16 @@ public class ZoneRepo {
     public MutableLiveData<ZoneInfo> requestZoneInfo(int id) {
         MutableLiveData<ZoneInfo> zoneInfo = new MutableLiveData<>();
         DatabaseReference myRef = database.getReference("zones/" + id);
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 String name = dataSnapshot.child("name").getValue(String.class);
                 String ownerId = dataSnapshot.child("owner").getValue(String.class);
                 DatabaseReference ref2 = database.getReference("users/" + ownerId);
-                ref2.addValueEventListener(new ValueEventListener() {
+                ref2.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        String ownerName = dataSnapshot.child("name").getValue(String.class);
+                        String ownerName = dataSnapshot.child("username").getValue(String.class);
                         zoneInfo.setValue(new ZoneInfo(ownerId, name, ownerName, id));
                     }
 

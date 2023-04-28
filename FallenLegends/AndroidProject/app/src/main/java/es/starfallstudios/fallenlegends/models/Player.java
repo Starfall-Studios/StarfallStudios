@@ -9,8 +9,8 @@ public class Player {
     // Creatures that are in the player's inventory
     private ArrayList<Creature> playerCreatures;
 
-    // Creatures that are in the player's deck (max 4)
-    private Deck playerDeck;
+    // Creatures owned by the player
+    private CreatureCollection playerCreatureCollection;
 
     //User related variables
     private String username;
@@ -114,4 +114,13 @@ public class Player {
     public Deck getDeck() {
         return playerDeck;
     }
+
+    public void setPlayerCreatureCollection(CreatureCollection playerCreatureCollection) {
+        this.playerCreatureCollection = playerCreatureCollection;
+    }
+
+    public CreatureCollection getPlayerCreatureCollection() {
+        return playerCreatureCollection;
+    }
+
 }

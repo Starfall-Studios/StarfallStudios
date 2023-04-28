@@ -222,7 +222,6 @@ public class Match {
     }
 
     public void playCreature(int index) {
-        Log.d("Match", "PLAYING CREATURE " + index);
         int cost = playingCreaturesPlayer.get(index).getCost();
 
         if (playerMana >= cost) playerMana -= cost;

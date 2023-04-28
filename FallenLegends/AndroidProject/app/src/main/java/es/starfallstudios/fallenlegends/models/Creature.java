@@ -35,6 +35,7 @@ public class Creature {
     private int defense;
     private int stamina;
     private int cost;
+    private boolean inDeck;
     private CreatureType type;
 
     private MutableLiveData<Integer> healthLD;
@@ -51,7 +52,7 @@ public class Creature {
     private double longitude;
 
     public static Creature blankCreature() {
-        return new Creature(BaseCreatures.NONE, 0, 0, 0, 0, 0, 0, CreatureType.NONE);
+        return new Creature(BaseCreatures.NONE, 0, 0, 0, 0, 0, 0, CreatureType.NONE, true);
     }
 
     /**
@@ -81,7 +82,7 @@ public class Creature {
         resourceId = R.drawable.creature_nightmire;
     }
 
-    public Creature(BaseCreatures baseCreature, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type) {
+    public Creature(BaseCreatures baseCreature, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type, boolean inDeck) {
         this.name = GameManager.getInstance().creatureNames.get(baseCreature);
         this.id = id;
         this.experience = experience;
@@ -90,6 +91,7 @@ public class Creature {
         this.defense = defense;
         this.stamina = stamina;
         this.type = type;
+        this.inDeck = inDeck;
         resourceId = GameManager.getInstance().creatureResources.get(baseCreature);
     }
 
@@ -179,6 +181,18 @@ public class Creature {
 
     public boolean isBlank() {
         return getType() == CreatureType.NONE;
+    }
+
+    public boolean isInDeck() {
+        return inDeck;
+    }
+
+    public void addToDeck() {
+        this.inDeck = true;
+    }
+
+    public void removeFromDeck() {
+        this.inDeck = false;
     }
 
     public MutableLiveData<Integer> getHealthLD() {

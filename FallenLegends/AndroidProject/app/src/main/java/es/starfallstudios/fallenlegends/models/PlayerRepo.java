@@ -48,8 +48,9 @@ public class PlayerRepo {
                     int attack = creature.child("attack").getValue(Integer.class);
                     int defense = creature.child("defense").getValue(Integer.class);
                     int stamina = creature.child("stamina").getValue(Integer.class);
+                    boolean inDeck = creature.child("inDeck").getValue(Boolean.class);
 
-                    tempDeck.addCreature(new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC));
+                    tempDeck.addCreature(new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC, inDeck));
                 }
 
                 temp.setDeck(tempDeck);
