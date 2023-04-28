@@ -56,8 +56,4 @@ public class GameViewModel extends ViewModel {
         return match.getPlayingCreatureOpponent();
     }
 
-    public Deck getPlayerDeck() {
-        return match.getPlayer().getDeck();
-    }
-
 }

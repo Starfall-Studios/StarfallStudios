@@ -57,4 +57,8 @@ public class CreatureCollection {
         return deck;
     }
 
+    public void add(Creature c) {
+        creatures.add(c);
+    }
+
 }

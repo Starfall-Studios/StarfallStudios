@@ -38,7 +38,7 @@ public class PlayerRepo {
                 //int stone = dataSnapshot.child("stone").getValue(Integer.class);
                 //int wood = dataSnapshot.child("wood").getValue(Integer.class);
                 Player temp = new Player(uid, username, xp, 0, 0, 0, 0);
-                Deck tempDeck = new Deck();
+                CreatureCollection tempCollection = new CreatureCollection(uid);
 
                 for (DataSnapshot creature : dataSnapshot.child("creatures").getChildren()) {
                     String name = creature.child("name").getValue(String.class);
@@ -50,10 +50,10 @@ public class PlayerRepo {
                     int stamina = creature.child("stamina").getValue(Integer.class);
                     boolean inDeck = creature.child("inDeck").getValue(Boolean.class);
 
-                    tempDeck.addCreature(new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC, inDeck));
+                    tempCollection.add(new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC, inDeck));
                 }
 
-                temp.setDeck(tempDeck);
+                temp.setPlayerCreatureCollection(tempCollection);
                 player.setValue(temp);
 
                 Log.d(TAG, "Player updated!");

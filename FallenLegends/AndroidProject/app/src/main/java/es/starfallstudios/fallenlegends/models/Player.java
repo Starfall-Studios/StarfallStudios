@@ -21,14 +21,10 @@ public class Player {
     private int wood;
     private int food;
 
-    public static Player createPlayer(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
-        return new Player(uid, username, userExperience, gems, stone, wood, food);
-    }
-
     public Player(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
         gm = GameManager.getInstance();
         playerCreatures = new ArrayList<Creature>();
-        playerDeck = new Deck();
+        playerCreatureCollection = new CreatureCollection(uid);
         this.uid = uid;
         this.username = username;
         this.userExperience = userExperience;
@@ -48,7 +44,7 @@ public class Player {
         this.stone = 0;
         this.wood = 0;
         this.food = 0;
-        playerDeck = new Deck();
+        playerCreatureCollection = new CreatureCollection(uid);
     }
 
     public String getUsername() {
@@ -105,14 +101,6 @@ public class Player {
 
     public void setFood(int food) {
         this.food = food;
-    }
-
-    public void setDeck(Deck deck) {
-        this.playerDeck = deck;
-    }
-
-    public Deck getDeck() {
-        return playerDeck;
     }
 
     public void setPlayerCreatureCollection(CreatureCollection playerCreatureCollection) {

@@ -35,6 +35,7 @@ public class GameActivity extends AppCompatActivity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         requestWindowFeature(View.SYSTEM_UI_FLAG_FULLSCREEN);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         try {
             this.getSupportActionBar().hide();
         } catch (NullPointerException ignored) {
@@ -51,7 +52,7 @@ public class GameActivity extends AppCompatActivity {
 
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
-        Deck deck = GameManager.getInstance().getPlayer().getDeck();
+        Deck deck = GameManager.getInstance().getPlayer().getPlayerCreatureCollection().getDeck();
         for(int i = 0; i < 4; i++) {
             cardImages.get(i).setBackgroundResource(deck.getCreatures().get(i).getResourceId());
         }

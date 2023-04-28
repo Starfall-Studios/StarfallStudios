@@ -136,7 +136,7 @@ public class Match {
                 }
             });
 
-            playingCreaturesPlayer = player.getDeck().getCreatures();
+            playingCreaturesPlayer = player.getPlayerCreatureCollection().getDeck().getCreatures();
 
             ValueEventListener listener = new ValueEventListener() {
                 @Override
@@ -151,7 +151,7 @@ public class Match {
                         int defense = creature.child("defense").getValue(Integer.class);
                         int stamina = creature.child("stamina").getValue(Integer.class);
 
-                        Creature c = new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC);
+                        Creature c = new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC, true);
                         tempDeck.addCreature(c);
                         Log.w("Match", "CREATURE ADDED TO AI DECK: " + c.toString());
                     }
