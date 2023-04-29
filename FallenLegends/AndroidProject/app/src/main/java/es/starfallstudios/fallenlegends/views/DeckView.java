@@ -2,13 +2,19 @@ package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+
+import java.util.List;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.Creature;
+import es.starfallstudios.fallenlegends.models.CreatureCollection;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +27,8 @@ public class DeckView extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+    private List<CardView> cardViewList;
+    private LinearLayout cardViewLayout;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -63,7 +71,7 @@ public class DeckView extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_deck, container, false);
 
-        view.findViewById(R.id.closeButton).setOnClickListener(View -> {
+        view.findViewById(R.id.btn_closeButton).setOnClickListener(View -> {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
         return view;
