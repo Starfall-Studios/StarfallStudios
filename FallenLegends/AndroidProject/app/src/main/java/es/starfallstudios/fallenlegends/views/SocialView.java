@@ -7,14 +7,16 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import es.starfallstudios.fallenlegends.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link navbar#newInstance} factory method to
+ * Use the {@link SocialView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class navbar extends Fragment {
+public class SocialView extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +27,12 @@ public class navbar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public navbar() {
+    private FrameLayout container;
+    private Fragment friendsFragment;
+    private Fragment teamsFragment;
+    private Fragment leaderboardsFragment;
+
+    public SocialView() {
         // Required empty public constructor
     }
 
@@ -35,11 +42,11 @@ public class navbar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment navbar.
+     * @return A new instance of fragment LeaderBoardView.
      */
     // TODO: Rename and change types and number of parameters
-    public static navbar newInstance(String param1, String param2) {
-        navbar fragment = new navbar();
+    public static SocialView newInstance(String param1, String param2) {
+        SocialView fragment = new SocialView();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,21 +67,6 @@ public class navbar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
-
-        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
-        });
-
-        view.findViewById(R.id.btn_social).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new SocialView()).commit();
-        });
-
-        view.findViewById(R.id.btn_deck).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new DeckView()).commit();
-        });
-        return view;
+        return inflater.inflate(R.layout.fragment_social, container, false);
     }
-
-
 }
