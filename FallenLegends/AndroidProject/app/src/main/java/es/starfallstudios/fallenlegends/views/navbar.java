@@ -1,6 +1,5 @@
 package es.starfallstudios.fallenlegends.views;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -8,10 +7,8 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import es.starfallstudios.fallenlegends.R;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link navbar#newInstance} factory method to
@@ -69,6 +66,13 @@ public class navbar extends Fragment {
             getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
         });
 
+        view.findViewById(R.id.btn_social).setOnClickListener(View -> {
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new SocialView()).commit();
+        });
+
+        view.findViewById(R.id.btn_deck).setOnClickListener(View -> {
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new DeckView()).commit();
+        });
         return view;
     }
 

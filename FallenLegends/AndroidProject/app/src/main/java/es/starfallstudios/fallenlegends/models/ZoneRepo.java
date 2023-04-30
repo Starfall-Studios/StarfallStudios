@@ -20,6 +20,15 @@ public class ZoneRepo {
     private final String TAG = getClass().getSimpleName();
     private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
 
+    private static ZoneRepo instance;
+
+    public static ZoneRepo getInstance() {
+        if (instance == null) {
+            instance = new ZoneRepo();
+        }
+        return instance;
+    }
+
     public MutableLiveData<Zone> requestZone(int id) {
         MutableLiveData<Zone> zone = new MutableLiveData<>();
         DatabaseReference myRef = database.getReference("zones/" + id);
@@ -47,6 +56,44 @@ public class ZoneRepo {
             }
         });
         return zone;
+    }
+
+    public MutableLiveData<ZoneInfo> requestZoneInfo(int id) {
+        MutableLiveData<ZoneInfo> zoneInfo = new MutableLiveData<>();
+        DatabaseReference myRef = database.getReference("zones/" + id);
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                String name = dataSnapshot.child("name").getValue(String.class);
+                String ownerId = dataSnapshot.child("owner").getValue(String.class);
+                DatabaseReference ref2 = database.getReference("users/" + ownerId);
+                ref2.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        String ownerName = dataSnapshot.child("username").getValue(String.class);
+                        zoneInfo.setValue(new ZoneInfo(ownerId, name, ownerName, id));
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError error) {
+                        // Failed to read value
+                        Log.w("FIREBASE", "Failed to read value.", error.toException());
+                    }
+                });
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                // Failed to read value
+                Log.w("FIREBASE", "Failed to read value.", error.toException());
+            }
+        });
+        return zoneInfo;
+    }
+
+    public void updateZoneOwner(int zoneId, String ownerId) {
+        DatabaseReference myRef = database.getReference("zones");
+        myRef.child(String.valueOf(zoneId)).child("owner").setValue(ownerId);
     }
 
 }

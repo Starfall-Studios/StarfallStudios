@@ -8,6 +8,7 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import es.starfallstudios.fallenlegends.models.Creature;
+import es.starfallstudios.fallenlegends.models.Deck;
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.models.Match;
 

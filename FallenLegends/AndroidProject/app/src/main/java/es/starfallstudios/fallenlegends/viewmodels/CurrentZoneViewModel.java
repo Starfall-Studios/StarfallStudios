@@ -11,44 +11,23 @@ import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.models.Player;
 import es.starfallstudios.fallenlegends.models.PlayerRepo;
 import es.starfallstudios.fallenlegends.models.Zone;
+import es.starfallstudios.fallenlegends.models.ZoneInfo;
 import es.starfallstudios.fallenlegends.models.ZoneRepo;
 
 public class CurrentZoneViewModel extends ViewModel {
 
-    @Nullable
-    private MutableLiveData<Zone> currentZone;
-
-    @Nullable
-    private MutableLiveData<Player> owner;
-
-    private Zone zone;
-
-    private ZoneRepo zoneRepo;
-    private PlayerRepo playerRepo;
+    private final ZoneRepo zoneRepo;
 
     public CurrentZoneViewModel() {
-        zoneRepo = new ZoneRepo();
-        playerRepo = new PlayerRepo();
+        zoneRepo = ZoneRepo.getInstance();
     }
 
     public LiveData<Zone> getZone() {
-        if (currentZone==null) {
-            int zoneId = GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getId();
-            currentZone = zoneRepo.requestZone(zoneId);
-            zone = currentZone.getValue();
-        }
-        return currentZone;
+        return zoneRepo.requestZone(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getId());
     }
 
-    public LiveData<Player> getOwner() {
-        if (owner==null) {
-            owner = playerRepo.requestPlayer(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getOwner());
-        }
-        return owner;
-    }
-
-    public void conquestZone() {
-
+    public LiveData<ZoneInfo> getZoneInfo() {
+        return zoneRepo.requestZoneInfo(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getId());
     }
 
 }

@@ -2,6 +2,9 @@ package es.starfallstudios.fallenlegends.models;
 
 import android.content.SharedPreferences;
 
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.Observer;
+
 import com.google.firebase.database.FirebaseDatabase;
 import org.osmdroid.util.GeoPoint;
 import java.util.ArrayList;
@@ -13,15 +16,11 @@ import es.starfallstudios.fallenlegends.R;
 public class GameManager extends Observable {
 
     private static GameManager instance = null;
-    private SharedPreferences sharedPreferences;
 
     private int zoneVersion;
 
     private GeoPoint userLocation;
     private static final DBManager dbManager = DBManager.getInstance();
-    private static final StorageManager storageManager = StorageManager.getInstance();
-    private final FirebaseDatabase database = FirebaseDatabase.getInstance("https://fallen-legends-30515-default-rtdb.europe-west1.firebasedatabase.app/");
-
     private ArrayList<Zone> zones;
 
     // Creatures that are in the map
@@ -70,6 +69,9 @@ public class GameManager extends Observable {
 
         creatureResources.put(Creature.BaseCreatures.THUNDERWING, R.drawable.creature_thunderwing);
         creatureNames.put(Creature.BaseCreatures.THUNDERWING, "Thunderwing");
+
+        creatureResources.put(Creature.BaseCreatures.NONE, R.drawable.logo_fallen);
+        creatureNames.put(Creature.BaseCreatures.NONE, "Blank");
     }
 
     /**
@@ -148,42 +150,11 @@ public class GameManager extends Observable {
         return null;
     }
 
-    /**
-     * Gets the shared preferences
-     * @return shared preferences
-     */
-    public SharedPreferences getSharedPreferences() {
-        return sharedPreferences;
-    }
-
-    /**
-     * Sets the shared preferences
-     * @param sharedPreferences shared preferences
-     */
-    public void setSharedPreferences(SharedPreferences sharedPreferences) {
-        this.sharedPreferences = sharedPreferences;
-    }
-
-    //User related methods
-    public void loadPlayer(String uid) {
-        dbManager.retrievePlayer(uid);
-    }
-
     public Player getPlayer() {
         return player;
     }
 
-    public Player getPlayerById(String uid) {
-        synchronized (this) {
-            return dbManager.retrievePlayerById(uid);
-        }
-    }
-
     public void setPlayer(Player player) {
-        synchronized (this) {
-            this.player = player;
-        }
-        setChanged();
-        notifyObservers();
+        this.player = player;
     }
 }

@@ -96,3 +96,4 @@ public class Zone {
         return !owner.equals("0");
     }
 }
+

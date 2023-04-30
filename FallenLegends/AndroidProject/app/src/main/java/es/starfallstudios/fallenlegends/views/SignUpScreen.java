@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import es.starfallstudios.fallenlegends.models.DBManager;
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.PlayerRepo;
 
 public class SignUpScreen extends AppCompatActivity {
 
@@ -70,7 +71,7 @@ public class SignUpScreen extends AppCompatActivity {
         mAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 mAuth.getCurrentUser().sendEmailVerification();
-                DBManager.getInstance().signUpUser(mAuth.getUid(), username, email);
+                PlayerRepo.getInstance().signUpUser(mAuth.getUid(), username, email);
                 finish();
                 startActivity(new Intent(SignUpScreen.this, HomeScreen.class));
                 Toast.makeText(SignUpScreen.this, getResources().getString(R.string.welcomeMsg) + " " + username + "!", Toast.LENGTH_SHORT).show();

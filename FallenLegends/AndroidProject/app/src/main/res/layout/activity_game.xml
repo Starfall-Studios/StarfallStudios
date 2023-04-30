@@ -105,18 +105,77 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"/>
 
+            <ImageView
+                android:id="@+id/player_card1_cost_icon"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_mana"
+                android:elevation="10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="4dp"/>
+
             <TextView
                 android:id="@+id/player_card1_cost"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Cost: 20"
+                android:text="20"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:elevation="6dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginStart="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_card1_cost_icon"/>
+
+            <ImageView
+                android:id="@+id/player_card1_health_icon"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_health"
+                android:elevation="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="4dp"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/player_card1_health"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="200"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:elevation="6dp"
+                android:layout_marginBottom="4dp"
+                android:layout_marginEnd="2dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/player_card1_health_icon"/>
+
+            <ImageView
+                android:id="@+id/player_card1_attack_icon"
+                android:layout_width="10dp"
+                android:layout_height="15dp"
+                android:src="@drawable/icon_attack"
+                android:elevation="10dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="4dp"/>
+
+            <TextView
+                android:id="@+id/player_card1_attack"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="20"
                 android:textColor="#FFFFFF"
                 android:textSize="12sp"
                 android:elevation="6dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginStart="4dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"/>
+                android:layout_marginStart="2dp"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/player_card1_attack_icon"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

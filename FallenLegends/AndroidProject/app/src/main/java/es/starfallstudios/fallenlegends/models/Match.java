@@ -2,9 +2,16 @@ package es.starfallstudios.fallenlegends.models;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.ValueEventListener;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Match {
 
@@ -14,7 +21,7 @@ public class Match {
     private Zone zone;
 
     private Player player;
-    private Player opponent;
+    private OpponentAI opponent;
 
     private int playerMana;
     private int opponentMana;
@@ -28,6 +35,9 @@ public class Match {
     private ArrayList<Creature> playingCreaturesPlayer;
 
     private Thread gameTick;
+
+    private PlayerRepo playerRepo;
+    private ZoneRepo zoneRepo;
 
     private boolean winner;
 
@@ -49,23 +59,35 @@ public class Match {
 
         playerManaLD.postValue(playerMana);
 
-        if(playingCreaturePlayer != null) {
-            if (playingCreatureOpponent != null) {
+        opponent.updateMatchState();
+
+        Log.w("Match", "GAMESTATE: PlayerHP: " + playerHealth + " OpponentHP: " + opponentHealth);
+        Log.w("Match", "Player: " + playingCreaturePlayer.toString());
+        Log.w("Match", "AI: " + playingCreatureOpponent.toString());
+
+        if(!playingCreaturePlayer.isBlank()) {
+            if (!playingCreatureOpponent.isBlank()) {
                 playingCreatureOpponent.setHealth(playingCreatureOpponent.getHealth() - playingCreaturePlayer.getAttack());
                 playingCreaturePlayer.setHealth(playingCreaturePlayer.getHealth() - playingCreatureOpponent.getAttack());
                 if (playingCreatureOpponent.getHealth() <= 0) {
-                    playingCreatureOpponent = null;
+                    killCreature(playingCreatureOpponent);
                 }
                 if (playingCreaturePlayer.getHealth() <= 0) {
-                    playingCreaturePlayer = null;
+                    killCreature(playingCreaturePlayer);
                 }
             } else {
                 damageOpponent(playingCreaturePlayer.getAttack());
             }
         } else {
-            if (playingCreatureOpponent != null) {
+            if (!playingCreatureOpponent.isBlank()) {
                 damagePlayer(playingCreatureOpponent.getAttack());
             }
+        }
+
+        // Slowly damage both players if no creatures are in play
+        if(playingCreatureOpponent.isBlank() && playingCreaturePlayer.isBlank()) {
+            damageOpponent(5);
+            damagePlayer(5);
         }
 
         // Update health
@@ -79,31 +101,76 @@ public class Match {
         this.zone = zone;
         this.player = player;
 
-        winner = false;
+        zoneRepo = ZoneRepo.getInstance();
+        playerRepo = PlayerRepo.getInstance();
 
-        playerHealth = MAX_HEALTH;
-        opponentHealth = MAX_HEALTH;
+        //check if zone has owner
+        if (!zone.hasOwner()) {
+            //zone has no owner, so we are the first player
+            zone.setOwner(player.getUsername());
+            winner = true;
+            finishMatch();
+        } else {
+            winner = false;
 
-        playerMana = 30;
-        opponentMana = 30;
+            playerHealth = MAX_HEALTH;
+            opponentHealth = MAX_HEALTH;
 
-        playingCreaturePlayer = null;
-        playingCreatureOpponent = new Creature("TestCreature", 9998, 20, 60, 50, 50, 50, Creature.CreatureType.ELECTRIC);
+            playerMana = 30;
+            opponentMana = 30;
 
-        gameTick = new Thread(new Runnable() {
-            @Override
-            public void run() {
-                while (!Thread.currentThread().isInterrupted()) {
-                    try {
-                        Thread.sleep(1000);
-                        gameTickUpdate();
-                    } catch (InterruptedException e) {
-                        return;
+            playingCreaturePlayer = Creature.blankCreature();
+            playingCreatureOpponent = Creature.blankCreature();
+
+            gameTick = new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    while (!Thread.currentThread().isInterrupted()) {
+                        try {
+                            Thread.sleep(1000);
+                            gameTickUpdate();
+                        } catch (InterruptedException e) {
+                            return;
+                        }
                     }
                 }
-            }
-        });
-        gameTick.start();
+            });
+
+            playingCreaturesPlayer = player.getPlayerCreatureCollection().getDeck().getCreatures();
+
+            ValueEventListener listener = new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    Deck tempDeck = new Deck();
+
+                    for (DataSnapshot creature : dataSnapshot.getChildren()) {
+                        int base = creature.child("base").getValue(Integer.class);
+                        int exp = creature.child("experience").getValue(Integer.class);
+                        int hp = creature.child("hp").getValue(Integer.class);
+                        int attack = creature.child("attack").getValue(Integer.class);
+                        int defense = creature.child("defense").getValue(Integer.class);
+                        int stamina = creature.child("stamina").getValue(Integer.class);
+
+                        Creature c = new Creature(Creature.BaseCreatures.values()[base], 999, exp, hp, attack, defense, stamina, Creature.CreatureType.ELECTRIC, true);
+                        tempDeck.addCreature(c);
+                        Log.w("Match", "CREATURE ADDED TO AI DECK: " + c.toString());
+                    }
+
+                    opponent = new OpponentAI(Match.this, tempDeck);
+                    gameTick.start();
+
+                    Log.d("GAMEEEE", "Deck updated! STARTING MATCH!");
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    // Failed to read value
+                    Log.w("", "Failed to read value.", error.toException());
+                }
+            };
+
+            playerRepo.requestDeck(zone.getOwner(), listener);
+        }
     }
 
     public MutableLiveData<Integer> getPlayerMana() {
@@ -111,9 +178,12 @@ public class Match {
         return playerManaLD;
     }
 
-    public MutableLiveData<Integer> getOpponentMana() {
-        enemyManaLD.setValue(opponentMana);
-        return enemyManaLD;
+    public int getOpponentMana() {
+        return opponentMana;
+    }
+
+    public void setOpponentMana(int mana) {
+        opponentMana = mana;
     }
 
     public MutableLiveData<Integer> getPlayerHealth() {
@@ -136,6 +206,11 @@ public class Match {
             }
         }
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
+
+        if (isWinner()) {
+            zoneRepo.updateZoneOwner(zone.getId(), player.getUid());
+        }
+
     }
 
     public boolean isWinner() {
@@ -147,12 +222,15 @@ public class Match {
     }
 
     public void playCreature(int index) {
-        Log.d("Match", "PLAYING CREATURE " + index);
-        if (playerMana >= 20) playerMana -= 20;
+        int cost = playingCreaturesPlayer.get(index).getCost();
+
+        if (playerMana >= cost) playerMana -= cost;
+        else return;
+
         playerManaLD.setValue(playerMana);
 
-        playingCreaturePlayer = new Creature("TestCreature", 9999, 20, 100, 50, 50, 50, Creature.CreatureType.ELECTRIC);
-        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
+        setCreaturePlayer(playingCreaturesPlayer.get(index));
+
         Log.d("Match", "CREATURE PLAYED: " + playingCreaturePlayer.toString());
     }
 
@@ -165,6 +243,8 @@ public class Match {
             finishMatch();
         }
         else playerHealth -= damageTaken;
+
+        playerHealthLD.postValue(playerHealth);
     }
 
     private void damageOpponent(int damage) {
@@ -176,6 +256,8 @@ public class Match {
             finishMatch();
         }
         else opponentHealth -= damageTaken;
+
+        enemyHealthLD.postValue(opponentHealth);
     }
 
     public MutableLiveData<Creature> getPlayingCreaturePlayer() {
@@ -187,4 +269,40 @@ public class Match {
         playingCreatureOpponentLD.setValue(playingCreatureOpponent);
         return playingCreatureOpponentLD;
     }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public Creature getCreaturePlayer() {
+        return playingCreaturePlayer;
+    }
+
+    public Creature getCreatureOpponent() {
+        return playingCreatureOpponent;
+    }
+
+    public void setCreaturePlayer(Creature creature) {
+        playingCreaturePlayer = creature;
+        playingCreaturePlayerLD.postValue(creature);
+    }
+
+    public void setCreatureOpponent(Creature creature) {
+        playingCreatureOpponent = creature;
+        playingCreatureOpponentLD.postValue(creature);
+    }
+
+    private void killCreature(Creature creature) {
+        if(creature == playingCreaturePlayer) {
+            Log.d("Match", "KILLING CREATURE PLAYER");
+            playingCreaturePlayer = Creature.blankCreature();
+            playingCreaturePlayerLD.postValue(Creature.blankCreature());
+        }
+        if(creature == playingCreatureOpponent) {
+            Log.d("Match", "KILLING CREATURE OPPONENT");
+            playingCreatureOpponent = Creature.blankCreature();
+            playingCreatureOpponentLD.postValue(Creature.blankCreature());
+        }
+    }
+
 }

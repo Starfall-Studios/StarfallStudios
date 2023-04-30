@@ -61,7 +61,8 @@ class CreatureManager:
             "defense": base["defense"] * multiplier[tier-1],
             "zone": zone["id"],
             "latitude": latitude,
-            "longitude": longitude
+            "longitude": longitude,
+            "owner": ""
         }
         print("Created creature at " + str(latitude) + ", " + str(longitude) + " in zone " + str(zone["id"]))
         self.creatures.append(creature)

@@ -15,6 +15,7 @@ import android.widget.Toast;
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.models.Zone;
+import es.starfallstudios.fallenlegends.models.ZoneInfo;
 import es.starfallstudios.fallenlegends.viewmodels.CurrentZoneViewModel;
 
 /**
@@ -65,18 +66,17 @@ public class CurrentZone extends Fragment {
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
         zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
         zoneName = view.findViewById(R.id.txt_zone_name);
-        viewModel.getZone().observe(getViewLifecycleOwner(), zone -> {
-            zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zone.getName());
+
+        viewModel.getZoneInfo().observe(getViewLifecycleOwner(), zoneInfo -> {
+            updateUI(zoneInfo);
         });
-        //zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation()).getName());
-
-        viewModel.getOwner().observe(getViewLifecycleOwner(), player -> {
-            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + player.getUsername());
-        });
-
-
 
         // Inflate the layout for this fragment
         return view;
+    }
+
+    public void updateUI(ZoneInfo zoneInfo) {
+        zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zoneInfo.getZoneName());
+        zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + zoneInfo.getOwnerName());
     }
 }

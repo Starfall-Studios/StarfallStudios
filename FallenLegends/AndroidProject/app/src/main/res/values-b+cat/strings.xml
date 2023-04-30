@@ -14,4 +14,6 @@
     <string name="conquestButton">Conquerir</string>
     <string name="hello_blank_fragment">Blank Fragment</string>
     <string name="resetPasswordButton">Restableix Contrasenya</string>
+    <string name="deck_title">Inventari</string>
+    <string name="txt_social_name">Social</string>
 </resources>

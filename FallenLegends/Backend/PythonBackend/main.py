@@ -15,17 +15,12 @@ def main():
 
     creatureManager = CreatureManager()
 
-    #if useApi:
-      #thread = threading.Thread(target=api.startAPI)
-      #thread.start()
-
     creatureManager.createRandomCreature()
     creatureManager.createRandomCreature()
     
     creatureManager.uploadCreatures()
 
     creatureManager.saveCreatures()
-    zoneManager.saveZones()
     
 if __name__ == '__main__':
     main()

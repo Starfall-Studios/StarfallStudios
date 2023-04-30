@@ -8,19 +8,21 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.ArrayAdapter;
+import android.widget.FrameLayout;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.viewmodels.GameViewModel;
+import es.starfallstudios.fallenlegends.viewmodels.SocialFragmentViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link gameboard#newInstance} factory method to
+ * Use the {@link SocialView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class gameboard extends Fragment {
-
-    private GameViewModel viewModel;
+public class SocialView extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -31,7 +33,12 @@ public class gameboard extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public gameboard() {
+    private FrameLayout container;
+    private Fragment friendsFragment;
+    private Fragment teamsFragment;
+    private Fragment leaderboardsFragment;
+
+    public SocialView() {
         // Required empty public constructor
     }
 
@@ -41,11 +48,11 @@ public class gameboard extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment gameboard.
+     * @return A new instance of fragment LeaderBoardView.
      */
     // TODO: Rename and change types and number of parameters
-    public static gameboard newInstance(String param1, String param2) {
-        gameboard fragment = new gameboard();
+    public static SocialView newInstance(String param1, String param2) {
+        SocialView fragment = new SocialView();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -65,26 +72,21 @@ public class gameboard extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View v = inflater.inflate(R.layout.fragment_gameboard, container, false);
 
-        viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
+        View v = inflater.inflate(R.layout.fragment_social, container, false);
 
-        viewModel.getCurrentOpponentCreature().observe(getViewLifecycleOwner(), creature -> {
-            if (creature != null) {
-                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(creature.getResourceId());
-            } else {
-                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(R.drawable.logo_fallen);
-            }
+        ListView listView = v.findViewById(R.id.list_social);
+        ArrayList<String> names = new ArrayList<>();
+
+        SocialFragmentViewModel viewModel = new ViewModelProvider(this).get(SocialFragmentViewModel.class);
+
+        viewModel.getLeaderboard().observe(getViewLifecycleOwner(), leaderboard -> {
+            names.addAll(leaderboard);
+            ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, names);
+            listView.setAdapter(arrayAdapter);
         });
 
-        viewModel.getCurrentPlayerCreature().observe(getViewLifecycleOwner(), creature -> {
-            if (creature != null) {
-                ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(creature.getResourceId());
-            } else {
-                ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(R.drawable.logo_fallen);
-            }
-        });
-
+        // Inflate the layout for this fragment
         return v;
     }
 }
