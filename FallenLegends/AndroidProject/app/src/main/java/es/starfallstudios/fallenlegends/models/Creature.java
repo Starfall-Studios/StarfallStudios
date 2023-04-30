@@ -28,6 +28,14 @@ public class Creature {
         NONE
     }
 
+    public static enum BaseCreatures {
+        NIGHTMIRE,
+        FROSTBITE,
+        GRYPHIX,
+        LUMINO,
+        THUNDERWING
+    }
+
     private String name;
     private int experience;
     private int health;
