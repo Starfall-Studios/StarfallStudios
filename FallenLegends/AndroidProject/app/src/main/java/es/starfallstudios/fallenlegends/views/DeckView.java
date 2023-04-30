@@ -4,24 +4,32 @@ import android.os.Bundle;
 
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.models.Creature;
 import es.starfallstudios.fallenlegends.models.CreatureCollection;
+import es.starfallstudios.fallenlegends.models.CreatureCollectionList;
+import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
+import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link DeckView#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DeckView extends Fragment {
+public class DeckView extends Fragment implements AdapterView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -29,6 +37,8 @@ public class DeckView extends Fragment {
     private static final String ARG_PARAM2 = "param2";
     private List<CardView> cardViewList;
     private LinearLayout cardViewLayout;
+
+    private DeckFragmentViewModel viewModel;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -71,9 +81,31 @@ public class DeckView extends Fragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_deck, container, false);
 
+        viewModel = new ViewModelProvider(this).get(DeckFragmentViewModel.class);
+
+        ArrayList<CreatureCollectionList> creatureCollectionList = getCreatureCollectionList();
+
+        ListView listView = view.findViewById(R.id.lst_deck_cards);
+        CreatureListAdapter adapter = new CreatureListAdapter(getContext(), creatureCollectionList);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
         view.findViewById(R.id.btn_closeButton).setOnClickListener(View -> {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
         return view;
+    }
+
+    private ArrayList<CreatureCollectionList> getCreatureCollectionList() {
+        ArrayList<CreatureCollectionList> creatureCollectionList = new ArrayList<>();
+        for (Creature creature : viewModel.getCreatureCollection().getCreatures()) {
+            creatureCollectionList.add(new CreatureCollectionList(creature.getResourceId(), creature.getName()));
+        }
+        return creatureCollectionList;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.d("DeckView", "onItemClick: " + i);
     }
 }

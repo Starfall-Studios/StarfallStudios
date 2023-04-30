@@ -61,4 +61,8 @@ public class CreatureCollection {
         creatures.add(c);
     }
 
+    public ArrayList<Creature> getCreatures() {
+        return creatures;
+    }
+
 }

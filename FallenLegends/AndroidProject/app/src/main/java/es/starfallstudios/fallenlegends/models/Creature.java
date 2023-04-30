@@ -37,6 +37,7 @@ public class Creature {
     private int cost;
     private boolean inDeck;
     private CreatureType type;
+    private BaseCreatures baseCreature;
 
     private MutableLiveData<Integer> healthLD;
 
@@ -83,6 +84,7 @@ public class Creature {
     }
 
     public Creature(BaseCreatures baseCreature, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type, boolean inDeck) {
+        this.baseCreature = baseCreature;
         this.name = GameManager.getInstance().creatureNames.get(baseCreature);
         this.id = id;
         this.experience = experience;
@@ -198,5 +200,17 @@ public class Creature {
     public MutableLiveData<Integer> getHealthLD() {
         healthLD.setValue(health);
         return healthLD;
+    }
+
+    public BaseCreatures getBaseCreature() {
+        return baseCreature;
+    }
+
+    public int getDefense() {
+        return defense;
+    }
+
+    public int getStamina() {
+        return stamina;
     }
 }

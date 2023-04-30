@@ -11,6 +11,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+
 public class PlayerRepo {
 
     private final String TAG = getClass().getSimpleName();
@@ -84,6 +86,46 @@ public class PlayerRepo {
         myRef.child(uid).child("food").setValue(0);
         myRef.child(uid).child("stone").setValue(0);
         myRef.child(uid).child("wood").setValue(0);
+    }
+
+    public void saveCreatureCollection(String uid, CreatureCollection collection) {
+        DatabaseReference myRef = database.getReference("users/" + uid + "/creatures");
+
+        for (Creature creature : collection.getCreatures()) {
+            myRef.child(creature.getName()).child("name").setValue(creature.getName());
+            myRef.child(creature.getName()).child("base").setValue(creature.getBaseCreature().ordinal());
+            myRef.child(creature.getName()).child("experience").setValue(creature.getExperience());
+            myRef.child(creature.getName()).child("hp").setValue(creature.getHealth());
+            myRef.child(creature.getName()).child("attack").setValue(creature.getAttack());
+            myRef.child(creature.getName()).child("defense").setValue(creature.getDefense());
+            myRef.child(creature.getName()).child("stamina").setValue(creature.getStamina());
+            myRef.child(creature.getName()).child("inDeck").setValue(creature.isInDeck());
+        }
+    }
+
+    public MutableLiveData<ArrayList<String>> getLeaderboard() {
+        MutableLiveData<ArrayList<String>> leaderboard = new MutableLiveData<>();
+        DatabaseReference myRef = database.getReference("users/");
+        myRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                ArrayList<String> temp = new ArrayList<>();
+                for (DataSnapshot user : dataSnapshot.getChildren()) {
+                    String username = user.child("username").getValue(String.class);
+                    long creatures = user.child("creatures").getChildrenCount();
+                    temp.add(username + " - " + creatures);
+                }
+                leaderboard.setValue(temp);
+                Log.d(TAG, "Leaderboard updated!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+
+        return leaderboard;
     }
 
 }
