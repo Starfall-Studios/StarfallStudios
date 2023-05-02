@@ -14,6 +14,18 @@ public class CreatureCollection {
 
     private ArrayList<Creature> creatures;
 
+    public static CreatureCollection generateDefaultCreatureCollection(String uid) {
+        //Add default creatures to the collection
+        CreatureCollection collection = new CreatureCollection(uid);
+        collection.add(new Creature(Creature.BaseCreatures.FROSTBITE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
+        collection.add(new Creature(Creature.BaseCreatures.GRYPHIX, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
+        collection.add(new Creature(Creature.BaseCreatures.LUMINO, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
+        collection.add(new Creature(Creature.BaseCreatures.NIGHTMIRE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
+        collection.add(new Creature(Creature.BaseCreatures.FROSTBITE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, false));
+
+        return collection;
+    }
+
     public CreatureCollection(String playerUid) {
         creatures = new ArrayList<>();
 

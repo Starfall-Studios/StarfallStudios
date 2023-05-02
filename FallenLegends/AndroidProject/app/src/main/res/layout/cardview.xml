@@ -37,17 +37,14 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:elevation="20dp"
-                android:fontFamily="sans-serif"
                 android:text="Nombre de la criatura"
-                android:textSize="18sp"
-                android:textStyle="normal" />
+                android:textSize="18sp" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:elevation="20dp"
-                android:fontFamily="sans-serif"
                 android:text="Vida: 100"
                 android:textSize="14sp" />
 

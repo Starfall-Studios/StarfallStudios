@@ -86,6 +86,7 @@ public class PlayerRepo {
         myRef.child(uid).child("food").setValue(0);
         myRef.child(uid).child("stone").setValue(0);
         myRef.child(uid).child("wood").setValue(0);
+        saveCreatureCollection(uid, CreatureCollection.generateDefaultCreatureCollection(uid));
     }
 
     public void saveCreatureCollection(String uid, CreatureCollection collection) {
