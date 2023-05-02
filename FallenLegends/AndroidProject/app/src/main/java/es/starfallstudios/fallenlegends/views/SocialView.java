@@ -86,6 +86,10 @@ public class SocialView extends Fragment {
             listView.setAdapter(arrayAdapter);
         });
 
+        v.findViewById(R.id.btn_social_back).setOnClickListener(view -> {
+            getParentFragmentManager().beginTransaction().remove(this).commit();
+        });
+
         // Inflate the layout for this fragment
         return v;
     }

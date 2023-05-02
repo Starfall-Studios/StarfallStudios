@@ -58,11 +58,11 @@ public class CreatureListAdapter extends BaseAdapter {
 
     private static class HolderView {
         private final ImageView creatureImage;
-        private final TextView creatureName;
+        //private final TextView creatureName;
 
         public HolderView(View view) {
             this.creatureImage = view.findViewById(R.id.deckview_card_image);
-            this.creatureName = view.findViewById(R.id.deckview_card_name);
+            //this.creatureName = view.findViewById(R.id.deckview_card_name);
         }
     }
 }
