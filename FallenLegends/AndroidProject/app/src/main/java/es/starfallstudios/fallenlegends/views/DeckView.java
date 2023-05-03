@@ -22,6 +22,7 @@ import es.starfallstudios.fallenlegends.models.Creature;
 import es.starfallstudios.fallenlegends.models.CreatureCollection;
 import es.starfallstudios.fallenlegends.models.CreatureCollectionList;
 import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
+import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
 
 /**
@@ -83,10 +84,8 @@ public class DeckView extends Fragment implements AdapterView.OnItemClickListene
 
         viewModel = new ViewModelProvider(this).get(DeckFragmentViewModel.class);
 
-        ArrayList<CreatureCollectionList> creatureCollectionList = getCreatureCollectionList();
-
         ListView listView = view.findViewById(R.id.lst_deck_cards);
-        CreatureListAdapter adapter = new CreatureListAdapter(getContext(), creatureCollectionList);
+        CreatureListAdapter adapter = new CreatureListAdapter(getContext(), 0, viewModel.getCreatureCollection().getCreatures());
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
@@ -94,14 +93,6 @@ public class DeckView extends Fragment implements AdapterView.OnItemClickListene
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
         return view;
-    }
-
-    private ArrayList<CreatureCollectionList> getCreatureCollectionList() {
-        ArrayList<CreatureCollectionList> creatureCollectionList = new ArrayList<>();
-        for (Creature creature : viewModel.getCreatureCollection().getCreatures()) {
-            creatureCollectionList.add(new CreatureCollectionList(creature.getResourceId(), creature.getName()));
-        }
-        return creatureCollectionList;
     }
 
     @Override
