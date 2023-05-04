@@ -9,7 +9,8 @@ import java.util.HashMap;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.viewmodels.GameViewModel;
 
-public class Creature {
+public class Creature extends MapEntity {
+
     public static enum CreatureType {
         FIRE,
         ROCK,
