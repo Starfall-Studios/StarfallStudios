@@ -47,6 +47,10 @@ public class HomeScreen extends AppCompatActivity {
         findViewById(R.id.updateLocation_button).setOnClickListener(View -> {
             viewModel.updateLocation();
         });
+
+        findViewById(R.id.debugSpawnCreature_button).setOnClickListener(View -> {
+            viewModel.spawnCreature();
+        });
     }
 
     public void onProfileClick(View view) { //Fix this method

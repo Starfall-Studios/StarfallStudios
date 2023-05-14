@@ -2,12 +2,9 @@ package es.starfallstudios.fallenlegends.models;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends MapEntity {
 
     private GameManager gm;
-
-    // Creatures that are in the player's inventory
-    private ArrayList<Creature> playerCreatures;
 
     // Creatures owned by the player
     private CreatureCollection playerCreatureCollection;
@@ -22,8 +19,8 @@ public class Player {
     private int food;
 
     public Player(String uid, String username, int userExperience, int gems, int stone, int wood, int food) {
+        super(username, Type.PLAYER, 0, 0);
         gm = GameManager.getInstance();
-        playerCreatures = new ArrayList<Creature>();
         playerCreatureCollection = new CreatureCollection(uid);
         this.uid = uid;
         this.username = username;
@@ -32,19 +29,6 @@ public class Player {
         this.stone = stone;
         this.wood = wood;
         this.food = food;
-    }
-
-    public Player(String uid) {
-        gm = GameManager.getInstance();
-        playerCreatures = new ArrayList<Creature>();
-        this.uid = uid;
-        this.username = "TempUsername";
-        this.userExperience = 0;
-        this.gems = 0;
-        this.stone = 0;
-        this.wood = 0;
-        this.food = 0;
-        playerCreatureCollection = new CreatureCollection(uid);
     }
 
     public String getUsername() {

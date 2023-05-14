@@ -40,6 +40,17 @@
         app:layout_constraintStart_toStartOf="parent"
         android:text="CENTER" />
 
+    <Button
+        android:id="@+id/debugSpawnCreature_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toTopOf="@+id/navbar_container"
+        app:layout_constraintStart_toEndOf="@+id/updateLocation_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="SPAWN" />
+
 
     <org.osmdroid.views.MapView
         android:id="@+id/map"

@@ -57,6 +57,10 @@ public class Creature extends MapEntity {
         return new Creature(BaseCreatures.NONE, 0, 0, 0, 0, 0, 0, CreatureType.NONE, true);
     }
 
+    public static Creature randomCreature() {
+        return new Creature(BaseCreatures.values()[(int) (Math.random() * BaseCreatures.values().length)], 0, 0, Utils.getRandomNumberInRange(50, 200), Utils.getRandomNumberInRange(50, 200), Utils.getRandomNumberInRange(50, 200), Utils.getRandomNumberInRange(10, 50), CreatureType.ELECTRIC, false);
+    }
+
     /**
      * Constructor for creatures that are in a zone
      * @param name Name of the creature
@@ -64,6 +68,7 @@ public class Creature extends MapEntity {
      * @param zoneId Id of the zone where the creature is
      */
     public Creature(String name, int id, int zoneId, double latitude, double longitude) {
+        super(name, Type.CREATURE, latitude, longitude);
         this.id = id;
         this.zoneId = zoneId;
         this.name = name;
@@ -73,6 +78,7 @@ public class Creature extends MapEntity {
     }
 
     public Creature(String name, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type) {
+        super(name, Type.CREATURE, 0, 0);
         this.name = name;
         this.id = id;
         this.experience = experience;
@@ -85,6 +91,7 @@ public class Creature extends MapEntity {
     }
 
     public Creature(BaseCreatures baseCreature, int id, int experience, int health, int attack, int defense, int stamina, CreatureType type, boolean inDeck) {
+        super(GameManager.getInstance().creatureNames.get(baseCreature), Type.CREATURE, 0, 0);
         this.baseCreature = baseCreature;
         this.name = GameManager.getInstance().creatureNames.get(baseCreature);
         this.id = id;
@@ -96,22 +103,6 @@ public class Creature extends MapEntity {
         this.type = type;
         this.inDeck = inDeck;
         resourceId = GameManager.getInstance().creatureResources.get(baseCreature);
-    }
-
-    /**
-     * Gets the location of the creature
-     * @return geopoint of creature
-     */
-    public GeoPoint getLocation() {
-        return new GeoPoint(latitude, longitude);
-    }
-
-    /**
-     * Gets the name of the creature
-     * @return name of the creature
-     */
-    public String getName() {
-        return name;
     }
 
     /**

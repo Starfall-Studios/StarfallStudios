@@ -36,6 +36,8 @@ public class Map {
     private final GameManager gameManager;
     private final Activity activity;
 
+    private ArrayList<Marker> mapEntitiesMarkers;
+
     public Map(MapView mapView) {
         Configuration.getInstance().setUserAgentValue(BuildConfig.APPLICATION_ID);
 
@@ -54,11 +56,12 @@ public class Map {
         this.mapView.setMinZoomLevel(18.0);
         userMarker = new Marker(this.mapView);
 
+        mapEntitiesMarkers = new ArrayList<>();
+
         //show streets and buildings but not labels
         this.mapView.setTileSource(TileSourceFactory.MAPNIK);
 
         drawZone();
-        drawCreatures();
 
         getLocation();
     }
@@ -109,16 +112,20 @@ public class Map {
         }
     }
 
-    private void drawCreatures() {
-        ArrayList<Creature> creatures = gameManager.getCreaturesList();
+    public void drawCreatures(ArrayList<MapEntity> entities) {
+        //Clear previous markers
+        for (Marker marker : mapEntitiesMarkers) {
+            mapView.getOverlayManager().remove(marker);
+        }
+        mapEntitiesMarkers.clear();
 
-        for (Creature creature : creatures) {
+        for (MapEntity entity : entities) {
             Marker marker = new Marker(mapView);
-            marker.setPosition(creature.getLocation());
+            marker.setPosition(entity.getLocation());
             marker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             //marker.setIcon(getResources().getDrawable(R.drawable.ic_creature));
-            marker.setTitle(creature.getName());
-            marker.setInfoWindow(new CreatureInfoWindow(mapView, creature));
+            marker.setTitle(entity.getName());
+            marker.setInfoWindow(new CreatureInfoWindow(mapView, entity));
             mapView.getOverlayManager().add(marker);
         }
     }

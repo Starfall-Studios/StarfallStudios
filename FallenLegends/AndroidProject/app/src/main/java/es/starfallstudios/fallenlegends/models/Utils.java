@@ -79,4 +79,19 @@ public class Utils {
         return r.nextInt((max - min) + 1) + min;
     }
 
+    public static GeoPoint getRandomLocationInRange(GeoPoint location, int range) {
+        double lat = location.getLatitude();
+        double lon = location.getLongitude();
+
+        double latMin = lat - (range / 111111.0);
+        double latMax = lat + (range / 111111.0);
+        double lonMin = lon - (range / 111111.0);
+        double lonMax = lon + (range / 111111.0);
+
+        double newLat = new Random().nextDouble() * (latMax - latMin) + latMin;
+        double newLon = new Random().nextDouble() * (lonMax - lonMin) + lonMin;
+
+        return new GeoPoint(newLat, newLon);
+    }
+
 }

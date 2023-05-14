@@ -25,6 +25,7 @@ public class GameManager extends Observable {
 
     // Creatures that are in the map
     private ArrayList<Creature> mapCreatures;
+    private ArrayList<MapEntity> mapEntities;
 
     //User related variables
     private Player player;
@@ -47,8 +48,9 @@ public class GameManager extends Observable {
      * Private constructor to avoid instantiation
      */
     private GameManager() {
-        zones = new ArrayList<Zone>();
-        mapCreatures = new ArrayList<Creature>();
+        zones = new ArrayList<>();
+        mapCreatures = new ArrayList<>();
+        mapEntities = new ArrayList<>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
 
         creatureResources = new HashMap<>();
@@ -121,19 +123,8 @@ public class GameManager extends Observable {
         return zones;
     }
 
-    /**
-     * Gets the creatures from the database
-     */
-    public void getCreatures() {
-        mapCreatures = dbManager.retrieveCreatures();
-    }
-
-    /**
-     * Returns the list of creatures that are in the map
-     * @return List of creatures that are in the map
-     */
-    public ArrayList<Creature> getCreaturesList() {
-        return mapCreatures;
+    public ArrayList<MapEntity> getMapEntities() {
+        return mapEntities;
     }
 
     /**

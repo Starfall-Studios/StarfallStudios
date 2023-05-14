@@ -208,7 +208,10 @@ public class Match {
         Log.d("Match", "FINISHING MATCH, WINNER IS: " + (winner ? "PLAYER" : "OPPONENT"));
 
         if (isWinner()) {
+            playerRepo.updateExperience(player.getUid(), 10);
             zoneRepo.updateZoneOwner(zone.getId(), player.getUid());
+        } else {
+            playerRepo.updateExperience(zone.getOwner(), 10);
         }
 
     }
