@@ -73,8 +73,6 @@ public class SignUpScreen extends AppCompatActivity {
                 mAuth.getCurrentUser().sendEmailVerification();
                 PlayerRepo.getInstance().signUpUser(mAuth.getUid(), username, email);
                 finish();
-                startActivity(new Intent(SignUpScreen.this, HomeScreen.class));
-                Toast.makeText(SignUpScreen.this, getResources().getString(R.string.welcomeMsg) + " " + username + "!", Toast.LENGTH_SHORT).show();
             } else {
                 Toast.makeText(SignUpScreen.this, "Error", Toast.LENGTH_SHORT).show();
             }

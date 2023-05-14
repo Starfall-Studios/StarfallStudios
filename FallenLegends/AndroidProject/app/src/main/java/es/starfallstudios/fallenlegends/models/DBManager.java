@@ -128,4 +128,23 @@ public class DBManager {
         });
     }
 
+    public boolean captureCreature(MapEntity entity) {
+
+        if (!Utils.isCloseEnough(GameManager.getInstance().getUserLocation(), entity.getLocation(), 50)) {
+            return false;
+        }
+
+        ArrayList<MapEntity> entities = GameManager.getInstance().getMapEntities();
+
+        int index = entities.indexOf(entity)+1;
+
+        Log.w("FIREBASE", "Capturing creature " + index);
+
+        DatabaseReference myRef = database.getReference("creatures");
+        //delete creature
+        myRef.child(String.valueOf(index)).removeValue();
+
+        return true;
+    }
+
 }

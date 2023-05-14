@@ -53,6 +53,7 @@ public class ZoneRepo {
             public void onCancelled(@NonNull DatabaseError error) {
                 // Failed to read value
                 Log.w("FIREBASE", "Failed to read value.", error.toException());
+                zone.setValue(Zone.dummyZone());
             }
         });
         return zone;

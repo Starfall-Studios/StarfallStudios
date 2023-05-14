@@ -24,7 +24,6 @@ public class GameManager extends Observable {
     private ArrayList<Zone> zones;
 
     // Creatures that are in the map
-    private ArrayList<Creature> mapCreatures;
     private ArrayList<MapEntity> mapEntities;
 
     //User related variables
@@ -49,7 +48,6 @@ public class GameManager extends Observable {
      */
     private GameManager() {
         zones = new ArrayList<>();
-        mapCreatures = new ArrayList<>();
         mapEntities = new ArrayList<>();
         userLocation = new GeoPoint(41.57660025593672, 1.6017485255249397);
 
@@ -125,6 +123,10 @@ public class GameManager extends Observable {
 
     public ArrayList<MapEntity> getMapEntities() {
         return mapEntities;
+    }
+
+    public void setMapEntities(ArrayList<MapEntity> mapEntities) {
+        this.mapEntities = mapEntities;
     }
 
     /**

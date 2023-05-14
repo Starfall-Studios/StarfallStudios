@@ -52,6 +52,7 @@ public class HomeViewModel extends ViewModel {
                     mapEntities.add(new MapEntity(GameManager.getInstance().creatureNames.get(Creature.BaseCreatures.values()[creatureType]), MapEntity.Type.CREATURE, latitude, longitude));
                 }
                 map.drawCreatures(mapEntities);
+                GameManager.getInstance().setMapEntities(mapEntities);
                 Log.d("FIREBASE", "Creatures updated!");
             }
 
