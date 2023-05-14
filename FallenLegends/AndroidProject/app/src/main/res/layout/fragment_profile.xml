@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/test_shape"
+    tools:context=".views.ProfileFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <!-- Set the background color of the fragment to the color of the header bar -->
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start|center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="20dp"
+            android:layout_gravity="left|center"
+            android:layout_marginStart="20dp"
+            android:text="@string/about"
+            android:textColor="@color/white"
+            android:onClick="onAboutClick">
+        </TextView>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginStart="20dp"
+            android:text="@string/TermsCond"
+            android:textColor="@color/white"
+            android:onClick="onTermsCondClick">
+        </TextView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start|center"
+            android:orientation="horizontal"
+            android:layout_marginVertical="15dp">
+
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center"
+                android:layout_marginStart="20dp"
+                android:src="@drawable/baseline_logout_24"
+                android:onClick="Logout">
+            </ImageView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left|center"
+                android:layout_marginStart="10dp"
+                android:text="@string/txt_Logout"
+                android:textColor="@color/white"
+                android:onClick="Logout">
+            </TextView>
+        </LinearLayout>
+    </LinearLayout>
+</FrameLayout>
