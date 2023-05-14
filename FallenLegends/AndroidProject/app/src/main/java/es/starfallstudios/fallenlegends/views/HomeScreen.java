@@ -69,4 +69,10 @@ public class HomeScreen extends AppCompatActivity {
     public void onTermsCondClick(View view) {
         startActivity(new Intent(this, TermsConditionsScreen.class));
     }
+
+    public void onLogoutClick(View view) {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(new Intent(this, LoginScreen.class));
+    }
 }
