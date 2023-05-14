@@ -16,4 +16,5 @@
     <string name="resetPasswordButton">Restableix Contrasenya</string>
     <string name="deck_title">Inventari</string>
     <string name="txt_social_name">Social</string>
+    <string name="txt_Logout">Tancar la Sessió</string>
 </resources>

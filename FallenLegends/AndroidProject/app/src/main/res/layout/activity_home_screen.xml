@@ -15,6 +15,19 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <FrameLayout
+        android:id="@+id/profile_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:elevation="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent=".5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/headerbar_container"
+        app:layout_constraintWidth_percent=".95" />
+
+
+    <FrameLayout
         android:id="@+id/mainContent_container"
         android:layout_width="0dp"
         android:layout_height="0dp"

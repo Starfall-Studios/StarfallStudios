@@ -16,4 +16,5 @@
     <string name="resetPasswordButton">Restablecer Contraseña</string>
     <string name="deck_title">Inventario</string>
     <string name="txt_social_name">Social</string>
+    <string name="txt_Logout">Cerrar Sesión</string>
 </resources>
