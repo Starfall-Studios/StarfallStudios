@@ -11,6 +11,11 @@ public class Zone {
 
     private ArrayList<GeoPoint> points;
 
+    public static Zone dummyZone() {
+        ArrayList<GeoPoint> points = new ArrayList<>();
+        return new Zone("0", 0, "Dummy", points);
+    }
+
     /**
      * Create a new zone
      * @param owner player id

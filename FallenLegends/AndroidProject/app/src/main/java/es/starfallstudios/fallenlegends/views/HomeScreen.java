@@ -47,32 +47,32 @@ public class HomeScreen extends AppCompatActivity {
         findViewById(R.id.updateLocation_button).setOnClickListener(View -> {
             viewModel.updateLocation();
         });
+
+        findViewById(R.id.debugSpawnCreature_button).setOnClickListener(View -> {
+            viewModel.spawnCreature();
+        });
     }
 
     public void onProfileClick(View view) { //Fix this method
-        PopupMenu popup = new PopupMenu(this, view);
-        MenuInflater inflater = popup.getMenuInflater();
-        inflater.inflate(R.menu.menu_profile, popup.getMenu());
-        popup.show();
-    }
-
-    public boolean onProfileMenuItemClick(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.aboutUs:
-                startActivity(new Intent(this, AboutScreen.class));
-                return true;
-            case R.id.TermsConditions:
-                startActivity(new Intent(this, TermsConditionsScreen.class));
-                return true;
-            case R.id.Logout:
-                FirebaseAuth.getInstance().signOut();
-                finish();
-                startActivity(new Intent(this, LoginScreen.class));
-                return true;
-            default:
-                return false;
+        getSupportFragmentManager().beginTransaction().replace(R.id.profile_container, new ProfileFragment()).commit();
+        if (findViewById(R.id.profile_container).getVisibility() == View.VISIBLE) {
+            findViewById(R.id.profile_container).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.profile_container).setVisibility(View.VISIBLE);
         }
-
     }
 
+    public void onAboutClick(View view) {
+        startActivity(new Intent(this, AboutScreen.class));
+    }
+
+    public void onTermsCondClick(View view) {
+        startActivity(new Intent(this, TermsConditionsScreen.class));
+    }
+
+    public void onLogoutClick(View view) {
+        FirebaseAuth.getInstance().signOut();
+        finish();
+        startActivity(new Intent(this, LoginScreen.class));
+    }
 }

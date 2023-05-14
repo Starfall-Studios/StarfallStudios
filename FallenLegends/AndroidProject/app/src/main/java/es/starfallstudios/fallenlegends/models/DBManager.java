@@ -8,7 +8,10 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.MutableData;
+import com.google.firebase.database.Transaction;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.Nullable;
 
 import org.osmdroid.util.GeoPoint;
 
@@ -85,23 +88,36 @@ public class DBManager {
         return zones;
     }
 
-    public ArrayList<Creature> retrieveCreatures() {
-        ArrayList<Creature> creatures = new ArrayList<>();
+    public void retrieveMapEntities(ValueEventListener listener) {
         DatabaseReference myRef = database.getReference("creatures");
-        myRef.addValueEventListener(new ValueEventListener() {
+        myRef.addValueEventListener(listener);
+    }
+
+    public void spawnRandomCreatureNearby() {
+        DatabaseReference myRef = database.getReference("creatures");
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for (DataSnapshot creatureSnapshot : dataSnapshot.getChildren()) {
-                    int id = creatureSnapshot.child("id").getValue(Integer.class);
-                    String name = creatureSnapshot.child("name").getValue(String.class);
-                    int zone = creatureSnapshot.child("zone").getValue(Integer.class);
-                    double latitude = creatureSnapshot.child("latitude").getValue(Double.class);
-                    double longitude = creatureSnapshot.child("longitude").getValue(Double.class);
+                int id = (int) dataSnapshot.getChildrenCount() + 1;
 
-                    creatures.add(new Creature(name, id, zone, latitude, longitude));
-                }
-                Log.d("FIREBASE", "Creatures updated!");
-                MainActivity.creaturesLoaded = true;
+                GeoPoint pos = Utils.getRandomLocationInRange(GameManager.getInstance().getUserLocation(), 100);
+
+                myRef.runTransaction(new Transaction.Handler() {
+                    @NonNull
+                    @Override
+                    public Transaction.Result doTransaction(@NonNull MutableData currentData) {
+                        currentData.child(String.valueOf(id)).child("latitude").setValue(pos.getLatitude());
+                        currentData.child(String.valueOf(id)).child("longitude").setValue(pos.getLongitude());
+                        currentData.child(String.valueOf(id)).child("type").setValue(Utils.getRandomNumberInRange(0, Creature.BaseCreatures.values().length - 2));
+                        currentData.child(String.valueOf(id)).child("tier").setValue(Utils.getRandomNumberInRange(0, 4));
+                        return Transaction.success(currentData);
+                    }
+
+                    @Override
+                    public void onComplete(@Nullable DatabaseError error, boolean committed, @Nullable DataSnapshot currentData) {
+                        Log.d("FIREBASE", "Creature spawned!");
+                    }
+                });
             }
 
             @Override
@@ -110,8 +126,25 @@ public class DBManager {
                 Log.w("FIREBASE", "Failed to read value.", error.toException());
             }
         });
+    }
 
-        return creatures;
+    public boolean captureCreature(MapEntity entity) {
+
+        if (!Utils.isCloseEnough(GameManager.getInstance().getUserLocation(), entity.getLocation(), 50)) {
+            return false;
+        }
+
+        ArrayList<MapEntity> entities = GameManager.getInstance().getMapEntities();
+
+        int index = entities.indexOf(entity)+1;
+
+        Log.w("FIREBASE", "Capturing creature " + index);
+
+        DatabaseReference myRef = database.getReference("creatures");
+        //delete creature
+        myRef.child(String.valueOf(index)).removeValue();
+
+        return true;
     }
 
 }

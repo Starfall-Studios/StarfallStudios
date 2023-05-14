@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         gameManager = GameManager.getInstance();
         gameManager.getZones();
-        gameManager.getCreatures();
+        //gameManager.getCreatures();
         //gameManager.setSharedPreferences(getSharedPreferences("FallenLegends", MODE_PRIVATE));
 
         requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
             try {
                 // Thread will sleep for 5 seconds
                 Thread.sleep(5*1000);
-                while (!creaturesLoaded || !zonesLoaded) {
+                while (!zonesLoaded) {
                     Thread.sleep(1000*1);
                 }
 

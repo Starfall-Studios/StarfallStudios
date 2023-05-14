@@ -86,6 +86,7 @@ public class PlayerRepo {
         myRef.child(uid).child("food").setValue(0);
         myRef.child(uid).child("stone").setValue(0);
         myRef.child(uid).child("wood").setValue(0);
+        saveCreatureCollection(uid, CreatureCollection.generateDefaultCreatureCollection(uid));
     }
 
     public void saveCreatureCollection(String uid, CreatureCollection collection) {
@@ -126,6 +127,24 @@ public class PlayerRepo {
         });
 
         return leaderboard;
+    }
+
+    public void updateExperience(String uid, int xp) {
+        DatabaseReference myRef = database.getReference("users/" + uid + "/xp");
+        //get current xp from db and add xp
+        myRef.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                int currentXp = dataSnapshot.getValue(Integer.class);
+                myRef.setValue(currentXp + xp);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Log.w(TAG, "Failed to read value.", error.toException());
+            }
+
+        });
     }
 
 }

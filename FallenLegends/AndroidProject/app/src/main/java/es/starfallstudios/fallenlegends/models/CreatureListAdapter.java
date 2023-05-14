@@ -4,65 +4,45 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
+import java.util.List;
 
 import es.starfallstudios.fallenlegends.R;
 
-public class CreatureListAdapter extends BaseAdapter {
+public class CreatureListAdapter extends ArrayAdapter<Creature> {
 
     private final Context context;
-    private final ArrayList<CreatureCollectionList> creatureCollectionList;
 
-    public CreatureListAdapter(Context context, ArrayList<CreatureCollectionList> creatureCollectionList) {
+    public CreatureListAdapter(@NonNull Context context, int resource, @NonNull List<Creature> objects) {
+        super(context, resource, objects);
         this.context = context;
-        this.creatureCollectionList = creatureCollectionList;
-    }
-
-    @Override
-    public int getCount() {
-        return creatureCollectionList.size();
-    }
-
-    @Override
-    public Object getItem(int i) {
-        return creatureCollectionList.get(i);
-    }
-
-    @Override
-    public long getItemId(int i) {
-        return i;
     }
 
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
-        HolderView holderView;
+        Creature creature = getItem(i);
 
         if (view == null) {
             view = LayoutInflater.from(context).inflate(R.layout.cardview, viewGroup, false);
-            holderView = new HolderView(view);
-            view.setTag(holderView);
-        } else {
-            holderView = (HolderView) view.getTag();
         }
 
-        CreatureCollectionList list = creatureCollectionList.get(i);
-        holderView.creatureImage.setImageResource(list.getCreatureResourceId());
-        //holderView.creatureName.setText(list.getCreatureName());
+        ImageView creatureImage = view.findViewById(R.id.deckview_card_image);
+        TextView creatureName = view.findViewById(R.id.deckview_card_name);
+        TextView creatureHealth = view.findViewById(R.id.deckview_card_health);
+
+        creatureImage.setImageResource(creature.getResourceId());
+        creatureName.setText(creature.getName());
+        creatureHealth.setText(String.valueOf(creature.getHealth()));
 
         return view;
-    }
-
-    private static class HolderView {
-        private final ImageView creatureImage;
-        private final TextView creatureName;
-
-        public HolderView(View view) {
-            this.creatureImage = view.findViewById(R.id.deckview_card_image);
-            this.creatureName = view.findViewById(R.id.deckview_card_name);
-        }
     }
 }

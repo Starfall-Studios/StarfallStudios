@@ -9,7 +9,7 @@
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="588dp"
+        android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:orientation="vertical">
 
@@ -51,10 +51,17 @@
 
         <ListView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="0.6"
             android:id="@+id/list_social"
-            android:layout_marginTop="16dp">
-        </ListView>
+            android:layout_marginTop="16dp"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/closeButton"
+            android:id="@+id/btn_social_back"
+            android:layout_gravity="center_horizontal"/>
 
     </LinearLayout>
 
