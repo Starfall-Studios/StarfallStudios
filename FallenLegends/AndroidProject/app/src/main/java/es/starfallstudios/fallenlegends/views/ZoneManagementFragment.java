@@ -4,17 +4,22 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ListView;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.ZoneListAdapter;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link navbar#newInstance} factory method to
+ * Use the {@link ZoneManagementFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class navbar extends Fragment {
+public class ZoneManagementFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -25,7 +30,7 @@ public class navbar extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public navbar() {
+    public ZoneManagementFragment() {
         // Required empty public constructor
     }
 
@@ -35,11 +40,11 @@ public class navbar extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment navbar.
+     * @return A new instance of fragment ZoneManagementFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static navbar newInstance(String param1, String param2) {
-        navbar fragment = new navbar();
+    public static ZoneManagementFragment newInstance(String param1, String param2) {
+        ZoneManagementFragment fragment = new ZoneManagementFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -60,25 +65,22 @@ public class navbar extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_navbar, container, false);
+        View view = inflater.inflate(R.layout.fragment_zone_management, container, false);
 
-        view.findViewById(R.id.btn_current_zone).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new CurrentZone()).commit();
+        ListView listView = view.findViewById(R.id.lst_zone_cards);
+        ZoneListAdapter adapter = new ZoneListAdapter(getContext(), 0);
+        listView.setAdapter(adapter);
+        listView.setOnItemClickListener(this);
+
+        view.findViewById(R.id.btn_closeButton).setOnClickListener(View -> {
+            getParentFragmentManager().beginTransaction().remove(this).commit();
         });
 
-        view.findViewById(R.id.btn_social).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new SocialView()).commit();
-        });
-
-        view.findViewById(R.id.btn_deck).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new DeckView()).commit();
-        });
-
-        view.findViewById(R.id.btn_property_zones).setOnClickListener(View -> {
-            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, new ZoneManagementFragment()).commit();
-        });
         return view;
     }
 
-
+    @Override
+    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+        Log.d("ZoneView", "onItemClick: " + i);
+    }
 }

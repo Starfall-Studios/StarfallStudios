@@ -150,4 +150,14 @@ public class GameManager extends Observable {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public ArrayList<Zone> getZonesOwnedByPlayer(String playerId) {
+        ArrayList<Zone> zonesOwnedByPlayer = new ArrayList<>();
+        for (Zone zone : zones) {
+            if (zone.getOwner().equals(playerId)) {
+                zonesOwnedByPlayer.add(zone);
+            }
+        }
+        return zonesOwnedByPlayer;
+    }
 }

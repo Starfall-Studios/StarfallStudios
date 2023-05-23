@@ -14,15 +14,10 @@ import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.models.Creature;
-import es.starfallstudios.fallenlegends.models.CreatureCollection;
-import es.starfallstudios.fallenlegends.models.CreatureCollectionList;
 import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
-import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
 
 /**
