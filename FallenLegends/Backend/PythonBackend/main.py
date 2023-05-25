@@ -1,26 +1,19 @@
-# import threading
-from zones import ZoneManager
-from creatures import CreatureManager
-# import api
-import utils
-import json
+import firebase_admin
+from firebase_admin import credentials, messaging
+
 
 useApi = False
 
 def main():
-    print("Fallen Legends Backend v0.1 starting...")
-    zoneManager = ZoneManager()
-    zoneManager.checkForUpdate()
-    zoneManager.loadZones()
+    firebase_cred = credentials.Certificate('firebase.json')
+    firebase_app = firebase_admin.initialize_app(firebase_cred)
 
-    creatureManager = CreatureManager()
+    send_topic_push("Test MSG", "Test Body")
 
-    creatureManager.createRandomCreature()
-    creatureManager.createRandomCreature()
-    
-    creatureManager.uploadCreatures()
-
-    creatureManager.saveCreatures()
+def send_topic_push(title, body): 
+        topic = "creature_spawn"
+        message = messaging.Message(notification=messaging.Notification(title=title, body=body), topic=topic)
+        messaging.send(message)
     
 if __name__ == '__main__':
     main()

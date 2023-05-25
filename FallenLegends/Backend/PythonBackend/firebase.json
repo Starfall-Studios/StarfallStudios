@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fallen-legends-30515",
+  "private_key_id": "e576a0506f797aa0f0f2fda8b1469e40173f014e",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDWNVxCHMZMoh8y\n2WdsJE9EV17W0j5hnXzxb7uRpPPrrPiAEvTIdS0BvQsemJlshsS6/Ma6Ue10614v\n+gp/xcQdeU4w3espeQUoPj/bqCh+1Wp7+2Jl7+1vu6AAMC8kCB1a+CPkAH2dJPp/\nGSrHcJya02qIQM1blp7Z+G9vnYjNOh6ouBKWaJdXbaNljCOcW7khnYFybBjHaYi9\nC90F5SzDZUzlsyV5ee9uKe+Y6qTkPkChq8qa1kYTfR6yttJ2SDddim3Sayl6q1Bk\nISYBr5Pn5QWQqrQWEUy6RLguAUJOkhwxcd0L3pHtnuS5nChMOU5qhGyw/54h83t+\nOXjHOoTnAgMBAAECggEABkdvbtD4+If06yngtHAGm6pPHyrLQS8f/h04RvmX7tT6\nYvT9lFXV1LCSbV71DF1IZE3wbseau/UmkpPh2QxEPVim4XbTSF+42ug1Xf56ifpj\nGzDZUMN/Vumf/R8jUXjbItxMzQeq8BrNmmW80X+sNBcRIUyf2GsX7/UJ/Xup5f4c\nD2ffXjXcFySD0m1N+O5Z+2+qVv8chVQyVlBAeKo10kyH3IlA2mqGwihT2+hR8AEz\nsOkUQKlSF/RV5RH5jcrFpfKT+CBA54Mv3jGRoHlzY7uvpi0e0EMnf8ouc2PP5okA\n7zEQbAWGSV1YzB4JxReJApRjYX2WWboa32uE4lcS5QKBgQDu59RzXvEJ0HKEO32a\nFCY8dL9YzyhvmcrWKOIx6GSrNlPitUmsf6SHoTjsdci5oRDvQhqG+Y2MdlQLanoT\n6Pu46jpNCCJ2mWNuHeRwMl3y3r42KXinsj+Lczj+zO8/enNcY1xi1DlXFF+p1X5d\nh87VnIBcaTduET2TdrTyYrdkawKBgQDliSOFbfVnh3PNTa1bda5MPrDJDOqmrFu4\n6q7+f7Vr1B/QXuxRrhUZWmdHAsin+I/dhxmOjl7egk8G0OSHhyxNAroDb74ueIbu\narX/8ZM6yFburiEniIR3z8sDjo2DT4L7q1xRZm+b87qMlWa6cdmRVnBjrbhGZFFF\n5cA916TgdQKBgH0PqNw4MA/GKZxlFAwLTjTJnL0dvHonVNIlFruvfrtNtj3wTr/Z\nFcTWNdk6kzfxQ88rmH1dt6Z27uoG9B7mEJetLZXTk07oXu9vAH1nMF0KEyKBNSL8\nIV2blJN1rixZqngLn3owxE98X9Ok6gCGLlUOFvfJMHYS2lwOgQx9dqk/AoGATuXv\nxsqAIyEFJhnAMALocZ7O55y//6CZOpu4oRRGyRS2BsrKEl1zNS7E9zy2uj4PPYdV\nupGnfHZwMZiWJRvKl4ILbGj5h0G4p7UYcCyafgclEo/aJ5ueZQyQ7N0QOYWYMWe6\nqOQ8EvAZPH+SOx4tOe7rXOf2woNzCEKr7NX1/40CgYEAjvjKzy2ulziV9Z1zXv7M\ntBpMSwn8/J0sLhDao1vxT4xOyUNNyIJyWNY67Wpj+a9SB5/eveVTtjHW22S2WJaq\nZVgz1yUZ1SD9CgT4/pauO9SLwIMSfW8DNaJfgEWZa96MMsKez9cUwy27zJXunH6l\nFvysHxpK8V+ymo7zZagnpR8=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fallen-legends-backend@fallen-legends-30515.iam.gserviceaccount.com",
+  "client_id": "100904710013526044784",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fallen-legends-backend%40fallen-legends-30515.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

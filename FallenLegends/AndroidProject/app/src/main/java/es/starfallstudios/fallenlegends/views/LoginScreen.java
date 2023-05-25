@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
@@ -88,6 +89,7 @@ public class LoginScreen extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        FirebaseMessaging.getInstance().subscribeToTopic("creature_spawn");
 
         if (currentUser != null) {
             playerRepo.requestPlayer(currentUser.getUid()).observe(this, player -> {
