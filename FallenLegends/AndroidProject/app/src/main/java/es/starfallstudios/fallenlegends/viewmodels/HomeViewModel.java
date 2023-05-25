@@ -49,7 +49,7 @@ public class HomeViewModel extends ViewModel {
                     int creatureType = creatureSnapshot.child("type").getValue(Integer.class);
                     int creatureTier = creatureSnapshot.child("tier").getValue(Integer.class);
 
-                    mapEntities.add(new MapEntity(GameManager.getInstance().creatureNames.get(Creature.BaseCreatures.values()[creatureType]), MapEntity.Type.CREATURE, latitude, longitude));
+                    mapEntities.add(new MapEntity(Creature.BaseCreatures.values()[creatureType], MapEntity.Type.CREATURE, latitude, longitude, creatureTier));
                 }
                 map.drawCreatures(mapEntities);
                 GameManager.getInstance().setMapEntities(mapEntities);

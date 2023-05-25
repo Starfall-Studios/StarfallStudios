@@ -44,8 +44,7 @@ public class CreatureInfoWindow extends MarkerInfoWindow {
 
         Button button = (Button) mView.findViewById(org.osmdroid.library.R.id.bubble_moreinfo);
         ImageView icon = mView.findViewById(org.osmdroid.library.R.id.bubble_image);
-
-        icon.setImageResource(R.drawable.creature_nightmire);
+        icon.setImageResource(gameManager.creatureResources.get(entity.getBaseCreature()));
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override

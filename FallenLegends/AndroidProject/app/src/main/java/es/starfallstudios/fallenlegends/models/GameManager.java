@@ -152,6 +152,7 @@ public class GameManager extends Observable {
     }
 
     public ArrayList<Zone> getZonesOwnedByPlayer(String playerId) {
+        removeDuplicates();
         ArrayList<Zone> zonesOwnedByPlayer = new ArrayList<>();
         for (Zone zone : zones) {
             if (zone.getOwner().equals(playerId)) {
@@ -159,5 +160,16 @@ public class GameManager extends Observable {
             }
         }
         return zonesOwnedByPlayer;
+    }
+
+    //Find and remove duplicates in zones arraylist
+    public void removeDuplicates() {
+        ArrayList<Zone> zonesWithoutDuplicates = new ArrayList<>();
+        for (Zone zone : zones) {
+            if (!zonesWithoutDuplicates.contains(zone)) {
+                zonesWithoutDuplicates.add(zone);
+            }
+        }
+        zones = zonesWithoutDuplicates;
     }
 }
