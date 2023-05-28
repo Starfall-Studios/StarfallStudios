@@ -17,6 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="@string/zoneFragment_zoneName"
             android:textSize="48sp" />
@@ -26,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="@string/zoneFragment_zoneOwner"
             android:textSize="24sp" />
@@ -34,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nisl nisl aliquet nisl, eget aliquet nisl nisl sit amet nisl."
             android:textSize="24sp" />

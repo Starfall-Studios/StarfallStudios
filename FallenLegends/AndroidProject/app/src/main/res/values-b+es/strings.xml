@@ -20,4 +20,7 @@
     <string name="StoreTitle">Tienda</string>
     <string name="NotImplemented">Esta sección aun no está implementada, pronto estará disponible!</string>
     <string name="manageButton">Gestionar</string>
+    <string name="txt_name">Nombre</string>
+    <string name="txt_position">Posición</string>
+    <string name="txt_score">Puntuación</string>
 </resources>

@@ -21,6 +21,9 @@
     <string name="StoreTitle">Store</string>
     <string name="NotImplemented">This section is not implemented yet, soon will be available!</string>
     <string name="manageButton">Manage</string>
+    <string name="txt_name">Name</string>
+    <string name="txt_position">Position</string>
+    <string name="txt_score">Score</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
