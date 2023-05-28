@@ -53,6 +53,8 @@ public class LoginScreen extends AppCompatActivity {
         signupButton = findViewById(R.id.btn_opensignup);
         recoveryButton = findViewById(R.id.btn_openrecovery);
 
+        FirebaseMessaging.getInstance().subscribeToTopic("creature_spawn");
+
         loginButton.setOnClickListener(v -> login());
         signupButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, SignUpScreen.class)));
         recoveryButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, RecoveryScreen.class)));
@@ -89,7 +91,6 @@ public class LoginScreen extends AppCompatActivity {
         super.onStart();
 
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        FirebaseMessaging.getInstance().subscribeToTopic("creature_spawn");
 
         if (currentUser != null) {
             playerRepo.requestPlayer(currentUser.getUid()).observe(this, player -> {
