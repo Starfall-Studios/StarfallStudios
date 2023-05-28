@@ -172,4 +172,14 @@ public class GameManager extends Observable {
         }
         zones = zonesWithoutDuplicates;
     }
+
+    public void updateZoneOwner(Zone zone, String playerId) {
+        zone.setOwner(playerId);
+        ZoneRepo.getInstance().updateZoneOwner(zone.getId(), playerId);
+    }
+
+    public void abandonZone(Zone zone) {
+        zone.setOwner("0");
+        ZoneRepo.getInstance().abandonZone(zone.getId());
+    }
 }

@@ -71,8 +71,8 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_marginStart="41dp"
-            android:gravity="left|center"
-            android:text="food"
+            android:gravity="center"
+            android:text="560"
             android:textColor="@color/white"/>
 
         <ImageView
@@ -98,7 +98,7 @@
             android:layout_gravity="right|center"
             android:layout_marginStart="18dp"
             android:layout_marginEnd="29dp"
-            android:text="gems"
+            android:text="300"
             android:textColor="@color/white"/>
 
     </FrameLayout>

@@ -9,8 +9,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.Objects;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.Creature;
 import es.starfallstudios.fallenlegends.viewmodels.GameViewModel;
 
 /**
@@ -69,20 +74,48 @@ public class gameboard extends Fragment {
 
         viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
 
+        ArrayList<View> enemyInfo = new ArrayList<>();
+        enemyInfo.add(v.findViewById(R.id.enemy_cardingame_health));
+        enemyInfo.add(v.findViewById(R.id.enemy_cardingame_health_icon));
+
+        ArrayList<View> playerInfo = new ArrayList<>();
+        playerInfo.add(v.findViewById(R.id.player_cardingame_health));
+        playerInfo.add(v.findViewById(R.id.player_cardingame_health_icon));
+
         viewModel.getCurrentOpponentCreature().observe(getViewLifecycleOwner(), creature -> {
-            if (creature != null) {
-                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(creature.getResourceId());
+            if (!creature.isBlank()) {
+                for (View view : enemyInfo) {
+                    view.setVisibility(View.VISIBLE);
+                }
+                ((ImageView) v.findViewById(R.id.current_enemy_card)).setImageResource(creature.getResourceId());
             } else {
-                ((ImageView) v.findViewById(R.id.current_opponent_card)).setImageResource(R.drawable.logo_fallen);
+                for (View view : enemyInfo) {
+                    view.setVisibility(View.GONE);
+                }
+                ((ImageView) v.findViewById(R.id.current_enemy_card)).setImageResource(R.drawable.logo_fallen);
             }
         });
 
         viewModel.getCurrentPlayerCreature().observe(getViewLifecycleOwner(), creature -> {
-            if (creature != null) {
+            if (!creature.isBlank()) {
+                for (View view : playerInfo) {
+                    view.setVisibility(View.VISIBLE);
+                }
                 ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(creature.getResourceId());
             } else {
+                for (View view : playerInfo) {
+                    view.setVisibility(View.GONE);
+                }
                 ((ImageView) v.findViewById(R.id.current_player_card)).setImageResource(R.drawable.logo_fallen);
             }
+        });
+
+        viewModel.getPlayerCreatureHealth().observe(getViewLifecycleOwner(), health -> {
+            ((TextView) playerInfo.get(0)).setText(String.valueOf(health));
+        });
+
+        viewModel.getOpponentCreatureHealth().observe(getViewLifecycleOwner(), health -> {
+            ((TextView) enemyInfo.get(0)).setText(String.valueOf(health));
         });
 
         return v;

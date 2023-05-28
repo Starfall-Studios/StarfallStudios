@@ -67,6 +67,24 @@ public class CurrentZone extends Fragment {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
 
+        view.findViewById(R.id.manageButton).setOnClickListener(View -> {
+            int i = 0;
+            for (Zone zone : GameManager.getInstance().getZonesOwnedByPlayer(GameManager.getInstance().getPlayer().getUid())) {
+                if (zone.equals(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation())))
+                    break;
+                else
+                    i++;
+            }
+
+            ManageZoneFragment manageZoneFragment = new ManageZoneFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("zoneIndex", i);
+            manageZoneFragment.setArguments(bundle);
+
+            //open manage fragment
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageZoneFragment).commit();
+        });
+
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
         zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
         zoneName = view.findViewById(R.id.txt_zone_name);

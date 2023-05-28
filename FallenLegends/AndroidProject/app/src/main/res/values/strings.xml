@@ -24,6 +24,8 @@
     <string name="txt_name">Name</string>
     <string name="txt_position">Position</string>
     <string name="txt_score">Score</string>
+    <string name="creatureCaptured">Creature Captured!</string>
+    <string name="creatureTooFarAway">Creature too far away!</string>
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->
     <!-- TODO: Remove or change this placeholder text -->

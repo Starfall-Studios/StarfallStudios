@@ -69,6 +69,11 @@ public class ManageZoneFragment extends Fragment {
 
         ((TextView) v.findViewById(R.id.zone_manage_title)).setText(GameManager.getInstance().getZonesOwnedByPlayer(GameManager.getInstance().getPlayer().getUid()).get(index).getName());
 
+        v.findViewById(R.id.zone_manage_abandon_button).setOnClickListener(v1 -> {
+            GameManager.getInstance().abandonZone(GameManager.getInstance().getZonesOwnedByPlayer(GameManager.getInstance().getPlayer().getUid()).get(index));
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContent_container, new ZoneManagementFragment()).commit();
+        });
+
         return v;
     }
 }

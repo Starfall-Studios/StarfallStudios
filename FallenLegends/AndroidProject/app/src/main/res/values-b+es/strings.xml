@@ -23,4 +23,6 @@
     <string name="txt_name">Nombre</string>
     <string name="txt_position">Posición</string>
     <string name="txt_score">Puntuación</string>
+    <string name="creatureCaptured">Criatura Capturada!</string>
+    <string name="creatureTooFarAway">La criatura está muy lejos!</string>
 </resources>

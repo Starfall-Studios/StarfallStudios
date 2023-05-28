@@ -56,4 +56,12 @@ public class GameViewModel extends ViewModel {
         return match.getPlayingCreatureOpponent();
     }
 
+    public LiveData<Integer> getPlayerCreatureHealth() {
+        return match.getPlayerCreatureHealthLD();
+    }
+
+    public LiveData<Integer> getOpponentCreatureHealth() {
+        return match.getOpponentCreatureHealthLD();
+    }
+
 }

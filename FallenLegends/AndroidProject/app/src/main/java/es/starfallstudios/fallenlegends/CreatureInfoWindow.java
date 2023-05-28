@@ -49,9 +49,8 @@ public class CreatureInfoWindow extends MarkerInfoWindow {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(view.getContext(), "HOLA HEHE", Toast.LENGTH_SHORT).show();
-                //String msg = DBManager.getInstance().captureCreature(entity) ? "Creature captured!" : "Creature escaped!";
-                //Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
+                String msg = DBManager.getInstance().captureCreature(entity) ? view.getResources().getString(R.string.creatureCaptured) : view.getResources().getString(R.string.creatureTooFarAway);
+                Toast.makeText(view.getContext(), msg, Toast.LENGTH_SHORT).show();
             }
         });
     }
