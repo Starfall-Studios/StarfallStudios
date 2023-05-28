@@ -19,6 +19,7 @@ import java.util.List;
 import es.starfallstudios.fallenlegends.ManageCreatureFragment;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
+import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
 
 /**
