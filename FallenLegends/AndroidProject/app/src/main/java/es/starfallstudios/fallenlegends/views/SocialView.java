@@ -82,6 +82,7 @@ public class SocialView extends Fragment {
 
         viewModel.getLeaderboard().observe(getViewLifecycleOwner(), leaderboard -> {
             names.addAll(leaderboard);
+            names.sort(String::compareTo);
             ArrayAdapter<String> arrayAdapter = new ArrayAdapter<>(getActivity(), android.R.layout.simple_list_item_1, names);
             listView.setAdapter(arrayAdapter);
         });

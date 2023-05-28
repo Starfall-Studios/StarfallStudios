@@ -97,4 +97,9 @@ public class ZoneRepo {
         myRef.child(String.valueOf(zoneId)).child("owner").setValue(ownerId);
     }
 
+    public void abandonZone(int zoneId) {
+        DatabaseReference myRef = database.getReference("zones");
+        myRef.child(String.valueOf(zoneId)).child("owner").setValue("0");
+    }
+
 }

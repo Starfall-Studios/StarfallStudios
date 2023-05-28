@@ -205,4 +205,5 @@ public class Creature extends MapEntity {
     public int getStamina() {
         return stamina;
     }
+
 }

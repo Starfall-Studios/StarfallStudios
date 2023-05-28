@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".views.ManageZoneFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
+            android:id="@+id/zone_Manage_Image"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:src="@drawable/icon_zones"
+            android:scaleType="centerCrop"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="32dp"
+            android:layout_marginHorizontal="32dp"/>
+
+        <TextView
+            android:id="@+id/zone_manage_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Area Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/zone_Manage_Image"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="16dp"/>
+
+        <Button
+            android:id="@+id/zone_manage_abandon_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Abandon"
+            app:layout_constraintStart_toEndOf="@+id/zone_manage_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/zone_Manage_Image"
+            android:layout_marginVertical="8dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintHorizontal_bias="1"/>
+
+        <TextView
+            android:id="@+id/zone_Manage_Creature_Text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Creatures in this zone"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@id/zone_Manage_Creature_List"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintHorizontal_bias="0"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Edit"
+            app:layout_constraintStart_toEndOf="@+id/zone_Manage_Creature_Text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/zone_Manage_Creature_List"
+            android:layout_marginVertical="8dp"
+            app:layout_constraintHorizontal_bias="1"
+            android:layout_marginEnd="32dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:id="@+id/zone_Manage_Creature_List"
+            app:layout_constraintBottom_toTopOf="@id/zone_Manage_Close_Button"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="32dp"
+            android:layout_marginBottom="16dp"
+            android:gravity="center">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                android:id="@+id/zone_Manage_Creature_1"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:src="@drawable/creature_nightmire"
+                android:scaleType="centerCrop"
+                android:layout_margin="4dp"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                android:id="@+id/zone_Manage_Creature_2"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:src="@drawable/creature_frostbite"
+                android:scaleType="centerCrop"
+                android:layout_margin="4dp"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                android:id="@+id/zone_Manage_Creature_3"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:src="@drawable/creature_gryphix"
+                android:scaleType="centerCrop"
+                android:layout_margin="4dp"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
+                android:id="@+id/zone_Manage_Creature_4"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
+                android:layout_height="match_parent"
+                android:background="@color/black"
+                android:src="@drawable/creature_thunderwing"
+                android:scaleType="centerCrop"
+                android:layout_margin="4dp"/>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/zone_Manage_Close_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/closeButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/test_shape" />
+
+</FrameLayout>

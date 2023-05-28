@@ -26,7 +26,12 @@ public class GameActivity extends AppCompatActivity {
     private GameViewModel viewModel;
     private ProgressBar manaBar;
 
+    private ProgressBar playerHealthBar;
+    private ProgressBar enemyHealthBar;
+
     private ArrayList<ImageView> cardImages;
+
+    private ArrayList<ArrayList<Integer>> cardsStats;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +48,30 @@ public class GameActivity extends AppCompatActivity {
 
         setContentView(R.layout.activity_game);
         manaBar = findViewById(R.id.mana_bar_progress);
+        playerHealthBar = findViewById(R.id.player_healtbar_progress);
+        enemyHealthBar = findViewById(R.id.opponent_healthbar_progress);
+
+        ArrayList<TextView> card1Stats = new ArrayList<>();
+        ArrayList<TextView> card2Stats = new ArrayList<>();
+        ArrayList<TextView> card3Stats = new ArrayList<>();
+        ArrayList<TextView> card4Stats = new ArrayList<>();
+
+        card1Stats.add((TextView) findViewById(R.id.player_card1_health));
+        card1Stats.add((TextView) findViewById(R.id.player_card1_attack));
+        card1Stats.add((TextView) findViewById(R.id.player_card1_cost));
+
+        card2Stats.add((TextView) findViewById(R.id.player_card2_health));
+        card2Stats.add((TextView) findViewById(R.id.player_card2_attack));
+        card2Stats.add((TextView) findViewById(R.id.player_card2_cost));
+
+        card3Stats.add((TextView) findViewById(R.id.player_card3_health));
+        card3Stats.add((TextView) findViewById(R.id.player_card3_attack));
+        card3Stats.add((TextView) findViewById(R.id.player_card3_cost));
+
+        card4Stats.add((TextView) findViewById(R.id.player_card4_health));
+        card4Stats.add((TextView) findViewById(R.id.player_card4_attack));
+        card4Stats.add((TextView) findViewById(R.id.player_card4_cost));
+
         cardImages = new ArrayList<>();
 
         cardImages.add((ImageView) findViewById(R.id.player_card1));
@@ -50,11 +79,24 @@ public class GameActivity extends AppCompatActivity {
         cardImages.add((ImageView) findViewById(R.id.player_card3));
         cardImages.add((ImageView) findViewById(R.id.player_card4));
 
+        cardsStats = new ArrayList<>();
+
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
         Deck deck = GameManager.getInstance().getPlayer().getPlayerCreatureCollection().getDeck();
         for(int i = 0; i < 4; i++) {
+            cardsStats.add(new ArrayList<>());
             cardImages.get(i).setBackgroundResource(deck.getCreatures().get(i).getResourceId());
+            cardsStats.get(i).add(deck.getCreatures().get(i).getHealth());
+            cardsStats.get(i).add(deck.getCreatures().get(i).getAttack());
+            cardsStats.get(i).add(deck.getCreatures().get(i).getCost());
+        }
+
+        for (int i = 0; i < 3; i++) {
+            card1Stats.get(i).setText(String.valueOf(cardsStats.get(0).get(i)));
+            card2Stats.get(i).setText(String.valueOf(cardsStats.get(1).get(i)));
+            card3Stats.get(i).setText(String.valueOf(cardsStats.get(2).get(i)));
+            card4Stats.get(i).setText(String.valueOf(cardsStats.get(3).get(i)));
         }
 
         viewModel.getMana().observe(this, mana -> {
@@ -63,10 +105,12 @@ public class GameActivity extends AppCompatActivity {
 
         viewModel.getPlayerHealth().observe(this, health -> {
             ((TextView) findViewById(R.id.player_health)).setText(String.valueOf(health) + " HP");
+            playerHealthBar.setProgress(health);
         });
 
         viewModel.getOpponentHealth().observe(this, health -> {
             ((TextView) findViewById(R.id.opponent_health)).setText(String.valueOf(health) + " HP");
+            enemyHealthBar.setProgress(health);
         });
 
         getSupportFragmentManager().beginTransaction().replace(R.id.board_container, new gameboard()).commit();

@@ -17,4 +17,12 @@
     <string name="deck_title">Inventari</string>
     <string name="txt_social_name">Social</string>
     <string name="txt_Logout">Tancar la Sessió</string>
+    <string name="StoreTitle">Botiga</string>
+    <string name="NotImplemented">Aquesta secció encara no està implementada, aviat estarà disponible!</string>
+    <string name="manageButton">Gestionar</string>
+    <string name="txt_name">Nom</string>
+    <string name="txt_position">Posició</string>
+    <string name="txt_score">Puntuació</string>
+    <string name="creatureCaptured">Criatura Capturada!</string>
+    <string name="creatureTooFarAway">La criatura està massa lluny!</string>
 </resources>

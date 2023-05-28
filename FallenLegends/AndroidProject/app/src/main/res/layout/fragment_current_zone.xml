@@ -9,13 +9,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:layout_margin="16dp">
+        android:layout_margin="16dp"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/txt_zone_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="@string/zoneFragment_zoneName"
             android:textSize="48sp" />
@@ -25,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="@string/zoneFragment_zoneOwner"
             android:textSize="24sp" />
@@ -33,6 +36,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
+            android:textColor="@color/white"
             android:gravity="top|center"
             android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec auctor, nisl eget ultricies lacinia, nisl nisl aliquet nisl, eget aliquet nisl nisl sit amet nisl."
             android:textSize="24sp" />
@@ -47,7 +51,16 @@
             android:elevation="20dp">
 
             <Button
-                android:id="@+id/acceptButton"
+                android:visibility="gone"
+                android:id="@+id/manageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:elevation="20dp"
+                android:text="@string/manageButton"/>
+
+            <Button
+                android:visibility="visible"
+                android:id="@+id/conquerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:elevation="20dp"

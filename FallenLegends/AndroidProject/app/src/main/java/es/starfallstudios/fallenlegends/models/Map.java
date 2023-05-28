@@ -1,5 +1,6 @@
 package es.starfallstudios.fallenlegends.models;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.graphics.Color;
 import android.location.Location;
@@ -25,6 +26,7 @@ import java.util.ArrayList;
 
 import es.starfallstudios.fallenlegends.BuildConfig;
 import es.starfallstudios.fallenlegends.CreatureInfoWindow;
+import es.starfallstudios.fallenlegends.R;
 
 public class Map {
 
@@ -112,6 +114,7 @@ public class Map {
         }
     }
 
+    @SuppressLint("UseCompatLoadingForDrawables")
     public void drawCreatures(ArrayList<MapEntity> entities) {
         //Clear previous markers
         for (Marker marker : mapEntitiesMarkers) {

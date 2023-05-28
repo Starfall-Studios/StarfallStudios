@@ -44,6 +44,9 @@ public class Match {
     MutableLiveData<Creature> playingCreaturePlayerLD = new MutableLiveData<>();
     MutableLiveData<Creature> playingCreatureOpponentLD = new MutableLiveData<>();
 
+    MutableLiveData<Integer> playerCreatureHealthLD = new MutableLiveData<>();
+    MutableLiveData<Integer> opponentCreatureHealthLD = new MutableLiveData<>();
+
     MutableLiveData<Integer> playerHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> enemyHealthLD = new MutableLiveData<>();
     MutableLiveData<Integer> playerManaLD = new MutableLiveData<>();
@@ -66,7 +69,9 @@ public class Match {
         Log.w("Match", "AI: " + playingCreatureOpponent.toString());
 
         if(!playingCreaturePlayer.isBlank()) {
+            playerCreatureHealthLD.postValue(playingCreaturePlayer.getHealth());
             if (!playingCreatureOpponent.isBlank()) {
+                opponentCreatureHealthLD.postValue(playingCreatureOpponent.getHealth());
                 playingCreatureOpponent.setHealth(playingCreatureOpponent.getHealth() - playingCreaturePlayer.getAttack());
                 playingCreaturePlayer.setHealth(playingCreaturePlayer.getHealth() - playingCreatureOpponent.getAttack());
                 if (playingCreatureOpponent.getHealth() <= 0) {
@@ -80,6 +85,7 @@ public class Match {
             }
         } else {
             if (!playingCreatureOpponent.isBlank()) {
+                opponentCreatureHealthLD.postValue(playingCreatureOpponent.getHealth());
                 damagePlayer(playingCreatureOpponent.getAttack());
             }
         }
@@ -209,7 +215,7 @@ public class Match {
 
         if (isWinner()) {
             playerRepo.updateExperience(player.getUid(), 10);
-            zoneRepo.updateZoneOwner(zone.getId(), player.getUid());
+            GameManager.getInstance().updateZoneOwner(zone, player.getUid());
         } else {
             playerRepo.updateExperience(zone.getOwner(), 10);
         }
@@ -306,6 +312,14 @@ public class Match {
             playingCreatureOpponent = Creature.blankCreature();
             playingCreatureOpponentLD.postValue(Creature.blankCreature());
         }
+    }
+
+    public MutableLiveData<Integer> getPlayerCreatureHealthLD() {
+        return playerCreatureHealthLD;
+    }
+
+    public MutableLiveData<Integer> getOpponentCreatureHealthLD() {
+        return opponentCreatureHealthLD;
     }
 
 }

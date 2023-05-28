@@ -53,12 +53,12 @@ public class HomeScreen extends AppCompatActivity {
         });
     }
 
-    public void onProfileClick(View view) { //Fix this method
+    public void onProfileClick(View view) {
         getSupportFragmentManager().beginTransaction().replace(R.id.profile_container, new ProfileFragment()).commit();
-        if (findViewById(R.id.profile_container).getVisibility() == View.VISIBLE) {
-            findViewById(R.id.profile_container).setVisibility(View.GONE);
-        } else {
+        if(findViewById(R.id.profile_container).getVisibility() == View.GONE) {
             findViewById(R.id.profile_container).setVisibility(View.VISIBLE);
+        } else {
+            findViewById(R.id.profile_container).setVisibility(View.GONE);
         }
     }
 
@@ -72,7 +72,7 @@ public class HomeScreen extends AppCompatActivity {
 
     public void onLogoutClick(View view) {
         FirebaseAuth.getInstance().signOut();
-        finish();
         startActivity(new Intent(this, LoginScreen.class));
+        finish();
     }
 }

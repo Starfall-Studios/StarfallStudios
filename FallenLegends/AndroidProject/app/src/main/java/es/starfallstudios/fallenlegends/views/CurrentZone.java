@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,6 +30,9 @@ public class CurrentZone extends Fragment {
     private TextView zoneName;
     private TextView zoneDescription;
     private TextView zoneOwner;
+
+    private Button conquerButton;
+    private Button manageButton;
 
     public CurrentZone() {
         // Required empty public constructor
@@ -53,7 +57,7 @@ public class CurrentZone extends Fragment {
         CurrentZoneViewModel viewModel = new ViewModelProvider(this).get(CurrentZoneViewModel.class);
 
 
-        view.findViewById(R.id.acceptButton).setOnClickListener(View -> {
+        view.findViewById(R.id.conquerButton).setOnClickListener(View -> {
             startActivity(new Intent(getActivity(), GameActivity.class));
         });
 
@@ -63,9 +67,32 @@ public class CurrentZone extends Fragment {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
 
+        view.findViewById(R.id.manageButton).setOnClickListener(View -> {
+            int i = 0;
+            for (Zone zone : GameManager.getInstance().getZonesOwnedByPlayer(GameManager.getInstance().getPlayer().getUid())) {
+                if (zone.equals(GameManager.getInstance().getZone(GameManager.getInstance().getUserLocation())))
+                    break;
+                else
+                    i++;
+            }
+
+            ManageZoneFragment manageZoneFragment = new ManageZoneFragment();
+            Bundle bundle = new Bundle();
+            bundle.putInt("zoneIndex", i);
+            manageZoneFragment.setArguments(bundle);
+
+            //open manage fragment
+            getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageZoneFragment).commit();
+        });
+
         zoneOwner = view.findViewById(R.id.txt_zone_owner);
         zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
         zoneName = view.findViewById(R.id.txt_zone_name);
+        manageButton = view.findViewById(R.id.manageButton);
+        conquerButton = view.findViewById(R.id.conquerButton);
+
+        manageButton.setVisibility(View.GONE);
+        conquerButton.setVisibility(View.VISIBLE);
 
         viewModel.getZoneInfo().observe(getViewLifecycleOwner(), zoneInfo -> {
             updateUI(zoneInfo);
@@ -76,7 +103,16 @@ public class CurrentZone extends Fragment {
     }
 
     public void updateUI(ZoneInfo zoneInfo) {
+        if (zoneInfo.getOwnerId().equals(GameManager.getInstance().getPlayer().getUid())) {
+            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " You");
+            manageButton.setVisibility(View.VISIBLE);
+            conquerButton.setVisibility(View.GONE);
+        } else if (zoneInfo.getOwnerId().equals("")) {
+            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " Nobody");
+        } else {
+            zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + zoneInfo.getOwnerName());
+        }
+
         zoneName.setText(getResources().getString(R.string.zoneFragment_zoneName) + " " + zoneInfo.getZoneName());
-        zoneOwner.setText(getResources().getString(R.string.zoneFragment_zoneOwner) + " " + zoneInfo.getOwnerName());
     }
 }

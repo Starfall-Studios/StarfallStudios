@@ -17,4 +17,12 @@
     <string name="deck_title">Inventario</string>
     <string name="txt_social_name">Social</string>
     <string name="txt_Logout">Cerrar Sesión</string>
+    <string name="StoreTitle">Tienda</string>
+    <string name="NotImplemented">Esta sección aun no está implementada, pronto estará disponible!</string>
+    <string name="manageButton">Gestionar</string>
+    <string name="txt_name">Nombre</string>
+    <string name="txt_position">Posición</string>
+    <string name="txt_score">Puntuación</string>
+    <string name="creatureCaptured">Criatura Capturada!</string>
+    <string name="creatureTooFarAway">La criatura está muy lejos!</string>
 </resources>

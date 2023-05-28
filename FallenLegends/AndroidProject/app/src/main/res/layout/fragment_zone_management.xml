@@ -13,25 +13,25 @@
         android:elevation="2dp">
 
         <TextView
-            android:id="@+id/txt_deck_name"
+            android:id="@+id/txt_zonemanager_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:gravity="top|center"
-            android:text="@string/deck_title"
+            android:text="@string/zoneFragment_zoneName"
             android:textColor="@color/white"
             android:textSize="48sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@+id/lst_deck_cards"/>
+            app:layout_constraintBottom_toTopOf="@+id/lst_zone_cards"/>
 
         <ListView
             android:layout_marginHorizontal="16dp"
-            android:id="@+id/lst_deck_cards"
+            android:id="@+id/lst_zone_cards"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_deck_name"
+            app:layout_constraintTop_toBottomOf="@+id/txt_zonemanager_name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toTopOf="@+id/btn_closeButton"/>
@@ -42,7 +42,7 @@
             android:layout_height="50dp"
             android:elevation="20dp"
             android:text="@string/closeButton"
-            app:layout_constraintTop_toBottomOf="@+id/lst_deck_cards"
+            app:layout_constraintTop_toBottomOf="@+id/lst_zone_cards"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"/>

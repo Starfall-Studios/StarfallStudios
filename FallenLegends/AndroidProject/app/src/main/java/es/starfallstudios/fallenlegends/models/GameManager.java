@@ -150,4 +150,36 @@ public class GameManager extends Observable {
     public void setPlayer(Player player) {
         this.player = player;
     }
+
+    public ArrayList<Zone> getZonesOwnedByPlayer(String playerId) {
+        removeDuplicates();
+        ArrayList<Zone> zonesOwnedByPlayer = new ArrayList<>();
+        for (Zone zone : zones) {
+            if (zone.getOwner().equals(playerId)) {
+                zonesOwnedByPlayer.add(zone);
+            }
+        }
+        return zonesOwnedByPlayer;
+    }
+
+    //Find and remove duplicates in zones arraylist
+    public void removeDuplicates() {
+        ArrayList<Zone> zonesWithoutDuplicates = new ArrayList<>();
+        for (Zone zone : zones) {
+            if (!zonesWithoutDuplicates.contains(zone)) {
+                zonesWithoutDuplicates.add(zone);
+            }
+        }
+        zones = zonesWithoutDuplicates;
+    }
+
+    public void updateZoneOwner(Zone zone, String playerId) {
+        zone.setOwner(playerId);
+        ZoneRepo.getInstance().updateZoneOwner(zone.getId(), playerId);
+    }
+
+    public void abandonZone(Zone zone) {
+        zone.setOwner("0");
+        ZoneRepo.getInstance().abandonZone(zone.getId());
+    }
 }

@@ -12,6 +12,7 @@ public class MapEntity {
     private Type type;
     private double latitude;
     private double longitude;
+    private Creature.BaseCreatures baseCreature;
 
     public Type getEntityType() {
         if (this instanceof Player) {
@@ -37,6 +38,14 @@ public class MapEntity {
         this.longitude = longitude;
     }
 
+    public MapEntity(Creature.BaseCreatures baseCreature, Type type, double latitude, double longitude, int tier) {
+        this.name = GameManager.getInstance().creatureNames.get(baseCreature);
+        this.baseCreature = baseCreature;
+        this.type = type;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
+
     /**
      * Gets the location of the creature
      * @return geopoint of creature
@@ -51,6 +60,10 @@ public class MapEntity {
      */
     public String getName() {
         return name;
+    }
+
+    public Creature.BaseCreatures getBaseCreature() {
+        return baseCreature;
     }
 
 }

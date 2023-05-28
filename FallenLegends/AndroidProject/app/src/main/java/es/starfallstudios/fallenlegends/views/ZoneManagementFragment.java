@@ -2,47 +2,35 @@ package es.starfallstudios.fallenlegends.views;
 
 import android.os.Bundle;
 
-import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 
-import java.util.List;
-
-import es.starfallstudios.fallenlegends.ManageCreatureFragment;
 import es.starfallstudios.fallenlegends.R;
-import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
-import es.starfallstudios.fallenlegends.models.GameManager;
-import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
+import es.starfallstudios.fallenlegends.models.ZoneListAdapter;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link DeckView#newInstance} factory method to
+ * Use the {@link ZoneManagementFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class DeckView extends Fragment implements AdapterView.OnItemClickListener {
+public class ZoneManagementFragment extends Fragment implements AdapterView.OnItemClickListener {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-    private List<CardView> cardViewList;
-    private LinearLayout cardViewLayout;
-
-    private DeckFragmentViewModel viewModel;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
 
-    public DeckView() {
+    public ZoneManagementFragment() {
         // Required empty public constructor
     }
 
@@ -52,11 +40,11 @@ public class DeckView extends Fragment implements AdapterView.OnItemClickListene
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment deckView.
+     * @return A new instance of fragment ZoneManagementFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static DeckView newInstance(String param1, String param2) {
-        DeckView fragment = new DeckView();
+    public static ZoneManagementFragment newInstance(String param1, String param2) {
+        ZoneManagementFragment fragment = new ZoneManagementFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -77,34 +65,29 @@ public class DeckView extends Fragment implements AdapterView.OnItemClickListene
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_deck, container, false);
+        View view = inflater.inflate(R.layout.fragment_zone_management, container, false);
 
-        viewModel = new ViewModelProvider(this).get(DeckFragmentViewModel.class);
-
-        ListView listView = view.findViewById(R.id.lst_deck_cards);
-        CreatureListAdapter adapter = new CreatureListAdapter(getContext(), 0, viewModel.getCreatureCollection().getCreatures());
+        ListView listView = view.findViewById(R.id.lst_zone_cards);
+        ZoneListAdapter adapter = new ZoneListAdapter(getContext(), 0);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(this);
 
         view.findViewById(R.id.btn_closeButton).setOnClickListener(View -> {
             getParentFragmentManager().beginTransaction().remove(this).commit();
         });
+
         return view;
     }
 
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Log.d("DeckView", "onItemClick: " + i);
+        Log.d("ZoneView", "onItemClick: " + i);
 
-        ManageCreatureFragment manageCreatureFragment = new ManageCreatureFragment();
+        ManageZoneFragment manageZoneFragment = new ManageZoneFragment();
         Bundle bundle = new Bundle();
-        bundle.putString("name", viewModel.getCreatureCollection().getCreatures().get(i).getName());
-        bundle.putInt("health", viewModel.getCreatureCollection().getCreatures().get(i).getHealth());
-        bundle.putInt("attack", viewModel.getCreatureCollection().getCreatures().get(i).getAttack());
-        bundle.putInt("mana", viewModel.getCreatureCollection().getCreatures().get(i).getCost());
-        bundle.putInt("imageResourceId", viewModel.getCreatureCollection().getCreatures().get(i).getResourceId());
-        manageCreatureFragment.setArguments(bundle);
+        bundle.putInt("zoneIndex", i);
+        manageZoneFragment.setArguments(bundle);
 
-        getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageCreatureFragment).commit();
+        getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageZoneFragment).commit();
     }
 }

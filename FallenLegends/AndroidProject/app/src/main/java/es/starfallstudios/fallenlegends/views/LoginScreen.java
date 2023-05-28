@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.messaging.FirebaseMessaging;
 
 import es.starfallstudios.fallenlegends.models.GameManager;
 import es.starfallstudios.fallenlegends.R;
@@ -51,6 +52,8 @@ public class LoginScreen extends AppCompatActivity {
         loginButton = findViewById(R.id.btn_login);
         signupButton = findViewById(R.id.btn_opensignup);
         recoveryButton = findViewById(R.id.btn_openrecovery);
+
+        FirebaseMessaging.getInstance().subscribeToTopic("creature_spawn");
 
         loginButton.setOnClickListener(v -> login());
         signupButton.setOnClickListener(v -> startActivity(new Intent(LoginScreen.this, SignUpScreen.class)));
