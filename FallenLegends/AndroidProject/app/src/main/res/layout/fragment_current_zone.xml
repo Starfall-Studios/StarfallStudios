@@ -47,7 +47,16 @@
             android:elevation="20dp">
 
             <Button
-                android:id="@+id/acceptButton"
+                android:visibility="gone"
+                android:id="@+id/manageButton"
+                android:layout_width="wrap_content"
+                android:layout_height="50dp"
+                android:elevation="20dp"
+                android:text="@string/manageButton"/>
+
+            <Button
+                android:visibility="visible"
+                android:id="@+id/conquerButton"
                 android:layout_width="wrap_content"
                 android:layout_height="50dp"
                 android:elevation="20dp"
