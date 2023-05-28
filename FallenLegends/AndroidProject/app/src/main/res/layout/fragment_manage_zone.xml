@@ -8,13 +8,16 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:elevation="2dp">
 
-        <ImageView
+        <com.google.android.material.imageview.ShapeableImageView
+            app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.ExtraLarge"
             android:id="@+id/zone_Manage_Image"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:background="@color/black"
+            android:src="@drawable/icon_zones"
+            android:scaleType="centerCrop"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -22,12 +25,13 @@
             android:layout_marginHorizontal="32dp"/>
 
         <TextView
+            android:id="@+id/zone_manage_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Area Name"
             android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             app:layout_constraintTop_toBottomOf="@id/zone_Manage_Image"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,8 +44,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Creatures in this zone"
-            android:textSize="24sp"
-            android:textColor="@color/black"
+            android:textSize="20sp"
+            android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@id/zone_Manage_Creature_List"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -63,42 +67,68 @@
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:id="@+id/zone_Manage_Creature_List"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/zone_Manage_Close_Button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="32dp"
             android:layout_marginBottom="16dp"
             android:gravity="center">
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
                 android:id="@+id/zone_Manage_Creature_1"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
+                android:src="@drawable/creature_nightmire"
+                android:scaleType="centerCrop"
                 android:layout_margin="4dp"/>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
                 android:id="@+id/zone_Manage_Creature_2"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
+                android:src="@drawable/creature_frostbite"
+                android:scaleType="centerCrop"
                 android:layout_margin="4dp"/>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
                 android:id="@+id/zone_Manage_Creature_3"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
+                android:src="@drawable/creature_gryphix"
+                android:scaleType="centerCrop"
                 android:layout_margin="4dp"/>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
+                app:shapeAppearanceOverlay="@style/ShapeAppearance.Material3.Corner.Large"
                 android:id="@+id/zone_Manage_Creature_4"
-                android:layout_width="75dp"
+                android:layout_width="0dp"
+                android:layout_weight=".2"
                 android:layout_height="match_parent"
                 android:background="@color/black"
+                android:src="@drawable/creature_thunderwing"
+                android:scaleType="centerCrop"
                 android:layout_margin="4dp"/>
 
         </LinearLayout>
+
+        <Button
+            android:id="@+id/zone_Manage_Close_Button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/closeButton"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="16dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

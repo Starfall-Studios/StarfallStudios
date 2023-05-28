@@ -82,5 +82,12 @@ public class ZoneManagementFragment extends Fragment implements AdapterView.OnIt
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("ZoneView", "onItemClick: " + i);
+
+        ManageZoneFragment manageZoneFragment = new ManageZoneFragment();
+        Bundle bundle = new Bundle();
+        bundle.putInt("zoneIndex", i);
+        manageZoneFragment.setArguments(bundle);
+
+        getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageZoneFragment).commit();
     }
 }

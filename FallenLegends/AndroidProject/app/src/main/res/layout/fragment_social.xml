@@ -11,7 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/txt_social_name"
@@ -21,8 +22,6 @@
             android:gravity="top|center"
             android:text="@string/txt_social_name"
             android:textSize="48sp" />
-
-
 
         <LinearLayout
             android:layout_width="match_parent"

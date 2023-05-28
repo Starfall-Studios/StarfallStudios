@@ -7,8 +7,10 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import es.starfallstudios.fallenlegends.R;
+import es.starfallstudios.fallenlegends.models.GameManager;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -19,11 +21,11 @@ public class ManageZoneFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
+    private static final String ARG_PARAM1 = "zoneIndex";
     private static final String ARG_PARAM2 = "param2";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
+    private int index;
     private String mParam2;
 
     public ManageZoneFragment() {
@@ -39,10 +41,10 @@ public class ManageZoneFragment extends Fragment {
      * @return A new instance of fragment ManageZoneFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ManageZoneFragment newInstance(String param1, String param2) {
+    public static ManageZoneFragment newInstance(int param1, String param2) {
         ManageZoneFragment fragment = new ManageZoneFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
+        args.putInt(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
@@ -52,7 +54,7 @@ public class ManageZoneFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
+            index = getArguments().getInt(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
@@ -61,6 +63,12 @@ public class ManageZoneFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_manage_zone, container, false);
+        View v = inflater.inflate(R.layout.fragment_manage_zone, container, false);
+
+        v.findViewById(R.id.zone_Manage_Close_Button).setOnClickListener(v1 -> getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContent_container, new ZoneManagementFragment()).commit());
+
+        ((TextView) v.findViewById(R.id.zone_manage_title)).setText(GameManager.getInstance().getZonesOwnedByPlayer(GameManager.getInstance().getPlayer().getUid()).get(index).getName());
+
+        return v;
     }
 }
