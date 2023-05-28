@@ -7,6 +7,11 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import es.starfallstudios.fallenlegends.models.Creature;
+import es.starfallstudios.fallenlegends.views.DeckView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -17,12 +22,18 @@ public class ManageCreatureFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String ARG_PARAM1 = "name";
+    private static final String ARG_PARAM2 = "health";
+    private static final String ARG_PARAM3 = "attack";
+    private static final String ARG_PARAM4 = "mana";
+    private static final String ARG_PARAM5 = "imageResourceId";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String name;
+    private int health;
+    private int attack;
+    private int mana;
+    private int resourceId;
 
     public ManageCreatureFragment() {
         // Required empty public constructor
@@ -50,8 +61,11 @@ public class ManageCreatureFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            name = getArguments().getString(ARG_PARAM1);
+            health = getArguments().getInt(ARG_PARAM2);
+            attack = getArguments().getInt(ARG_PARAM3);
+            mana = getArguments().getInt(ARG_PARAM4);
+            resourceId = getArguments().getInt(ARG_PARAM5);
         }
     }
 
@@ -60,6 +74,17 @@ public class ManageCreatureFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_manage_creature, container, false);
+
+        v.findViewById(R.id.creature_Manage_Close_Button).setOnClickListener(v1 -> {
+            getActivity().getSupportFragmentManager().beginTransaction().replace(R.id.mainContent_container, new DeckView()).commit();
+        });
+
+        ((ImageView) v.findViewById(R.id.creature_Manage_Image)).setImageResource(resourceId);
+
+        ((TextView) v.findViewById(R.id.creature_manage_title)).setText(name);
+        ((TextView) v.findViewById(R.id.creature_manage_health)).setText(String.valueOf(health));
+        ((TextView) v.findViewById(R.id.creature_manage_attack)).setText(String.valueOf(attack));
+        ((TextView) v.findViewById(R.id.creature_manage_mana)).setText(String.valueOf(mana));
 
         return v;
     }

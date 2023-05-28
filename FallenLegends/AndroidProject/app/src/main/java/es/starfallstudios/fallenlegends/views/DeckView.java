@@ -16,6 +16,7 @@ import android.widget.ListView;
 
 import java.util.List;
 
+import es.starfallstudios.fallenlegends.ManageCreatureFragment;
 import es.starfallstudios.fallenlegends.R;
 import es.starfallstudios.fallenlegends.models.CreatureListAdapter;
 import es.starfallstudios.fallenlegends.viewmodels.DeckFragmentViewModel;
@@ -93,5 +94,16 @@ public class DeckView extends Fragment implements AdapterView.OnItemClickListene
     @Override
     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
         Log.d("DeckView", "onItemClick: " + i);
+
+        ManageCreatureFragment manageCreatureFragment = new ManageCreatureFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("name", viewModel.getCreatureCollection().getCreatures().get(i).getName());
+        bundle.putInt("health", viewModel.getCreatureCollection().getCreatures().get(i).getHealth());
+        bundle.putInt("attack", viewModel.getCreatureCollection().getCreatures().get(i).getAttack());
+        bundle.putInt("mana", viewModel.getCreatureCollection().getCreatures().get(i).getCost());
+        bundle.putInt("imageResourceId", viewModel.getCreatureCollection().getCreatures().get(i).getResourceId());
+        manageCreatureFragment.setArguments(bundle);
+
+        getParentFragmentManager().beginTransaction().replace(R.id.mainContent_container, manageCreatureFragment).commit();
     }
 }
