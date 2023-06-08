@@ -110,6 +110,11 @@ public class Match {
         zoneRepo = ZoneRepo.getInstance();
         playerRepo = PlayerRepo.getInstance();
 
+        playingCreaturePlayer = Creature.blankCreature();
+        playingCreatureOpponent = Creature.blankCreature();
+        playingCreatureOpponentLD.setValue(playingCreatureOpponent);
+        playingCreaturePlayerLD.setValue(playingCreaturePlayer);
+
         //check if zone has owner
         if (!zone.hasOwner()) {
             //zone has no owner, so we are the first player
@@ -124,9 +129,6 @@ public class Match {
 
             playerMana = 30;
             opponentMana = 30;
-
-            playingCreaturePlayer = Creature.blankCreature();
-            playingCreatureOpponent = Creature.blankCreature();
 
             gameTick = new Thread(new Runnable() {
                 @Override

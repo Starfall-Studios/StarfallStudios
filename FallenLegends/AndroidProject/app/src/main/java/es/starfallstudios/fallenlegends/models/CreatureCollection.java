@@ -21,7 +21,7 @@ public class CreatureCollection {
         collection.add(new Creature(Creature.BaseCreatures.GRYPHIX, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
         collection.add(new Creature(Creature.BaseCreatures.LUMINO, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
         collection.add(new Creature(Creature.BaseCreatures.NIGHTMIRE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
-        collection.add(new Creature(Creature.BaseCreatures.FROSTBITE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, false));
+        collection.add(new Creature(Creature.BaseCreatures.FROSTBITE, 999, 0, 45, 49, 49, 45, Creature.CreatureType.ELECTRIC, true));
 
         return collection;
     }
