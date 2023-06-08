@@ -84,6 +84,12 @@ public class GameActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(GameViewModel.class);
 
         Deck deck = GameManager.getInstance().getPlayer().getPlayerCreatureCollection().getDeck();
+        //print deck to console
+        System.out.println("Deck: ");
+        for (Creature c : deck.getCreatures()) {
+            System.out.println(c.getName());
+        }
+
         for(int i = 0; i < 4; i++) {
             cardsStats.add(new ArrayList<>());
             cardImages.get(i).setBackgroundResource(deck.getCreatures().get(i).getResourceId());
