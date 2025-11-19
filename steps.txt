@@ -1,1 +1,15 @@
 1. Go to the backend folder
+2. Create the virtual environment
+    python3 -m venv .venv
+    source .venv/bin/activate
+
+3. install the deps
+    python -m pip install --upgrade pip
+    python -m pip install pdoc
+    python -m pip install flask pyrebase firebase-admin
+
+4. create the docs directory
+    mkdir -p ../docs/pythonbackend
+    
+5. generate the documentation:
+    pdoc --output-dir ../docs/pythonbackend api.py creatures.py dbManager.py zones.py utils.py main.py
